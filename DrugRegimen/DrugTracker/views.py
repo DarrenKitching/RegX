@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import datetime
 from datetime import date
 from . import models
+from . import qrcodes
 
 # login page
 def index(request):
@@ -10,6 +11,8 @@ def index(request):
 
 # patient home screen
 def home(request):
+	url = 'http://uca.edu' # testing QRcode generation - delete later
+	qrcodes.createQR(url) # testing QRcode generation - delete later
 	now = datetime.datetime.now()
 	today = date.today()
 	allPerscriptions = models.Perscription.objects.all()
