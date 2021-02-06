@@ -24,7 +24,7 @@ def home(request):
 			if dayDifference % perscription.intervalBetweenDoses == 0: # check that today is a day where you should be taking your perscription
 				dosesTaken = ((dayDifference - 1) // perscription.intervalBetweenDoses) * perscription.timesPerDay # count number of doses you've already taken
 				if perscription.totalNumberOfDoses > dosesTaken: # make sure you haven't already taken all of your doses for this medication
-					myPerscriptions.append(getMedicationName(perscription.medicationCode) + ", Dose: " + perscription.medicationDose)
+					myPerscriptions.append(getMedicationName(perscription.medicationCode) + ", Dose: " + str(perscription.medicationDose) +perscription.doseUnit)
 	context = {
 		'now': now,
 		'medications': myPerscriptions,
@@ -38,3 +38,6 @@ def getMedicationName(medicationCode):
 		if medicationCode == medication.medicationCode:
 			return medication.medicationName
 	return "" # no medication with that code has been found
+
+def takeDose(request, doseURL): # extract dose id from URL
+	return HttpResponse("Test " + doseURL) 
