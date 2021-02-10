@@ -26,3 +26,12 @@ class DoseURL(models.Model):
 	doseURL = models.CharField(max_length=c.MAX_MEDCODE_LEN) # 10 digit url code unique to each dose assigned to a patient
 	perscriptionID = models.CharField(max_length=c.MAX_PERSCRIPTION_ID_LEN) # identifies which perscription this URL is for
 	doseNumber = models.IntegerField() # identifies which dose of the perscription this URL represents
+
+class PatientGroup(models.Model):
+	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
+
+class PharmacistGroup(models.Model):
+	pharmacistUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of pharmacist account
+
+class DoctorGroup(models.Model):
+	doctorUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of doctor's account
