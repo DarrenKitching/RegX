@@ -19,8 +19,8 @@ class Medication(models.Model):
 	medicationName = models.CharField(max_length=c.MAX_NAME_LEN) # name of the medication
 
 class MedConflict(models.Model):
-	medication1 = Medication #assuming I can just reference other models like this
-	medication2 = Medication
+	medication1Code = models.CharField(max_length=c.MAX_MEDCODE_LEN) # code to identify the medication
+	medication2Code = models.CharField(max_length=c.MAX_MEDCODE_LEN) # code to identify the medication
 
 class DoseURL(models.Model):
 	doseURL = models.CharField(max_length=c.MAX_MEDCODE_LEN) # 10 digit url code unique to each dose assigned to a patient
