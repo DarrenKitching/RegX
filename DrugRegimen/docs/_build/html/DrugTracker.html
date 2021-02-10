@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>DrugTracker package &mdash; Drug Regimen Tracker  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Drug Regimen Tracker
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">DrugTracker package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.admin">DrugTracker.admin module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.apps">DrugTracker.apps module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.consts">DrugTracker.consts module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.models">DrugTracker.models module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.qrcodes">DrugTracker.qrcodes module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.tests">DrugTracker.tests module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.urls">DrugTracker.urls module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.views">DrugTracker.views module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Drug Regimen Tracker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>DrugTracker package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/DrugTracker.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="drugtracker-package">
+<h1>DrugTracker package<a class="headerlink" href="#drugtracker-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DrugTracker.migrations.html">DrugTracker.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DrugTracker.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrugTracker.migrations.html#module-DrugTracker.migrations.0001_initial">DrugTracker.migrations.0001_initial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrugTracker.migrations.html#module-DrugTracker.migrations.0002_auto_20210203_1622">DrugTracker.migrations.0002_auto_20210203_1622 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrugTracker.migrations.html#module-DrugTracker.migrations.0003_auto_20210206_1439">DrugTracker.migrations.0003_auto_20210206_1439 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrugTracker.migrations.html#module-DrugTracker.migrations.0004_auto_20210206_1605">DrugTracker.migrations.0004_auto_20210206_1605 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrugTracker.migrations.html#module-DrugTracker.migrations.0005_medconflict">DrugTracker.migrations.0005_medconflict module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DrugTracker.migrations.html#module-DrugTracker.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-DrugTracker.admin">
+<span id="drugtracker-admin-module"></span><h2>DrugTracker.admin module<a class="headerlink" href="#module-DrugTracker.admin" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-DrugTracker.apps">
+<span id="drugtracker-apps-module"></span><h2>DrugTracker.apps module<a class="headerlink" href="#module-DrugTracker.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="DrugTracker.apps.DrugtrackerConfig">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.apps.</code><code class="sig-name descname">DrugtrackerConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app_name</span></em>, <em class="sig-param"><span class="n">app_module</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.apps.DrugtrackerConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.config.AppConfig</span></code></p>
+<dl class="py attribute">
+<dt id="DrugTracker.apps.DrugtrackerConfig.name">
+<code class="sig-name descname">name</code><em class="property"> = 'DrugTracker'</em><a class="headerlink" href="#DrugTracker.apps.DrugtrackerConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.consts">
+<span id="drugtracker-consts-module"></span><h2>DrugTracker.consts module<a class="headerlink" href="#module-DrugTracker.consts" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-DrugTracker.models">
+<span id="drugtracker-models-module"></span><h2>DrugTracker.models module<a class="headerlink" href="#module-DrugTracker.models" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="DrugTracker.models.DoseURL">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.models.</code><code class="sig-name descname">DoseURL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">doseURL</span></em>, <em class="sig-param"><span class="n">perscriptionID</span></em>, <em class="sig-param"><span class="n">doseNumber</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.models.DoseURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<dl class="py exception">
+<dt id="DrugTracker.models.DoseURL.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#DrugTracker.models.DoseURL.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="DrugTracker.models.DoseURL.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#DrugTracker.models.DoseURL.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.DoseURL.doseNumber">
+<code class="sig-name descname">doseNumber</code><a class="headerlink" href="#DrugTracker.models.DoseURL.doseNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.DoseURL.doseURL">
+<code class="sig-name descname">doseURL</code><a class="headerlink" href="#DrugTracker.models.DoseURL.doseURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.DoseURL.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#DrugTracker.models.DoseURL.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.DoseURL.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#DrugTracker.models.DoseURL.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.DoseURL.perscriptionID">
+<code class="sig-name descname">perscriptionID</code><a class="headerlink" href="#DrugTracker.models.DoseURL.perscriptionID" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="DrugTracker.models.MedConflict">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.models.</code><code class="sig-name descname">MedConflict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">medication1Code</span></em>, <em class="sig-param"><span class="n">medication2Code</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.models.MedConflict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<dl class="py exception">
+<dt id="DrugTracker.models.MedConflict.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#DrugTracker.models.MedConflict.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="DrugTracker.models.MedConflict.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#DrugTracker.models.MedConflict.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.MedConflict.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#DrugTracker.models.MedConflict.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.MedConflict.medication1Code">
+<code class="sig-name descname">medication1Code</code><a class="headerlink" href="#DrugTracker.models.MedConflict.medication1Code" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.MedConflict.medication2Code">
+<code class="sig-name descname">medication2Code</code><a class="headerlink" href="#DrugTracker.models.MedConflict.medication2Code" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.MedConflict.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#DrugTracker.models.MedConflict.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="DrugTracker.models.Medication">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.models.</code><code class="sig-name descname">Medication</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">medicationCode</span></em>, <em class="sig-param"><span class="n">medicationName</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.models.Medication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<dl class="py exception">
+<dt id="DrugTracker.models.Medication.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#DrugTracker.models.Medication.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="DrugTracker.models.Medication.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#DrugTracker.models.Medication.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Medication.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#DrugTracker.models.Medication.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Medication.medicationCode">
+<code class="sig-name descname">medicationCode</code><a class="headerlink" href="#DrugTracker.models.Medication.medicationCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Medication.medicationName">
+<code class="sig-name descname">medicationName</code><a class="headerlink" href="#DrugTracker.models.Medication.medicationName" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Medication.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#DrugTracker.models.Medication.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="DrugTracker.models.Perscription">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.models.</code><code class="sig-name descname">Perscription</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">perscriptionID</span></em>, <em class="sig-param"><span class="n">patient</span></em>, <em class="sig-param"><span class="n">doctor</span></em>, <em class="sig-param"><span class="n">medicationCode</span></em>, <em class="sig-param"><span class="n">medicationDose</span></em>, <em class="sig-param"><span class="n">doseUnit</span></em>, <em class="sig-param"><span class="n">timesPerDay</span></em>, <em class="sig-param"><span class="n">intervalBetweenDoses</span></em>, <em class="sig-param"><span class="n">perscriptionStartDate</span></em>, <em class="sig-param"><span class="n">totalNumberOfDoses</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.models.Perscription" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<dl class="py exception">
+<dt id="DrugTracker.models.Perscription.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#DrugTracker.models.Perscription.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="DrugTracker.models.Perscription.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#DrugTracker.models.Perscription.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.doctor">
+<code class="sig-name descname">doctor</code><a class="headerlink" href="#DrugTracker.models.Perscription.doctor" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.doseUnit">
+<code class="sig-name descname">doseUnit</code><a class="headerlink" href="#DrugTracker.models.Perscription.doseUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="DrugTracker.models.Perscription.get_next_by_perscriptionStartDate">
+<code class="sig-name descname">get_next_by_perscriptionStartDate</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateField: perscriptionStartDate&gt;</em>, <em class="sig-param">is_next=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.models.Perscription.get_next_by_perscriptionStartDate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="DrugTracker.models.Perscription.get_previous_by_perscriptionStartDate">
+<code class="sig-name descname">get_previous_by_perscriptionStartDate</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateField: perscriptionStartDate&gt;</em>, <em class="sig-param">is_next=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.models.Perscription.get_previous_by_perscriptionStartDate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#DrugTracker.models.Perscription.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.intervalBetweenDoses">
+<code class="sig-name descname">intervalBetweenDoses</code><a class="headerlink" href="#DrugTracker.models.Perscription.intervalBetweenDoses" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.medicationCode">
+<code class="sig-name descname">medicationCode</code><a class="headerlink" href="#DrugTracker.models.Perscription.medicationCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.medicationDose">
+<code class="sig-name descname">medicationDose</code><a class="headerlink" href="#DrugTracker.models.Perscription.medicationDose" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#DrugTracker.models.Perscription.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.patient">
+<code class="sig-name descname">patient</code><a class="headerlink" href="#DrugTracker.models.Perscription.patient" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.perscriptionID">
+<code class="sig-name descname">perscriptionID</code><a class="headerlink" href="#DrugTracker.models.Perscription.perscriptionID" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.perscriptionStartDate">
+<code class="sig-name descname">perscriptionStartDate</code><a class="headerlink" href="#DrugTracker.models.Perscription.perscriptionStartDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.timesPerDay">
+<code class="sig-name descname">timesPerDay</code><a class="headerlink" href="#DrugTracker.models.Perscription.timesPerDay" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.models.Perscription.totalNumberOfDoses">
+<code class="sig-name descname">totalNumberOfDoses</code><a class="headerlink" href="#DrugTracker.models.Perscription.totalNumberOfDoses" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.qrcodes">
+<span id="drugtracker-qrcodes-module"></span><h2>DrugTracker.qrcodes module<a class="headerlink" href="#module-DrugTracker.qrcodes" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="DrugTracker.qrcodes.createQR">
+<code class="sig-prename descclassname">DrugTracker.qrcodes.</code><code class="sig-name descname">createQR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.qrcodes.createQR" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function can turn a url into a QRCode image.</p>
+</div></blockquote>
+<p>Funciton makes it possible to produce a QRCode for our unique dose url’s associated with each dose a patient is going to take.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>string</em>) – url is a string of what our qr code should point to e.g. <a class="reference external" href="http://127.0.0.1:8000/dose/1z5Lff10AN">http://127.0.0.1:8000/dose/1z5Lff10AN</a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Currently the function is only printing the qr code to the terminal and not saving them as images.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>print</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.tests">
+<span id="drugtracker-tests-module"></span><h2>DrugTracker.tests module<a class="headerlink" href="#module-DrugTracker.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-DrugTracker.urls">
+<span id="drugtracker-urls-module"></span><h2>DrugTracker.urls module<a class="headerlink" href="#module-DrugTracker.urls" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-DrugTracker.views">
+<span id="drugtracker-views-module"></span><h2>DrugTracker.views module<a class="headerlink" href="#module-DrugTracker.views" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="DrugTracker.views.getMedicationName">
+<code class="sig-prename descclassname">DrugTracker.views.</code><code class="sig-name descname">getMedicationName</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">medicationCode</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.views.getMedicationName" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function is used to get the name of a medication using its unique medication code.</p>
+</div></blockquote>
+<p>This function is the link between the unique key for a medication (its code) and how to get its name from that.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>request</em>) – Request is built in to django and stores the current state of the system e.g. the username of the logged in user.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Will return a string of the name of the medication with that code or a blank screen if there is no medication with that code.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="DrugTracker.views.home">
+<code class="sig-prename descclassname">DrugTracker.views.</code><code class="sig-name descname">home</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.views.home" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function is run when the user has logged in and gets brought to <a class="reference external" href="http://127.0.0.1:8000/home">http://127.0.0.1:8000/home</a></p>
+</div></blockquote>
+<p>This function will display home.html in the user’s web browser. It will pass in a list of perscriptions which the user needs to
+take today into home.html</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>request</em>) – Request is built in to django and stores the current state of the system e.g. the username of the logged in user.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Will render the home.html file with the list of the user’s perscriptions that need to be taken today.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>render</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="DrugTracker.views.index">
+<code class="sig-prename descclassname">DrugTracker.views.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.views.index" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function is run when the user opens the site at <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a></p>
+</div></blockquote>
+<p>This function will display login.html in the user’s web browser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>request</em>) – Request is built in to django and stores the current state of the system e.g. the username of the logged in user.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Will render the login.html file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>render</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="DrugTracker.views.takeDose">
+<code class="sig-prename descclassname">DrugTracker.views.</code><code class="sig-name descname">takeDose</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">doseURL</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.views.takeDose" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function is called when the user navigates to <a class="reference external" href="http://127.0.0.1:8000/dose">http://127.0.0.1:8000/dose</a>/&lt;somenumber&gt;</p>
+</div></blockquote>
+<p>Our QRCodes will open up to unique dose sites, e.g. <a class="reference external" href="http://127.0.0.1:8000/dose/1z5Lff10AN">http://127.0.0.1:8000/dose/1z5Lff10AN</a>
+When these links are opened this function will be called. We can then check that the logged in user owns the dose associated with this dose URL
+and later on implement the record video feature at this page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>request</em>) – Request is built in to django and stores the current state of the system e.g. the username of the logged in user.</p></li>
+<li><p><strong>doseURL</strong> (<em>string</em>) – doseURL is a string of what comes after /dose/ in the url opened. For example if the user opened</p></li>
+<li><p><strong>http</strong> – //127.0.0.1:8000/dose/1z5Lff10AN then doseURL would be equal to 1z5Lff10AN when this function is called.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Currently the function is only returning some Text showing the doseURL the function has been called with.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>render</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-DrugTracker" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Group 5.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

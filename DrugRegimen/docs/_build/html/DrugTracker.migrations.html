@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>DrugTracker.migrations package &mdash; Drug Regimen Tracker  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Drug Regimen Tracker
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">DrugTracker.migrations package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.migrations.0001_initial">DrugTracker.migrations.0001_initial module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.migrations.0002_auto_20210203_1622">DrugTracker.migrations.0002_auto_20210203_1622 module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.migrations.0003_auto_20210206_1439">DrugTracker.migrations.0003_auto_20210206_1439 module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.migrations.0004_auto_20210206_1605">DrugTracker.migrations.0004_auto_20210206_1605 module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.migrations.0005_medconflict">DrugTracker.migrations.0005_medconflict module</a></li>
+<li><a class="reference internal" href="#module-DrugTracker.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Drug Regimen Tracker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>DrugTracker.migrations package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/DrugTracker.migrations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="drugtracker-migrations-package">
+<h1>DrugTracker.migrations package<a class="headerlink" href="#drugtracker-migrations-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-DrugTracker.migrations.0001_initial">
+<span id="drugtracker-migrations-0001-initial-module"></span><h2>DrugTracker.migrations.0001_initial module<a class="headerlink" href="#module-DrugTracker.migrations.0001_initial" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="DrugTracker.migrations.0001_initial.Migration">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.migrations.0001_initial.</code><code class="sig-name descname">Migration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">app_label</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.migrations.0001_initial.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0001_initial.Migration.dependencies">
+<code class="sig-name descname">dependencies</code><em class="property"> = []</em><a class="headerlink" href="#DrugTracker.migrations.0001_initial.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0001_initial.Migration.initial">
+<code class="sig-name descname">initial</code><em class="property"> = True</em><a class="headerlink" href="#DrugTracker.migrations.0001_initial.Migration.initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0001_initial.Migration.operations">
+<code class="sig-name descname">operations</code><em class="property"> = [&lt;CreateModel  name='Medication', fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('medicationCode', &lt;django.db.models.fields.CharField&gt;), ('medicationName', &lt;django.db.models.fields.CharField&gt;)]&gt;, &lt;CreateModel  name='Perscription', fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('patient', &lt;django.db.models.fields.CharField&gt;), ('doctor', &lt;django.db.models.fields.CharField&gt;), ('medicationCode', &lt;django.db.models.fields.CharField&gt;), ('medicationDose', &lt;django.db.models.fields.CharField&gt;), ('timesPerday', &lt;django.db.models.fields.IntegerField&gt;), ('IntervalBetweenDoses', &lt;django.db.models.fields.IntegerField&gt;), ('perscriptionStartDate', &lt;django.db.models.fields.DateField&gt;), ('totalNumberOfDoses', &lt;django.db.models.fields.IntegerField&gt;)]&gt;]</em><a class="headerlink" href="#DrugTracker.migrations.0001_initial.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.migrations.0002_auto_20210203_1622">
+<span id="drugtracker-migrations-0002-auto-20210203-1622-module"></span><h2>DrugTracker.migrations.0002_auto_20210203_1622 module<a class="headerlink" href="#module-DrugTracker.migrations.0002_auto_20210203_1622" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="DrugTracker.migrations.0002_auto_20210203_1622.Migration">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.migrations.0002_auto_20210203_1622.</code><code class="sig-name descname">Migration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">app_label</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.migrations.0002_auto_20210203_1622.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0002_auto_20210203_1622.Migration.dependencies">
+<code class="sig-name descname">dependencies</code><em class="property"> = [('DrugTracker', '0001_initial')]</em><a class="headerlink" href="#DrugTracker.migrations.0002_auto_20210203_1622.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0002_auto_20210203_1622.Migration.operations">
+<code class="sig-name descname">operations</code><em class="property"> = [&lt;RenameField  model_name='perscription', old_name='IntervalBetweenDoses', new_name='intervalBetweenDoses'&gt;, &lt;RenameField  model_name='perscription', old_name='timesPerday', new_name='timesPerDay'&gt;]</em><a class="headerlink" href="#DrugTracker.migrations.0002_auto_20210203_1622.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.migrations.0003_auto_20210206_1439">
+<span id="drugtracker-migrations-0003-auto-20210206-1439-module"></span><h2>DrugTracker.migrations.0003_auto_20210206_1439 module<a class="headerlink" href="#module-DrugTracker.migrations.0003_auto_20210206_1439" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="DrugTracker.migrations.0003_auto_20210206_1439.Migration">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.migrations.0003_auto_20210206_1439.</code><code class="sig-name descname">Migration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">app_label</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.migrations.0003_auto_20210206_1439.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0003_auto_20210206_1439.Migration.dependencies">
+<code class="sig-name descname">dependencies</code><em class="property"> = [('DrugTracker', '0002_auto_20210203_1622')]</em><a class="headerlink" href="#DrugTracker.migrations.0003_auto_20210206_1439.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0003_auto_20210206_1439.Migration.operations">
+<code class="sig-name descname">operations</code><em class="property"> = [&lt;AddField  model_name='perscription', name='doseUnit', field=&lt;django.db.models.fields.CharField&gt;, preserve_default=False&gt;, &lt;AlterField  model_name='medication', name='medicationCode', field=&lt;django.db.models.fields.CharField&gt;&gt;, &lt;AlterField  model_name='perscription', name='medicationCode', field=&lt;django.db.models.fields.CharField&gt;&gt;, &lt;AlterField  model_name='perscription', name='medicationDose', field=&lt;django.db.models.fields.IntegerField&gt;&gt;]</em><a class="headerlink" href="#DrugTracker.migrations.0003_auto_20210206_1439.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.migrations.0004_auto_20210206_1605">
+<span id="drugtracker-migrations-0004-auto-20210206-1605-module"></span><h2>DrugTracker.migrations.0004_auto_20210206_1605 module<a class="headerlink" href="#module-DrugTracker.migrations.0004_auto_20210206_1605" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="DrugTracker.migrations.0004_auto_20210206_1605.Migration">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.migrations.0004_auto_20210206_1605.</code><code class="sig-name descname">Migration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">app_label</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.migrations.0004_auto_20210206_1605.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0004_auto_20210206_1605.Migration.dependencies">
+<code class="sig-name descname">dependencies</code><em class="property"> = [('DrugTracker', '0003_auto_20210206_1439')]</em><a class="headerlink" href="#DrugTracker.migrations.0004_auto_20210206_1605.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0004_auto_20210206_1605.Migration.operations">
+<code class="sig-name descname">operations</code><em class="property"> = [&lt;CreateModel  name='DoseURL', fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('doseURL', &lt;django.db.models.fields.CharField&gt;), ('perscriptionID', &lt;django.db.models.fields.CharField&gt;), ('doseNumber', &lt;django.db.models.fields.IntegerField&gt;)]&gt;, &lt;AddField  model_name='perscription', name='perscriptionID', field=&lt;django.db.models.fields.CharField&gt;, preserve_default=False&gt;]</em><a class="headerlink" href="#DrugTracker.migrations.0004_auto_20210206_1605.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.migrations.0005_medconflict">
+<span id="drugtracker-migrations-0005-medconflict-module"></span><h2>DrugTracker.migrations.0005_medconflict module<a class="headerlink" href="#module-DrugTracker.migrations.0005_medconflict" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="DrugTracker.migrations.0005_medconflict.Migration">
+<em class="property">class </em><code class="sig-prename descclassname">DrugTracker.migrations.0005_medconflict.</code><code class="sig-name descname">Migration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">app_label</span></em><span class="sig-paren">)</span><a class="headerlink" href="#DrugTracker.migrations.0005_medconflict.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0005_medconflict.Migration.dependencies">
+<code class="sig-name descname">dependencies</code><em class="property"> = [('DrugTracker', '0004_auto_20210206_1605')]</em><a class="headerlink" href="#DrugTracker.migrations.0005_medconflict.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="DrugTracker.migrations.0005_medconflict.Migration.operations">
+<code class="sig-name descname">operations</code><em class="property"> = [&lt;CreateModel  name='MedConflict', fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('medication1Code', &lt;django.db.models.fields.CharField&gt;), ('medication2Code', &lt;django.db.models.fields.CharField&gt;)]&gt;]</em><a class="headerlink" href="#DrugTracker.migrations.0005_medconflict.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-DrugTracker.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-DrugTracker.migrations" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Group 5.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
