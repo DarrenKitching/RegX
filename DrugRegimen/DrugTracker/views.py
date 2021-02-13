@@ -4,6 +4,8 @@ import datetime
 from datetime import date
 from . import models
 from . import qrcodes
+import random
+import string
 
 def index(request):
 	"""
@@ -17,6 +19,7 @@ def index(request):
     Returns:
         render: Will render the login.html file.
 	"""
+	print(generateTenDigtURL())
 	return render(request, 'login.html')
 
 def home(request):
@@ -29,7 +32,7 @@ def home(request):
         request (request): Request is built in to django and stores the current state of the system e.g. the username of the logged in user.
 
     Returns:
-        render: Will render the patienthome.html file with the list of the user's perscriptions that need to be taken today.
+        render: Return will render either patientHome, pharmacistHome or doctorHome function depending on the type of user logged in. 
 
     """
 	allPatients = models.PatientGroup.objects.all()
@@ -147,3 +150,23 @@ def doctorHome(request):
 
     """
 	return render(request, 'doctorhome.html')
+
+def generateTenDigtURL():
+	"""
+	This function generates a unique 10 digit code that can be used to build a unique URL for qrcodes to point to.
+
+    This function creates a 10 digit combination of upper case and lower case characters as well as digits. It will then check that this combination
+    has not already been used for another dose. If it has been used before then it will generate a new url otherwise it will return the one it has made.
+
+    Args:
+
+    Returns:
+        string: A string of length 10 will be returned containing a unique combination to be used for a dose URL.
+
+    """
+	newUrl = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(10))
+	allDoses = models.DoseURL.objects.all()
+	for dose in allDoses:
+		if dose.doseURL == newUrl: # check for rare conflict when a generated dose URL has already been used for a different dose.
+			return generateTenDigtURL()
+	return newUrl
