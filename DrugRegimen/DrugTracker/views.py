@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from rest_framework import viewsets
+from .serializers import MedConflictSerializer
 import datetime
 from datetime import date
 from . import models
@@ -170,3 +172,7 @@ def generateTenDigtURL():
 		if dose.doseURL == newUrl: # check for rare conflict when a generated dose URL has already been used for a different dose.
 			return generateTenDigtURL()
 	return newUrl
+
+class MedConflictViewSet (viewsets.ModelViewSet):
+	queryset = models.MedConflict.objects.all()
+	serializer_class = MedConflictSerializer
