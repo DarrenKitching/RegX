@@ -93,33 +93,28 @@ def patientHome(request):
 	"""
 	This function is run when the user has logged into a patient account and gets brought to http://127.0.0.1:8000/home
 
-    This function will display patienthome.html in the user's web browser. It will pass in a list of perscriptions which the user needs to 
+    This function will display patienthome.html in the user's web browser. It will pass in a list of prescriptions which the user needs to 
     take today into home.html
 
     Args:
         request (request): Request is built in to django and stores the current state of the system e.g. the username of the logged in user.
 
     Returns:
-        render: Will render the patienthome.html file with the list of the user's perscriptions that need to be taken today.
+        render: Will render the patienthome.html file with the list of the user's prescriptions that need to be taken today.
 
     """
 	url = 'http://uca.edu' # testing QRcode generation - delete later
 	qrcodes.createQR(url) # testing QRcode generation - delete later
 	now = datetime.datetime.now()
 	today = date.today()
-	allPerscriptions = models.Perscription.objects.all()
-	allMedications = models.Medication.objects.all()
-	myPerscriptions = []
-	for perscription in allPerscriptions:
-		if perscription.patient == request.user.username:
-			dayDifference = (today - perscription.perscriptionStartDate).days
-			if dayDifference % perscription.intervalBetweenDoses == 0: # check that today is a day where you should be taking your perscription
-				dosesTaken = ((dayDifference - 1) // perscription.intervalBetweenDoses) * perscription.timesPerDay # count number of doses you've already taken
-				if perscription.totalNumberOfDoses > dosesTaken: # make sure you haven't already taken all of your doses for this medication
-					myPerscriptions.append(getMedicationName(perscription.medicationCode) + ", Dose: " + str(perscription.medicationDose) +perscription.doseUnit)
+	allPrescriptions = models.Prescription.objects.all()
+	myPrescriptions = []
+	for prescription in allPrescriptions:
+		if prescription.patientId == request.user.username:
+			myPrescriptions.append(prescription.comment)
 	context = {
 		'now': now,
-		'medications': myPerscriptions,
+		'medications': myPrescriptions,
 		}
 	return render(request, 'patienthome.html', context)
 
