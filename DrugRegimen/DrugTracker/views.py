@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
-from .serializers import MedConflictSerializer
+# from .serializers import MedConflictSerializer
 import datetime
 from datetime import date
 from . import models
@@ -21,7 +21,7 @@ def index(request):
     Returns:
         render: Will render the login.html file.
 	"""
-	print(generateTenDigtURL())
+	# print(generateTenDigtURL())
 	return render(request, 'login.html')
 
 def home(request):
@@ -108,13 +108,15 @@ def patientHome(request):
 	now = datetime.datetime.now()
 	today = date.today()
 	allPrescriptions = models.Prescription.objects.all()
-	myPrescriptions = []
+	todaysMedications = []
 	for prescription in allPrescriptions:
 		if prescription.patientId == request.user.username:
-			myPrescriptions.append(prescription.comment)
+			items = getPrescriptionItems(prescription)
+			for item in items:
+				todaysMedications.append(item.drug)
 	context = {
 		'now': now,
-		'medications': myPrescriptions,
+		'medications': todaysMedications,
 		}
 	return render(request, 'patienthome.html', context)
 
@@ -168,6 +170,14 @@ def generateTenDigtURL():
 			return generateTenDigtURL()
 	return newUrl
 
-class MedConflictViewSet (viewsets.ModelViewSet):
-	queryset = models.MedConflict.objects.all()
-	serializer_class = MedConflictSerializer
+def getPrescriptionItems(prescription):
+	items = []
+	PrescriptionItems = models.PrescriptionItem.objects.all()
+	for prescriptionItem in PrescriptionItems:
+		if prescriptionItem.prescription == prescription:
+			items.append(prescriptionItem.item)
+	return items
+
+#class MedConflictViewSet (viewsets.ModelViewSet):
+#	queryset = models.MedConflict.objects.all()
+#	serializer_class = MedConflictSerializer
