@@ -44,6 +44,14 @@ DrugTracker.migrations.0005\_medconflict module
    :undoc-members:
    :show-inheritance:
 
+DrugTracker.migrations.0006\_doctorgroup\_patientgroup\_pharmacistgroup module
+------------------------------------------------------------------------------
+
+.. automodule:: DrugTracker.migrations.0006_doctorgroup_patientgroup_pharmacistgroup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
