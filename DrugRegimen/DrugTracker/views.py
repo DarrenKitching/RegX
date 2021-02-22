@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
-from .serializers import DrugConflictSerializer
+from .serializers import DrugConflictSerializer, DrugNotesSerializer
 import datetime
 from datetime import date
 from . import models
@@ -181,3 +181,7 @@ def getPrescriptionItems(prescription):
 class DrugConflictViewSet (viewsets.ModelViewSet):
 	queryset = models.DrugConflict.objects.all()
 	serializer_class = DrugConflictSerializer
+
+class DrugNotesViewSet (viewsets.ModelViewSet):
+	queryset = models.DrugNotes.objects.all()
+	serializer_class = DrugNotesSerializer

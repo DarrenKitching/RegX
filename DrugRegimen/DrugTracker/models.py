@@ -13,6 +13,10 @@ class DrugConflict(models.Model):
 	conflictSeverity = models.CharField(max_length=50)
 	conflictNotes = models.CharField(max_length=50)
 
+class DrugNotes(models.Model):
+	drug = models.CharField(max_length=50)
+	notes = models.CharField(max_length=5000)
+
 class PatientGroup(models.Model):
 	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
 
