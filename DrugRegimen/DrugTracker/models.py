@@ -7,6 +7,11 @@ class DoseURL(models.Model):
 	prescriptionID = models.CharField(max_length=c.MAX_PRESCRIPTION_ID_LEN) # identifies which prescription this URL is for
 	doseNumber = models.IntegerField() # identifies which dose of the prescription this URL represents
 '''
+class DrugConflict(models.Model):
+	drug1 = models.CharField(max_length=50)
+	drug2 = models.CharField(max_length=50)
+	conflictSeverity = models.CharField(max_length=50)
+	conflictNotes = models.CharField(max_length=50)
 
 class PatientGroup(models.Model):
 	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
