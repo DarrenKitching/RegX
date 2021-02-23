@@ -87,7 +87,7 @@ def takeDose(request, doseURL): # extract dose id from URL
 		render: Currently the function is only returning some Text showing the doseURL the function has been called with.
 
 	"""
-	return HttpResponse("Test " + doseURL)
+	return render(request, 'recordvideo.html')
 
 def patientHome(request):
 	"""
@@ -114,6 +114,7 @@ def patientHome(request):
 	todaysItems = getTodaysItems(patientItems)
 	context = {
 		'medications': todaysItems,
+		'username': request.user.username,
 		}
 	return render(request, 'patienthome.html', context)
 
@@ -145,7 +146,10 @@ def doctorHome(request):
 		render: Will render the doctorhome.html file.
 	"""
 	patients = ['test', 'test', 'test']
-	context = {'patients' : patients}
+	context = {
+		'patients' : patients,
+		'username': request.user.username,
+		}
 	# patientNames = []
 	# patientDrugs = [['']]
 	# patientLastDose [['']]?

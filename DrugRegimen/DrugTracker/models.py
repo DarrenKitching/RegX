@@ -28,7 +28,7 @@ class DoctorGroup(models.Model):
 
 class Item(models.Model):
 	dosageForm = models.CharField(max_length=50)
-	doseValue = models.IntegerField()
+	doseValue = models.IntegerField() # e.g. if you need to take two tablets of the same drug a day you'd have one video for doseCount 1 and another for doseCount 2
 	doseUnit = models.CharField(max_length=10)
 	drug = models.CharField(max_length=50)
 	durationValue = models.IntegerField()
@@ -38,6 +38,8 @@ class Item(models.Model):
 	quantity = models.CharField(max_length=50)
 	status = models.CharField(max_length=50)
 	startDate = models.DateField() # when the prescription has been started
+	videoRequired = models.BooleanField()
+	videoURL = models.CharField(max_length=10) # unique ten digit url for uploading the video
 
 class Prescription(models.Model):
 	comment = models.CharField(max_length=50)

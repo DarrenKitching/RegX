@@ -156,10 +156,10 @@
             <a href='#' class="left-nav">About</a>
             <a href='#' class="left-nav">Help</a>
             <div class="dropdown">
-                <a href='#' class="dropbtn">Dr Jones</a>
+                <a href='#' class="dropbtn">{{ username }}</a>
                 <div class="dropdown-content">
-                    <a href="#">Account</a>
-                    <a href="#">Sign Out</a>
+                    <a href="http://127.0.0.1:8000">Account</a>
+                    <a href="http://127.0.0.1:8000">Sign Out</a>
                 </div>
             </div>
         </nav>
@@ -178,6 +178,11 @@
                 <ul>
                     <li>2 hours ago</li>
                     <li>9:30 AM</li>
+                </ul>
+            </div>
+            <div class="video-submission">
+                <ul>
+                    <a href="dose/{{ medication.videoURL }}"><button>Submit Video</button></a>
                 </ul>
             </div>
         </div>
