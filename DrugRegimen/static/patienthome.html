@@ -165,8 +165,9 @@
         </nav>
     </header>
     <main>
+        {% for medication in medications %}
         <div class="prescription-summary">
-            <a href='#' class="medication">Nurofen</a>
+            <a href='#' class="medication">{{ medication.drug }}</a>
             <div class="meds">
                 <ul>
                     <li>Last Taken at:</li>
@@ -180,7 +181,7 @@
                 </ul>
             </div>
         </div>
-
+        {% endfor %}
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>

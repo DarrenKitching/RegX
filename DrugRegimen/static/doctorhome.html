@@ -165,6 +165,7 @@
         </nav>
     </header>
     <main>
+        {% for patient in patients %}
         <div class="patient-summary">
             <div class="video-player">
                 <video class="video-player" width="320" height="240" controls>
@@ -190,7 +191,7 @@
                 <label for="require1"> Require videos</label>
             </div>
         </div>
-
+        {% endfor %}
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>

@@ -37,6 +37,7 @@ class Item(models.Model):
 	route = models.CharField(max_length=50)
 	quantity = models.CharField(max_length=50)
 	status = models.CharField(max_length=50)
+	startDate = models.DateField() # when the prescription has been started
 
 class Prescription(models.Model):
 	comment = models.CharField(max_length=50)
@@ -53,4 +54,6 @@ class PrescriptionItem(models.Model):
 	prescription = models.ForeignKey('Prescription', on_delete=models.CASCADE)
 	item = models.ForeignKey('Item', on_delete=models.CASCADE)
 
-
+class DoctorPatient(models.Model):
+	doctorUsername = models.CharField(max_length=c.MAX_NAME_LEN)
+	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
