@@ -85,23 +85,20 @@
         }
 
         .patient-summary {
+            position: relative;
             overflow: hidden;
             margin: 15px 15px;
-            /* padding: 10px 24px; */
             background-color: rgb(187, 187, 187);
             border-radius: 20px;
         }
 
-        .patient-summary a {
+        .patient-details a {
             font-size: larger;
             text-decoration: none;
-            display: block;
             color: rgb(0, 0, 0);
-            width: max-content;
-            border-left: 20px;
-            padding: 15px 20px;
-            float: left;
             background-color: rgb(187, 187, 187);
+            text-align: center;
+            width: auto;
         }
 
         .patient-summary a:hover {
@@ -116,35 +113,67 @@
             overflow: hidden;
         }
 
-        .meds {
-            width: 40%;
+        .patient-details {
+            width: 18%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 52px 0px;
         }
 
-        .meds li {
+        .patient-details li {
             list-style-type: none;
             padding: 0px 20px;
             margin: 0;
-            font-size: large;
-            float: left;
         }
 
-        .time-last-taken {
-            padding: 0px 320px;
+        .patient-details input {
+            -webkit-appearance: none;
+            background-color: #fafafa;
+            border: 1px solid #cacece;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 9px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
         }
 
-        .time-last-taken li {
-            list-style-type: none;
-            font-size: large;
-            
+        .patient-details input:active,
+        .patient-details input:checked:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
         }
-        .require-videos {
-            padding: 0px 500px;
 
+        .patient-details input:checked {
+            background-color: #e9ecee;
+            border: 1px solid #adb8c0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+            color: #99a1a7;
         }
-        .require-videos input{
-            padding: 0px 0px;
-            margin: 0px;
 
+        .patient-details input:checked:after {
+            content: '\2714';
+            font-size: 14px;
+            position: absolute;
+            top: 0px;
+            left: 3px;
+            color: #006857;
+        }
+
+        .patient-details ul {
+            text-align: center;
+        }
+
+        #meds ul li {
+            display: block;
+            padding: auto;
+        }
+
+        #meds ul {
+            display: inline;
+        }
+
+        #time-last-taken ul {
+            display: inline;
         }
     </style>
 </head>
@@ -156,10 +185,10 @@
             <a href='#' class="left-nav">About</a>
             <a href='#' class="left-nav">Help</a>
             <div class="dropdown">
-                <a href='#' class="dropbtn">{{ username }}</a>
+                <a href='#' class="dropbtn">Dr Jones</a>
                 <div class="dropdown-content">
-                    <a href="http://127.0.0.1:8000">Account</a>
-                    <a href="http://127.0.0.1:8000">Sign Out</a>
+                    <a href="#">Account</a>
+                    <a href="#">Sign Out</a>
                 </div>
             </div>
         </nav>
@@ -167,29 +196,30 @@
     <main>
         {% for patient in patients %}
         <div class="patient-summary">
-            <div class="video-player">
-                <video class="video-player" width="320" height="240" controls>
-                    <source src="movie.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <div class="patient-details">
+                <a href='#' class="patient-details" id="patient-name">John Smith</a>
             </div>
-            <a href='#' class="patient_name">John Smith</a>
-            <div class="meds">
+            <div class="patient-details" id="meds">
                 <ul>
                     <li>Pyrazinamide 20mg</li>
                     <li>Nurofen 10mg</li>
                 </ul>
             </div>
-            <div class="time-last-taken">
+            <div id="time-last-taken" class="patient-details">
                 <ul>
                     <li>2 hours ago</li>
                     <li>9:30 AM</li>
                 </ul>
             </div>
-            <div class="require-videos">
+            <div id="require-videos" class="patient-details">
                 <input type="checkbox" id="require1" name=require1" value="Required">
                 <label for="require1"> Require videos</label>
             </div>
+            <video class="video-player" width="22%" height="240" controls>
+                <source src="movie.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
         </div>
         {% endfor %}
     </main>
