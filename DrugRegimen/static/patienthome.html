@@ -85,23 +85,20 @@
         }
 
         .prescription-summary {
+            position: relative;
             overflow: hidden;
             margin: 15px 15px;
-            /* padding: 10px 24px; */
             background-color: rgb(187, 187, 187);
             border-radius: 20px;
         }
 
-        .prescription-summary a {
+        .prescription-details a {
             font-size: larger;
             text-decoration: none;
-            display: block;
             color: rgb(0, 0, 0);
-            width: max-content;
-            border-left: 20px;
-            padding: 15px 20px;
-            float: left;
             background-color: rgb(187, 187, 187);
+            text-align: center;
+            width: auto;
         }
 
         .prescription-summary a:hover {
@@ -116,35 +113,71 @@
             overflow: hidden;
         }
 
-        .meds {
-            width: 40%;
+        .prescription-details {
+            width: 18%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 52px 0px;
         }
 
-        .meds li {
+        .prescription-details li {
             list-style-type: none;
             padding: 0px 20px;
             margin: 0;
-            font-size: large;
-            float: left;
         }
 
-        .time-last-taken {
-            padding: 0px 320px;
+        .prescription-details input {
+            -webkit-appearance: none;
+            background-color: #fafafa;
+            border: 1px solid #cacece;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 9px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
         }
 
-        .time-last-taken li {
-            list-style-type: none;
-            font-size: large;
-            
+        .prescription-details label {
+            text-align: padding: 20px;
         }
-        .require-videos {
-            padding: 0px 500px;
 
+        .prescription-details input:active,
+        .prescription-details input:checked:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
         }
-        .require-videos input{
-            padding: 0px 0px;
-            margin: 0px;
 
+        .prescription-details input:checked {
+            background-color: #e9ecee;
+            border: 1px solid #adb8c0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+            color: #99a1a7;
+        }
+
+        .prescription-details input:checked:after {
+            content: '\2714';
+            font-size: 14px;
+            position: absolute;
+            top: 0px;
+            left: 3px;
+            color: #006857;
+        }
+
+        .prescription-details ul {
+            text-align: center;
+        }
+
+        #meds ul li {
+            display: block;
+            padding: auto;
+        }
+
+        #meds ul {
+            display: inline;
+        }
+
+        #time-last-taken ul {
+            display: inline;
         }
     </style>
 </head>
@@ -167,20 +200,26 @@
     <main>
         {% for medication in medications %}
         <div class="prescription-summary">
-            <a href='#' class="medication">{{ medication.drug }}</a>
-            <div class="meds">
+            <div class="prescription-details">
+                <a href='#' class="prescription-details" id="medication">{{ medication.drug }}</a>
+            </div>
+            <div class="prescription-details" id="meds">
                 <ul>
-                    <li>Last Taken at:</li>
-                    <li>Next dose due at:</li>
+                    <li>Pyrazinamide 20mg</li>
+                    <li>Nurofen 10mg</li>
                 </ul>
             </div>
-            <div class="video-required">
+            <div id="time-last-taken" class="prescription-details">
                 <ul>
                     <li>2 hours ago</li>
                     <li>9:30 AM</li>
                 </ul>
             </div>
-            <div class="video-submission">
+            <div id="require-videos" class="prescription-details">
+                <input type="checkbox" id="require1" name=require1" value="Required">
+                <label for="require1"> Require videos</label>
+            </div>
+            <div class="prescription-details">
                 <ul>
                     <a href="dose/{{ medication.videoURL }}"><button>Submit Video</button></a>
                 </ul>
