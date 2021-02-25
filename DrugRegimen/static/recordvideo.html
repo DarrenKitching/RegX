@@ -117,10 +117,13 @@ h2 {
 <div class="bottom">
   <pre id="log"></pre>
 </div>
+
         
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="js/scripts.js"></script>
         
-            <script>
-                let preview = document.getElementById("preview");
+<script>
+let preview = document.getElementById("preview");
 let recording = document.getElementById("recording");
 let startButton = document.getElementById("startButton");
 let stopButton = document.getElementById("stopButton");
@@ -165,6 +168,7 @@ function stop(stream) {
   stream.getTracks().forEach(track => track.stop());
 }
 
+
 startButton.addEventListener("click", function() {
   navigator.mediaDevices.getUserMedia({
     video: true,
@@ -179,8 +183,31 @@ startButton.addEventListener("click", function() {
     let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
     recording.src = URL.createObjectURL(recordedBlob);
     downloadButton.href = recording.src;
-    downloadButton.download = "RecordedVideo.webm";
-
+    //downloadButton.download = "RecordedVideo.webm";
+ 	// var data = new FormData()
+	// data.append('file', blobToFile(recordedBlob, "dose_video"))
+	// fetch('/upload', {method: "POST", body: data});
+	// fetch("/upload", {
+	//   method: "POST", 
+	//   body: recordedBlob
+	// }).then(res => {
+	//   console.log("Request complete! response:", res);
+	// });
+	//var form_data = new FormData();
+	//form_data.append('file', recordedBlob);
+	$.ajax({
+        type:'POST',
+        url: '/upload',
+        data : {
+            file : recordedBlob,
+            url : recording.src
+        },
+        traditional: true,
+        cache: false,
+        success: function(response){
+            console.log('Success');
+        },
+    });
     log("Successfully recorded " + recordedBlob.size + " bytes of " +
         recordedBlob.type + " media.");
   })

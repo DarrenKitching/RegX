@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('home', views.home, name='home'),
     path('dose/<doseURL>/', views.takeDose, name='takeDose'),
+    path('upload', views.upload, name='upload'),
 	path('api', include(router.urls)),
 	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

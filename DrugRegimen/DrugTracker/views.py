@@ -1,13 +1,18 @@
+from django.core.files.storage import default_storage
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
 from .serializers import DrugConflictSerializer, DrugNotesSerializer
+from django.views.decorators.csrf import csrf_exempt
 import datetime
 from datetime import date
 from . import models
 from . import qrcodes
 import random
 import string
+import base64
+import requests
+
 
 def index(request):
 	"""
@@ -216,3 +221,16 @@ class DrugConflictViewSet (viewsets.ModelViewSet):
 class DrugNotesViewSet (viewsets.ModelViewSet):
 	queryset = models.DrugNotes.objects.all()
 	serializer_class = DrugNotesSerializer
+
+@csrf_exempt
+def upload(request):
+	if request.is_ajax():
+		vid = request.POST.get('file')
+		print(vid)
+		url = request.POST.get('url')
+		# r = requests.get(url, allow_redirects=True)
+		print(url)
+		# open('test.webm', 'wb').write(r.content)
+		return HttpResponse("Hello")
+	else:
+		return HttpResponse("Goodbye")
