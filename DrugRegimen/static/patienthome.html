@@ -131,16 +131,7 @@
             text-align: center;
         }
 
-        #meds ul li {
-            display: block;
-            padding: auto;
-        }
-
-        #meds ul {
-            display: inline;
-        }
-
-        #time-last-taken ul {
+        #time-last-taken p {
             display: inline;
         }
     </style>
@@ -167,17 +158,11 @@
             <div class="prescription-details">
                 <a href='#' class="prescription-details" id="medication">{{ medication.drug }}</a>
             </div>
-            <div class="prescription-details" id="meds">
-                <ul>
-                    <li>Pyrazinamide 20mg</li>
-                    <li>Nurofen 10mg</li>
-                </ul>
+            <div class="prescription-details" id="time-last-taken">
+                <p>09:30 AM</p>
             </div>
-            <div id="time-last-taken" class="prescription-details">
-                <ul>
-                    <li>2 hours ago</li>
-                    <li>9:30 AM</li>
-                </ul>
+            <div id="time-dose-due" class="prescription-details">
+                <p>30 minutes</p>
             </div>
             <div class="prescription-details">
                 <ul>
