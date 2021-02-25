@@ -1,9 +1,191 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #title {
+            padding-left: 35px;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+
+        }
+
+        .navbar {
+            overflow: hidden;
+            width: 100%;
+            background-color: #006857;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        .left-nav {
+            float: left;
+        }
+
+        .dropdown {
+            float: right;
+            overflow: hidden;
+            background-color: inherit;
+        }
+
+        .navbar a:hover {
+            background-color: #01463a;
+            color: #f4f4f4;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: #006857;
+        }
+
+        .footer p {
+            text-align: center;
+            color: white;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: grey;
+            min-width: 96.44px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #01463a;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .patient-summary {
+            position: relative;
+            overflow: hidden;
+            margin: 15px 15px;
+            background-color: rgb(187, 187, 187);
+            border-radius: 20px;
+        }
+
+        .patient-details a {
+            font-size: larger;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            background-color: rgb(187, 187, 187);
+            text-align: center;
+            width: auto;
+        }
+
+        .patient-summary a:hover {
+            background-color: #01493d;
+            color: white;
+        }
+
+        .patient-summary video {
+            float: right;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .patient-details {
+            width: 30%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .patient-details li {
+            list-style-type: none;
+            padding: 0px 20px;
+            margin: 0;
+    
+        }
+
+        .patient-details ul {
+            text-align: center;
+        }
+
+        #who-can-collect ul li {
+            display: block;
+            padding: auto;
+        }
+
+        #who-can-collect ul {
+            display: inline;
+        }
+
+        #prescription-medications ul {
+            display: inline;
+        }
+    </style>
 </head>
+
 <body>
-	<h1>You're logged in as a pharmacist</h1>
+    <header>
+        <h2 id="title">Drug Regimen Dashboard</h2>
+        <nav class="navbar">
+            <a href='#' class="left-nav">About</a>
+            <a href='#' class="left-nav">Help</a>
+            <div class="dropdown">
+                <a href='#' class="dropbtn">Dr Jones</a>
+                <div class="dropdown-content">
+                    <a href="#">Account</a>
+                    <a href="#">Sign Out</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% for patient in patients %}
+        <div class="patient-summary">
+            <div class="patient-details">
+                <a href='#' class="patient-details" id="patient-name">John Smith</a>
+            </div>
+            <div id="prescription-medications" class="patient-details">
+                <ul>
+                    <li>Pyrazinamide 20mg</li>
+                    <li>Nurofen 10mg</li>
+                </ul>
+            </div>
+			<div class="patient-details" id="who-can-collect">
+                <ul>
+                    <li>Sarah Smith</li>
+                    <li>Tim Smith</li>
+					<li>Bill Smith</li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+    <footer class="footer">
+        <p>Copyright &copy; Team 5 2021</p>
+    </footer>
 </body>
+
 </html>
