@@ -120,8 +120,7 @@ h2 {
 
         
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="js/scripts.js"></script>
-        
+
 <script>
 let preview = document.getElementById("preview");
 let recording = document.getElementById("recording");
@@ -183,31 +182,18 @@ startButton.addEventListener("click", function() {
     let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
     recording.src = URL.createObjectURL(recordedBlob);
     downloadButton.href = recording.src;
-    //downloadButton.download = "RecordedVideo.webm";
- 	// var data = new FormData()
-	// data.append('file', blobToFile(recordedBlob, "dose_video"))
-	// fetch('/upload', {method: "POST", body: data});
-	// fetch("/upload", {
-	//   method: "POST", 
-	//   body: recordedBlob
-	// }).then(res => {
-	//   console.log("Request complete! response:", res);
-	// });
-	//var form_data = new FormData();
-	//form_data.append('file', recordedBlob);
+	var formData = new FormData();
+	formData.append('video', recordedBlob);
+	formData.append('doseURL', "{{ doseURL }}")
 	$.ajax({
-        type:'POST',
-        url: '/upload',
-        data : {
-            file : recordedBlob,
-            url : recording.src
-        },
-        traditional: true,
-        cache: false,
-        success: function(response){
-            console.log('Success');
-        },
-    });
+	    type: 'POST',
+	    url: '/upload',
+	    data: formData,
+	    processData: false,
+	    contentType: false
+	}).done(function(data) {
+	       console.log(data);
+	});
     log("Successfully recorded " + recordedBlob.size + " bytes of " +
         recordedBlob.type + " media.");
   })

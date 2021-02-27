@@ -1,5 +1,6 @@
 from django.core.files.storage import default_storage
 from django.shortcuts import render
+from .forms import UploadFileForm
 from django.http import HttpResponse
 from rest_framework import viewsets
 from .serializers import DrugConflictSerializer, DrugNotesSerializer
@@ -92,7 +93,10 @@ def takeDose(request, doseURL): # extract dose id from URL
 		render: Currently the function is only returning some Text showing the doseURL the function has been called with.
 
 	"""
-	return render(request, 'recordvideo.html')
+	context = {
+		'doseURL': doseURL,
+	}
+	return render(request, 'recordvideo.html', context)
 
 def patientHome(request):
 	"""
@@ -225,12 +229,8 @@ class DrugNotesViewSet (viewsets.ModelViewSet):
 @csrf_exempt
 def upload(request):
 	if request.is_ajax():
-		vid = request.POST.get('file')
-		print(vid)
-		url = request.POST.get('url')
-		# r = requests.get(url, allow_redirects=True)
-		print(url)
-		# open('test.webm', 'wb').write(r.content)
-		return HttpResponse("Hello")
-	else:
-		return HttpResponse("Goodbye")
+		with open('recorded-videos/' + request.POST.get('doseURL') + '.webm', 'wb+') as destination:
+			for chunk in request.FILES['video'].chunks():
+				destination.write(chunk)
+		print(request.POST.get('doseURL'))
+	return home(request)
