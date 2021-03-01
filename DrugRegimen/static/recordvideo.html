@@ -110,7 +110,7 @@ h2 {
   <h2>Recording</h2>
   <video id="recording" width="160" height="120" controls></video>
   <a id="downloadButton" class="button">
-    Download
+    Upload
   </a>
 </div>
 
@@ -185,7 +185,8 @@ startButton.addEventListener("click", function() {
 	var formData = new FormData();
 	formData.append('video', recordedBlob);
 	formData.append('doseURL', "{{ doseURL }}")
-	$.ajax({
+	formData.append('date', "{{ date }}")
+  $.ajax({
 	    type: 'POST',
 	    url: '/upload',
 	    data: formData,

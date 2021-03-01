@@ -9,4 +9,5 @@ admin.site.register(PharmacistGroup)
 admin.site.register(DoctorGroup)
 admin.site.register(Item)
 admin.site.register(PrescriptionItem)
+admin.site.register(DoctorPatient)
 # Register your models here.

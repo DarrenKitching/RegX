@@ -1,5 +1,5 @@
 from django.core.files.storage import default_storage
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import UploadFileForm
 from django.http import HttpResponse
 from rest_framework import viewsets
@@ -11,8 +11,7 @@ from . import models
 from . import qrcodes
 import random
 import string
-import base64
-import requests
+from itertools import zip_longest
 
 
 def index(request):
@@ -93,8 +92,11 @@ def takeDose(request, doseURL): # extract dose id from URL
 		render: Currently the function is only returning some Text showing the doseURL the function has been called with.
 
 	"""
+	now = datetime.datetime.now()
+	today = date.today()
 	context = {
 		'doseURL': doseURL,
+		'date': str(today)
 	}
 	return render(request, 'recordvideo.html', context)
 
@@ -154,14 +156,30 @@ def doctorHome(request):
 	Returns:
 		render: Will render the doctorhome.html file.
 	"""
-	patients = ['test', 'test', 'test']
+	allDoctorPatientAssignmentsDoctorPatient = models.DoctorPatient.objects.all()
+	patients = [] # pateints assigned to this doctor
+	for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
+		if doctorPatientRelationship.doctorUsername == request.user.username:
+			patients.append(doctorPatientRelationship.patientUsername)
+	allPrescriptions = models.Prescription.objects.all()
+	patientDrugs = [] # a list of drugs to be taken by this doctor's patients today
+	patientAssignedToDrug = []
+	for patient in patients:
+		for prescription in allPrescriptions:
+			if prescription.patientId == patient:
+				patientItems = getAllPrescriptionItems([prescription]) # get this patient's prescriptions
+				todaysItems = getTodaysItems(patientItems) # get a list of items this patient needs to take today
+				for item in todaysItems:
+					patientDrugs.append(item)
+				for item in todaysItems:
+					patientAssignedToDrug.append(prescription.patientId)
+	zipped = zip(patientAssignedToDrug, patientDrugs)
+	today = date.today()
 	context = {
-		'patients' : patients,
-		'username': request.user.username,
+		'patientsAndDrugs' : zipped,
+		'username' : request.user.username,
+		'date': str(today)
 		}
-	# patientNames = []
-	# patientDrugs = [['']]
-	# patientLastDose [['']]?
 	return render(request, 'doctorhome.html', context)
 
 def generateTenDigtURL():
@@ -210,10 +228,13 @@ def getTodaysItems(items):
 			if abs(today - item.startDate).days <= (item.durationValue * 365):
 				todaysItems.append(item)
 		if item.durationUnit == 'months':
-			if abs(today - item.startDate).days <= (item.durationValue * 365):
+			if abs(today - item.startDate).days <= (item.durationValue * 30):
 				todaysItems.append(item)
-		else: # assume years
-			if abs(today - item.startDate).days <= (item.durationValue * 365):
+		if item.durationUnit == 'weeks':
+			if abs(today - item.startDate).days <= (item.durationValue * 7):
+				todaysItems.append(item)
+		else: # assume days
+			if abs(today - item.startDate).days <= (item.durationValue):
 				todaysItems.append(item)
 	return todaysItems
 
@@ -229,8 +250,61 @@ class DrugNotesViewSet (viewsets.ModelViewSet):
 @csrf_exempt
 def upload(request):
 	if request.is_ajax():
-		with open('recorded-videos/' + request.POST.get('doseURL') + '.webm', 'wb+') as destination:
-			for chunk in request.FILES['video'].chunks():
-				destination.write(chunk)
-		print(request.POST.get('doseURL'))
-	return home(request)
+		form = UploadFileForm(request.POST, request.FILES)
+		if form.is_valid():
+			print("valid")
+			with open('recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm', 'wb+') as destination:
+				for chunk in request.FILES['video'].chunks():
+					destination.write(chunk)
+				# pass in date video was taken as well so that it can be saved, might need date as well as doseURL in file name
+		else:
+			print("invalid")
+	return patientHome(request)
+
+def about(request):
+	allPatients = models.PatientGroup.objects.all()
+	for patient in allPatients:
+		if patient.patientUsername == request.user.username: # check to see if logged in user is a patient
+			return patientAbout(request) # if they are then call patientAbout
+	allPharmacists = models.PharmacistGroup.objects.all()
+	for pharmacist in allPharmacists:
+		if pharmacist.pharmacistUsername == request.user.username: # check to see if logged in user is a pharmacist account
+			return pharmacistAbout(request) # if they are then call pharmacistAbout
+	allDoctors = models.DoctorGroup.objects.all()
+	for doctor in allDoctors:
+		if doctor.doctorUsername == request.user.username: # check to see if logged in user is a doctor
+			return doctorAbout(request) # if they are then call doctorAbout
+	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
+
+def patientAbout(request):
+	return render(request, 'patientabout.html')
+
+def doctorAbout(request):
+	return render(request, 'doctorabout.html')
+
+def pharmacistAbout(request):
+	return render(request, 'pharmacistabout.html')
+
+def help(request):
+	allPatients = models.PatientGroup.objects.all()
+	for patient in allPatients:
+		if patient.patientUsername == request.user.username: # check to see if logged in user is a patient
+			return patientHelp(request) # if they are then call patientHelp
+	allPharmacists = models.PharmacistGroup.objects.all()
+	for pharmacist in allPharmacists:
+		if pharmacist.pharmacistUsername == request.user.username: # check to see if logged in user is a pharmacist account
+			return pharmacistHelp(request) # if they are then call pharmacistHelp
+	allDoctors = models.DoctorGroup.objects.all()
+	for doctor in allDoctors:
+		if doctor.doctorUsername == request.user.username: # check to see if logged in user is a doctor
+			return doctorHelp(request) # if they are then call doctorHelp
+	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
+
+def patientHelp(request):
+	return render(request, 'patienthelp.html')
+
+def doctorHelp(request):
+	return render(request, 'doctorhelp.html')
+
+def pharmacistHelp(request):
+	return render(request, 'pharmacisthelp.html')

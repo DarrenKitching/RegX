@@ -182,27 +182,26 @@
     <header>
         <h2 id="title">Drug Regimen Dashboard</h2>
         <nav class="navbar">
-            <a href='#' class="left-nav">About</a>
-            <a href='#' class="left-nav">Help</a>
+            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
             <div class="dropdown">
-                <a href='#' class="dropbtn">Dr Jones</a>
+                <a href='#' class="dropbtn">{{ username }}</a>
                 <div class="dropdown-content">
-                    <a href="#">Account</a>
-                    <a href="#">Sign Out</a>
+                    <a href="http://127.0.0.1:8000/account">Account</a>
+                    <a href="http://127.0.0.1:8000">Sign Out</a>
                 </div>
             </div>
         </nav>
     </header>
     <main>
-        {% for patient in patients %}
+        {% for item in patientsAndDrugs %}
         <div class="patient-summary">
             <div class="patient-details">
-                <a href='#' class="patient-details" id="patient-name">John Smith</a>
+                <a href='#' class="patient-details" id="patient-name">{{ item.0 }}</a>
             </div>
             <div class="patient-details" id="meds">
                 <ul>
-                    <li>Pyrazinamide 20mg</li>
-                    <li>Nurofen 10mg</li>
+                    <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
                 </ul>
             </div>
             <div id="time-last-taken" class="patient-details">
@@ -212,11 +211,11 @@
                 </ul>
             </div>
             <div id="require-videos" class="patient-details">
-                <input type="checkbox" id="require1" name=require1" value="Required">
+                <input type="checkbox" id="require1" name="require1" value="Required">
                 <label for="require1"> Require videos</label>
             </div>
             <video class="video-player" width="22%" height="240" controls>
-                <source src="movie.mp4" type="video/mp4">
+                <source src="recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
                 Your browser does not support the video tag.
             </video>
 

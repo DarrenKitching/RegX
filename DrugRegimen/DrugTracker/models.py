@@ -59,7 +59,3 @@ class PrescriptionItem(models.Model):
 class DoctorPatient(models.Model):
 	doctorUsername = models.CharField(max_length=c.MAX_NAME_LEN)
 	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
-
-class Videos(models.Model):
-    # file will be uploaded to MEDIA_ROOT/uploads
-    upload = models.FileField(upload_to='uploads/')
