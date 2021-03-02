@@ -362,3 +362,45 @@ def pharmacistAccount(request):
 		'username': request.user.username,
 	}
 	return render(request, 'account/pharmacistaccount.html', context)
+
+def prescribe(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'prescribe-medication/prescribe.html', context)
+
+def managepatients(request):
+	allDoctorPatientAssignmentsDoctorPatient = models.DoctorPatient.objects.all()
+	patients = [] # pateints assigned to this doctor
+	for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
+		if doctorPatientRelationship.doctorUsername == request.user.username:
+			patients.append(doctorPatientRelationship.patientUsername)
+	context = {
+		'username': request.user.username,
+		'patients': patients,
+	}
+	return render(request, 'manage-patients/manage-patients.html', context)
+
+def addPatient(request):
+	doctor = request.user.username
+	patient = request.POST.get('patient-username')
+	if (doctor is not None) and (patient is not None) and (doctor != '') and (patient != ''):
+		doctorPatientRelationship = models.DoctorPatient(doctorUsername = doctor, patientUsername = patient)
+		doctorPatientRelationship.save()
+	context = {
+		'username': request.user.username,
+	}
+	return managepatients(request)
+
+def removePatient(request):
+	doctor = request.user.username
+	patient = request.POST.get('remove-patient')
+	if (doctor is not None) and (patient is not None) and (doctor != '') and (patient != ''):
+		allDoctorPatientAssignmentsDoctorPatient = models.DoctorPatient.objects.all()
+		for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
+			if (doctorPatientRelationship.doctorUsername == doctor) and (doctorPatientRelationship.patientUsername == patient):
+				doctorPatientRelationship.delete()
+	context = {
+		'username': request.user.username,
+	}
+	return managepatients(request)

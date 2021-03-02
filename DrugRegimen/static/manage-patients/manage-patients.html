@@ -105,15 +105,28 @@
         </nav>
     </header>
     <main>
-        <p>
-            &lt;App Name&gt; is a service which allows doctors to manage perscriptions for their patients.</br>
-            It facilitates pharmacies coupling prescriptions with QR codes which the patient scans to inform their doctor and to check for medical conflicts.</br>
-            </br>
-            Our service offers a range of services for doctors, including the following:</br>
-            > Write a digital prescription for a patient - including the listing of others who can retrieve the prescription on their behalf</br>
-            > Set the prescription so that video uploads from the patient of their conumption of the prescription are necessary</br>
-            > Review the QR scans and videos of patients</br>
-        </p>
+        <div>
+        <h2>Add Patient</h2>
+            <form action="/add-patient" method="post">
+                {% csrf_token %}
+                <label for="patient-username">Patient Username: </label>
+                <input id="patient-username" type="text" name="patient-username">
+                <input type="submit" value="Add">
+            </form>
+        </div>
+        <div>
+        <h2>Remove Patient</h2>
+            <form action="/remove-patient" method="post">
+                {% csrf_token %}
+                <label for="remove-patient">Choose Patient: </label>
+                <select id="remove-patient" name="remove-patient">
+                {% for patient in patients %}
+                  <option value={{ patient }}>{{ patient }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Remove">
+            </form>
+        </div>
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>
