@@ -90,10 +90,11 @@
     <header>
         <h2 id="title">Drug Regimen</h2>
         <nav class="navbar">
-            <a href='#' class="left-nav">About</a>
-            <a href='#' class="left-nav">Help</a>
+            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
             <div class="dropdown">
-                <a href='#' class="dropbtn">Dr Jones</a>
+                <a href='#' class="dropbtn">{{ username }}</a>
                 <div class="dropdown-content">
                     <a href="http://127.0.0.1:8000/account">Account</a>
                     <a href="http://127.0.0.1:8000">Sign Out</a>
@@ -102,7 +103,14 @@
         </nav>
     </header>
     <main>
-
+        <p>
+            &lt;App Name&gt; is a service which allows doctors to manage perscriptions for their patients.</br>
+            It facilitates pharmacies coupling prescriptions with QR codes which the patient scans to inform their doctor and to check for medical conflicts.</br>
+            </br>
+            Our service offers a range of services for patients, including the following:</br>
+            > Paperless presciptions</br>
+            > Accountability on keeping on top of prescriptions</br>
+        </p>
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>

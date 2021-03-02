@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #title {
+            padding-left: 35px;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+
+        }
+
+        .navbar {
+            overflow: hidden;
+            width: 100%;
+            background-color: #006857;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        .left-nav {
+            float: left;
+        }
+
+        .dropdown {
+            float: right;
+            overflow: hidden;
+            background-color: inherit;
+        }
+
+        .navbar a:hover {
+            background-color: #01463a;
+            color: #f4f4f4;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: #006857;
+        }
+
+        .footer p {
+            text-align: center;
+            color: white;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: grey;
+            min-width: 96.44px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #01463a;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .patient-summary {
+            position: relative;
+            overflow: hidden;
+            margin: 15px 15px;
+            background-color: rgb(187, 187, 187);
+            border-radius: 20px;
+        }
+
+        .patient-details a {
+            font-size: larger;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            background-color: rgb(187, 187, 187);
+            text-align: center;
+            width: auto;
+        }
+
+        .patient-summary a:hover {
+            background-color: #01493d;
+            color: white;
+        }
+
+        .patient-summary video {
+            float: right;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .patient-details {
+            width: 18%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 52px 0px;
+        }
+
+        .patient-details li {
+            list-style-type: none;
+            padding: 0px 20px;
+            margin: 0;
+        }
+
+        .patient-details input {
+            -webkit-appearance: none;
+            background-color: #fafafa;
+            border: 1px solid #cacece;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 9px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .patient-details input:active,
+        .patient-details input:checked:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .patient-details input:checked {
+            background-color: #e9ecee;
+            border: 1px solid #adb8c0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+            color: #99a1a7;
+        }
+
+        .patient-details input:checked:after {
+            content: '\2714';
+            font-size: 14px;
+            position: absolute;
+            top: 0px;
+            left: 3px;
+            color: #006857;
+        }
+
+        .patient-details ul {
+            text-align: center;
+        }
+
+        #meds ul li {
+            display: block;
+            padding: auto;
+        }
+
+        #meds ul {
+            display: inline;
+        }
+
+        #time-last-taken ul {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2 id="title">Drug Regimen Dashboard</h2>
+        <nav class="navbar">
+            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+            <div class="dropdown">
+                <a href='#' class="dropbtn">{{ username }}</a>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/account">Account</a>
+                    <a href="http://127.0.0.1:8000">Sign Out</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% for item in patientsAndDrugs %}
+        <div class="patient-summary">
+            <div class="patient-details">
+                <a href='#' class="patient-details" id="patient-name">{{ item.0 }}</a>
+            </div>
+            <div class="patient-details" id="meds">
+                <ul>
+                    <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                </ul>
+            </div>
+            <div id="time-last-taken" class="patient-details">
+                <ul>
+                    <li>2 hours ago</li>
+                    <li>9:30 AM</li>
+                </ul>
+            </div>
+            <div id="require-videos" class="patient-details">
+                <input type="checkbox" id="require1" name="require1" value="Required">
+                <label for="require1"> Require videos</label>
+            </div>
+            <video class="video-player" width="22%" height="240" controls>
+                <source src="recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+
+        </div>
+        {% endfor %}
+    </main>
+    <footer class="footer">
+        <p>Copyright &copy; Team 5 2021</p>
+    </footer>
+</body>
+
+</html>

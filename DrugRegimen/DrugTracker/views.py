@@ -27,7 +27,7 @@ def index(request):
 		render: Will render the login.html file.
 	"""
 	# print(generateTenDigtURL())
-	return render(request, 'login.html')
+	return render(request, 'login/login.html')
 
 def home(request):
 	"""
@@ -98,7 +98,7 @@ def takeDose(request, doseURL): # extract dose id from URL
 		'doseURL': doseURL,
 		'date': str(today)
 	}
-	return render(request, 'recordvideo.html', context)
+	return render(request, 'recordvideo/recordvideo.html', context)
 
 def patientHome(request):
 	"""
@@ -127,7 +127,7 @@ def patientHome(request):
 		'medications': todaysItems,
 		'username': request.user.username,
 		}
-	return render(request, 'patienthome.html', context)
+	return render(request, 'home/patienthome.html', context)
 
 def pharmacistHome(request):
 	"""
@@ -142,7 +142,10 @@ def pharmacistHome(request):
 		render: Will render the pharmacisthome.html file.
 
 	"""
-	return render(request, 'pharmacisthome.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'home/pharmacisthome.html', context)
 
 def doctorHome(request):
 	"""
@@ -180,7 +183,7 @@ def doctorHome(request):
 		'username' : request.user.username,
 		'date': str(today)
 		}
-	return render(request, 'doctorhome.html', context)
+	return render(request, 'home/doctorhome.html', context)
 
 def generateTenDigtURL():
 	"""
@@ -277,13 +280,22 @@ def about(request):
 	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
 
 def patientAbout(request):
-	return render(request, 'patientabout.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'about/patientabout.html', context)
 
 def doctorAbout(request):
-	return render(request, 'doctorabout.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'about/doctorabout.html', context)
 
 def pharmacistAbout(request):
-	return render(request, 'pharmacistabout.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'about/pharmacistabout.html', context)
 
 def help(request):
 	allPatients = models.PatientGroup.objects.all()
@@ -301,10 +313,52 @@ def help(request):
 	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
 
 def patientHelp(request):
-	return render(request, 'patienthelp.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'help/patienthelp.html', context)
 
 def doctorHelp(request):
-	return render(request, 'doctorhelp.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'help/doctorhelp.html', context)
 
 def pharmacistHelp(request):
-	return render(request, 'pharmacisthelp.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'help/pharmacisthelp.html', context)
+
+def account(request):
+	allPatients = models.PatientGroup.objects.all()
+	for patient in allPatients:
+		if patient.patientUsername == request.user.username: # check to see if logged in user is a patient
+			return patientAccount(request) # if they are then call patientHelp
+	allPharmacists = models.PharmacistGroup.objects.all()
+	for pharmacist in allPharmacists:
+		if pharmacist.pharmacistUsername == request.user.username: # check to see if logged in user is a pharmacist account
+			return pharmacistAccount(request) # if they are then call pharmacistHelp
+	allDoctors = models.DoctorGroup.objects.all()
+	for doctor in allDoctors:
+		if doctor.doctorUsername == request.user.username: # check to see if logged in user is a doctor
+			return doctorAccount(request) # if they are then call doctorHelp
+	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
+
+def patientAccount(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'account/patientaccount.html', context)
+
+def doctorAccount(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'account/doctoraccount.html', context)
+
+def pharmacistAccount(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'account/pharmacistaccount.html', context)

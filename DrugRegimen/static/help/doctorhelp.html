@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>About</title>
     <style>
         #title {
             padding-left: 35px;
@@ -83,64 +83,14 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
-        .prescription-summary {
-            position: relative;
-            overflow: hidden;
-            margin: 15px 15px;
-            background-color: rgb(187, 187, 187);
-            border-radius: 20px;
-        }
-
-        .prescription-details a {
-            font-size: larger;
-            text-decoration: none;
-            color: rgb(0, 0, 0);
-            background-color: rgb(187, 187, 187);
-            text-align: center;
-            width: auto;
-        }
-
-        .prescription-summary a:hover {
-            background-color: #01493d;
-            color: white;
-        }
-
-        .prescription-summary video {
-            float: right;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .prescription-details {
-            width: 24%;
-            display: inline-block;
-            box-sizing: border-box;
-            text-align: center;
-            padding: 52px 0px;
-        }
-
-        .prescription-details li {
-            list-style-type: none;
-            padding: 0px 20px;
-            margin: 0;
-        }
-
-        .prescription-details ul {
-            text-align: center;
-        }
-
-        #time-last-taken p {
-            display: inline;
-        }
     </style>
 </head>
 
 <body>
     <header>
-        <h2 id="title">Drug Regimen Dashboard</h2>
+        <h2 id="title">Drug Regimen</h2>
         <nav class="navbar">
+            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
             <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
             <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
             <div class="dropdown">
@@ -153,24 +103,7 @@
         </nav>
     </header>
     <main>
-        {% for medication in medications %}
-        <div class="prescription-summary">
-            <div class="prescription-details">
-                <a href='#' class="prescription-details" id="medication">{{ medication.drug }} {{ medication.doseValue }} {{ medication.doseUnit }}</a>
-            </div>
-            <div class="prescription-details" id="time-last-taken">
-                <p>09:30 AM</p>
-            </div>
-            <div id="time-dose-due" class="prescription-details">
-                <p>30 minutes</p>
-            </div>
-            <div class="prescription-details">
-                <ul>
-                    <a href="dose/{{ medication.videoURL }}"><button>Submit Video</button></a>
-                </ul>
-            </div>
-        </div>
-        {% endfor %}
+
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>

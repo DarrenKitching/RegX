@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #title {
+            padding-left: 35px;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+
+        }
+
+        .navbar {
+            overflow: hidden;
+            width: 100%;
+            background-color: #006857;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        .left-nav {
+            float: left;
+        }
+
+        .dropdown {
+            float: right;
+            overflow: hidden;
+            background-color: inherit;
+        }
+
+        .navbar a:hover {
+            background-color: #01463a;
+            color: #f4f4f4;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: #006857;
+        }
+
+        .footer p {
+            text-align: center;
+            color: white;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: grey;
+            min-width: 96.44px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #01463a;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .prescription-summary {
+            position: relative;
+            overflow: hidden;
+            margin: 15px 15px;
+            background-color: rgb(187, 187, 187);
+            border-radius: 20px;
+        }
+
+        .prescription-details a {
+            font-size: larger;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            background-color: rgb(187, 187, 187);
+            text-align: center;
+            width: auto;
+        }
+
+        .prescription-summary a:hover {
+            background-color: #01493d;
+            color: white;
+        }
+
+        .prescription-summary video {
+            float: right;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .prescription-details {
+            width: 24%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 52px 0px;
+        }
+
+        .prescription-details li {
+            list-style-type: none;
+            padding: 0px 20px;
+            margin: 0;
+        }
+
+        .prescription-details ul {
+            text-align: center;
+        }
+
+        #time-last-taken p {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2 id="title">Drug Regimen Dashboard</h2>
+        <nav class="navbar">
+            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+            <div class="dropdown">
+                <a href='#' class="dropbtn">{{ username }}</a>
+                <div class="dropdown-content">
+                    <a href="http://127.0.0.1:8000/account">Account</a>
+                    <a href="http://127.0.0.1:8000">Sign Out</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% for medication in medications %}
+        <div class="prescription-summary">
+            <div class="prescription-details">
+                <a href='#' class="prescription-details" id="medication">{{ medication.drug }} {{ medication.doseValue }} {{ medication.doseUnit }}</a>
+            </div>
+            <div class="prescription-details" id="time-last-taken">
+                <p>09:30 AM</p>
+            </div>
+            <div id="time-dose-due" class="prescription-details">
+                <p>30 minutes</p>
+            </div>
+            <div class="prescription-details">
+                <ul>
+                    <a href="dose/{{ medication.videoURL }}"><button>Submit Video</button></a>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+    <footer class="footer">
+        <p>Copyright &copy; Team 5 2021</p>
+    </footer>
+</body>
+
+</html>
