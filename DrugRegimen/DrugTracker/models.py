@@ -43,14 +43,14 @@ class Item(models.Model):
 
 class Prescription(models.Model):
 	comment = models.CharField(max_length=50)
-	dateDispensed = models.CharField(max_length=50)
+	dateDispensed = models.CharField(max_length=50, null=True)
 	dateIssued = models.CharField(max_length=50)
-	dateReceived = models.CharField(max_length=50)
+	dateReceived = models.CharField(max_length=50, null=True)
 	dispensed = models.BooleanField()
 	doctorId = models.CharField(max_length=50)
 	patientId = models.CharField(max_length=50)
 	pharmacyId = models.CharField(max_length=50)
-	pharmacyNote = models.CharField(max_length=500)
+	pharmacyNote = models.CharField(max_length=500, null=True)
 
 class PrescriptionItem(models.Model):
 	prescription = models.ForeignKey('Prescription', on_delete=models.CASCADE)
@@ -59,3 +59,6 @@ class PrescriptionItem(models.Model):
 class DoctorPatient(models.Model):
 	doctorUsername = models.CharField(max_length=c.MAX_NAME_LEN)
 	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
+
+class DoseURL(models.Model):
+	doseURL = models.CharField(max_length = 10)

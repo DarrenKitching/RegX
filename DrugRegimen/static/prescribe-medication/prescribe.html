@@ -105,7 +105,87 @@
         </nav>
     </header>
     <main>
+        <div>
+        <h2>Prescribe Medication</h2>
+            <form action="/write-prescription" method="post">
+                {% csrf_token %}
+                <label for="patient">Choose Patient: </label>
+                <select id="patient" name="patient">
+                {% for patient in patients %}
+                  <option value={{ patient }}>{{ patient }}</option>
+                {% endfor %}
+                </select> 
+                <br><br>
+                
+                <label for="pharmacy">Choose Pharmacy: </label>
+                <select id="pharmacy" name="pharmacy">
+                {% for pharmacy in pharmacies %}
+                  <option value={{ pharmacy }}>{{ pharmacy }}</option>
+                {% endfor %}
+                </select>
+                <br><br>
 
+                <label for="drug">Drug: </label>
+                <input id="drug" type="text" name="drug">
+                <br><br>
+
+                <label for="DosageForm">Dosage Form: </label>
+                <input id="dosage-form" type="text" name="dosage-form">
+                <br><br>
+
+                <label for="DosageValue">Dose Value: </label>
+                <input id="dose-value" type="number" name="dose-value">
+                <br><br>
+
+                <label for="DoseUnit">Dose Unit: </label>
+                <input id="dose-unit" type="text" name="dose-unit">
+                <br><br>
+
+                <label for="DurationValue">Duration Value: </label>
+                <input id="duration-value" type="number" name="duration-value">
+                <br><br>
+
+                <label for="DurationUnit">Duration Unit: </label>
+                <select id="duration-unit" name="duration-unit">
+                  <option value="days">Days</option>
+                  <option value="weeks">Weeks</option>
+                  <option value="months">Months</option>
+                </select>
+                <br><br>
+
+
+                <label for="frequency">Frequency: </label>
+                <input id="frequency" type="text" name="frequency">
+                <br><br>
+
+
+                <label for="route">Route: </label>
+                <input id="route" type="text" name="route">
+                <br><br>
+
+                <label for="quantity">Quantity: </label>
+                <input id="quantity" type="text" name="quantity">
+                <br><br>
+
+                <label for="status">Status: </label>
+                <input id="status" type="text" name="status">
+                <br><br>
+
+                <label for="start-date">Start Date: </label>
+                <input id="start-date" type="date" name="start-date">
+                <br><br>
+
+                <label for="video-required">Video Required: </label>
+                <input id="video-required" type="checkbox" name="video-required">
+                <br><br>
+
+                <label for="comment">Comment: </label>
+                <input id="comment" type="text" name="comment">
+                <br><br>
+
+                <input type="submit" value="Prescribe">
+            </form>
+        </div>
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>

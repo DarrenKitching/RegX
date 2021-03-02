@@ -13,6 +13,7 @@ urlpatterns = [
     path('account', views.account, name='account'),
     path('manage', views.managepatients, name='managepatients'),
     path('prescribe', views.prescribe, name='prescribe'),
+    path('write-prescription', views.writePrescription, name='writePrescription'),
     path('help', views.help, name='help'),
     path('add-patient', views.addPatient, name='addPatient'),
     path('remove-patient', views.removePatient, name='removePatient'),

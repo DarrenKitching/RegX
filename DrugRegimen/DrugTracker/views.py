@@ -203,6 +203,8 @@ def generateTenDigtURL():
 	for dose in allDoses:
 		if dose.doseURL == newUrl: # check for rare conflict when a generated dose URL has already been used for a different dose.
 			return generateTenDigtURL()
+	newDoseURL = models.DoseURL(doseURL = newUrl)
+	newDoseURL.save()
 	return newUrl
 
 def getPrescriptionItems(prescription):
@@ -364,8 +366,19 @@ def pharmacistAccount(request):
 	return render(request, 'account/pharmacistaccount.html', context)
 
 def prescribe(request):
+	allDoctorPatientAssignmentsDoctorPatient = models.DoctorPatient.objects.all()
+	patients = [] # pateints assigned to this doctor
+	for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
+		if doctorPatientRelationship.doctorUsername == request.user.username:
+			patients.append(doctorPatientRelationship.patientUsername)
+	pharmacies = []
+	allPharmacies = models.PharmacistGroup.objects.all()
+	for pharmacy in allPharmacies:
+		pharmacies.append(pharmacy.pharmacistUsername)
 	context = {
 		'username': request.user.username,
+		'patients': patients,
+		'pharmacies': pharmacies,
 	}
 	return render(request, 'prescribe-medication/prescribe.html', context)
 
@@ -404,3 +417,33 @@ def removePatient(request):
 		'username': request.user.username,
 	}
 	return managepatients(request)
+
+def writePrescription(request):
+	doctor = request.user.username
+	patient = request.POST.get('patient')
+	pharmacy = request.POST.get('pharmacy')
+	drug = request.POST.get('drug')
+	dosageForm = request.POST.get('dosage-form')
+	doseValue = request.POST.get('dose-value')
+	doseUnit = request.POST.get('dose-unit')
+	durationValue = request.POST.get('duration-value')
+	durationUnit = request.POST.get('duration-unit')
+	frequency = request.POST.get('frequency')
+	route = request.POST.get('route')
+	quantity = request.POST.get('quantity')
+	status = request.POST.get('status')
+	startDate = request.POST.get('start-date')
+	videoRequired = False
+	if request.POST.get('video-required') == 'on':
+		videoRequired = True
+	comment = request.POST.get('comment')
+	item = models.Item(dosageForm = dosageForm, doseValue = doseValue, doseUnit = doseUnit, drug = drug, durationValue = durationValue, 
+		durationUnit = durationUnit, frequency = frequency, route = route, quantity = quantity, status = status, startDate = startDate, 
+		videoRequired = videoRequired, videoURL =  generateTenDigtURL())
+	item.save()
+	prescription = models.Prescription(comment = comment, dateIssued = date.today(), dispensed = False, doctorId = doctor, patientId = patient,
+		pharmacyId = pharmacy)
+	prescription.save()
+	prescriptionItem = models.PrescriptionItem(prescription=prescription, item = item)
+	prescriptionItem.save()
+	return home(request)
