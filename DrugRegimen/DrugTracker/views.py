@@ -27,7 +27,7 @@ def index(request):
 		render: Will render the login.html file.
 	"""
 	# print(generateTenDigtURL())
-	return render(request, 'login.html')
+	return render(request, 'login/login.html')
 
 def home(request):
 	"""
@@ -98,7 +98,7 @@ def takeDose(request, doseURL): # extract dose id from URL
 		'doseURL': doseURL,
 		'date': str(today)
 	}
-	return render(request, 'recordvideo.html', context)
+	return render(request, 'recordvideo/recordvideo.html', context)
 
 def patientHome(request):
 	"""
@@ -127,7 +127,7 @@ def patientHome(request):
 		'medications': todaysItems,
 		'username': request.user.username,
 		}
-	return render(request, 'patienthome.html', context)
+	return render(request, 'home/patienthome.html', context)
 
 def pharmacistHome(request):
 	"""
@@ -142,7 +142,10 @@ def pharmacistHome(request):
 		render: Will render the pharmacisthome.html file.
 
 	"""
-	return render(request, 'pharmacisthome.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'home/pharmacisthome.html', context)
 
 def doctorHome(request):
 	"""
@@ -180,7 +183,7 @@ def doctorHome(request):
 		'username' : request.user.username,
 		'date': str(today)
 		}
-	return render(request, 'doctorhome.html', context)
+	return render(request, 'home/doctorhome.html', context)
 
 def generateTenDigtURL():
 	"""
@@ -200,6 +203,8 @@ def generateTenDigtURL():
 	for dose in allDoses:
 		if dose.doseURL == newUrl: # check for rare conflict when a generated dose URL has already been used for a different dose.
 			return generateTenDigtURL()
+	newDoseURL = models.DoseURL(doseURL = newUrl)
+	newDoseURL.save()
 	return newUrl
 
 def getPrescriptionItems(prescription):
@@ -277,13 +282,22 @@ def about(request):
 	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
 
 def patientAbout(request):
-	return render(request, 'patientabout.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'about/patientabout.html', context)
 
 def doctorAbout(request):
-	return render(request, 'doctorabout.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'about/doctorabout.html', context)
 
 def pharmacistAbout(request):
-	return render(request, 'pharmacistabout.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'about/pharmacistabout.html', context)
 
 def help(request):
 	allPatients = models.PatientGroup.objects.all()
@@ -301,10 +315,135 @@ def help(request):
 	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
 
 def patientHelp(request):
-	return render(request, 'patienthelp.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'help/patienthelp.html', context)
 
 def doctorHelp(request):
-	return render(request, 'doctorhelp.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'help/doctorhelp.html', context)
 
 def pharmacistHelp(request):
-	return render(request, 'pharmacisthelp.html')
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'help/pharmacisthelp.html', context)
+
+def account(request):
+	allPatients = models.PatientGroup.objects.all()
+	for patient in allPatients:
+		if patient.patientUsername == request.user.username: # check to see if logged in user is a patient
+			return patientAccount(request) # if they are then call patientHelp
+	allPharmacists = models.PharmacistGroup.objects.all()
+	for pharmacist in allPharmacists:
+		if pharmacist.pharmacistUsername == request.user.username: # check to see if logged in user is a pharmacist account
+			return pharmacistAccount(request) # if they are then call pharmacistHelp
+	allDoctors = models.DoctorGroup.objects.all()
+	for doctor in allDoctors:
+		if doctor.doctorUsername == request.user.username: # check to see if logged in user is a doctor
+			return doctorAccount(request) # if they are then call doctorHelp
+	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
+
+def patientAccount(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'account/patientaccount.html', context)
+
+def doctorAccount(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'account/doctoraccount.html', context)
+
+def pharmacistAccount(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'account/pharmacistaccount.html', context)
+
+def prescribe(request):
+	allDoctorPatientAssignmentsDoctorPatient = models.DoctorPatient.objects.all()
+	patients = [] # pateints assigned to this doctor
+	for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
+		if doctorPatientRelationship.doctorUsername == request.user.username:
+			patients.append(doctorPatientRelationship.patientUsername)
+	pharmacies = []
+	allPharmacies = models.PharmacistGroup.objects.all()
+	for pharmacy in allPharmacies:
+		pharmacies.append(pharmacy.pharmacistUsername)
+	context = {
+		'username': request.user.username,
+		'patients': patients,
+		'pharmacies': pharmacies,
+	}
+	return render(request, 'prescribe-medication/prescribe.html', context)
+
+def managepatients(request):
+	allDoctorPatientAssignmentsDoctorPatient = models.DoctorPatient.objects.all()
+	patients = [] # pateints assigned to this doctor
+	for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
+		if doctorPatientRelationship.doctorUsername == request.user.username:
+			patients.append(doctorPatientRelationship.patientUsername)
+	context = {
+		'username': request.user.username,
+		'patients': patients,
+	}
+	return render(request, 'manage-patients/manage-patients.html', context)
+
+def addPatient(request):
+	doctor = request.user.username
+	patient = request.POST.get('patient-username')
+	if (doctor is not None) and (patient is not None) and (doctor != '') and (patient != ''):
+		doctorPatientRelationship = models.DoctorPatient(doctorUsername = doctor, patientUsername = patient)
+		doctorPatientRelationship.save()
+	context = {
+		'username': request.user.username,
+	}
+	return managepatients(request)
+
+def removePatient(request):
+	doctor = request.user.username
+	patient = request.POST.get('remove-patient')
+	if (doctor is not None) and (patient is not None) and (doctor != '') and (patient != ''):
+		allDoctorPatientAssignmentsDoctorPatient = models.DoctorPatient.objects.all()
+		for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
+			if (doctorPatientRelationship.doctorUsername == doctor) and (doctorPatientRelationship.patientUsername == patient):
+				doctorPatientRelationship.delete()
+	context = {
+		'username': request.user.username,
+	}
+	return managepatients(request)
+
+def writePrescription(request):
+	doctor = request.user.username
+	patient = request.POST.get('patient')
+	pharmacy = request.POST.get('pharmacy')
+	drug = request.POST.get('drug')
+	dosageForm = request.POST.get('dosage-form')
+	doseValue = request.POST.get('dose-value')
+	doseUnit = request.POST.get('dose-unit')
+	durationValue = request.POST.get('duration-value')
+	durationUnit = request.POST.get('duration-unit')
+	frequency = request.POST.get('frequency')
+	route = request.POST.get('route')
+	quantity = request.POST.get('quantity')
+	status = request.POST.get('status')
+	startDate = request.POST.get('start-date')
+	videoRequired = False
+	if request.POST.get('video-required') == 'on':
+		videoRequired = True
+	comment = request.POST.get('comment')
+	item = models.Item(dosageForm = dosageForm, doseValue = doseValue, doseUnit = doseUnit, drug = drug, durationValue = durationValue, 
+		durationUnit = durationUnit, frequency = frequency, route = route, quantity = quantity, status = status, startDate = startDate, 
+		videoRequired = videoRequired, videoURL =  generateTenDigtURL())
+	item.save()
+	prescription = models.Prescription(comment = comment, dateIssued = date.today(), dispensed = False, doctorId = doctor, patientId = patient,
+		pharmacyId = pharmacy)
+	prescription.save()
+	prescriptionItem = models.PrescriptionItem(prescription=prescription, item = item)
+	prescriptionItem.save()
+	return home(request)

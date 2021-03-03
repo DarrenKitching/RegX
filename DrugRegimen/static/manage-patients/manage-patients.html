@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>About</title>
     <style>
         #title {
             padding-left: 35px;
@@ -83,74 +83,17 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
-        .patient-summary {
-            position: relative;
-            overflow: hidden;
-            margin: 15px 15px;
-            background-color: rgb(187, 187, 187);
-            border-radius: 20px;
-        }
-
-        .patient-details a {
-            font-size: larger;
-            text-decoration: none;
-            color: rgb(0, 0, 0);
-            background-color: rgb(187, 187, 187);
-            text-align: center;
-            width: auto;
-        }
-
-        .patient-summary a:hover {
-            background-color: #01493d;
-            color: white;
-        }
-
-        .patient-summary video {
-            float: right;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .patient-details {
-            width: 30%;
-            display: inline-block;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .patient-details li {
-            list-style-type: none;
-            padding: 0px 20px;
-            margin: 0;
-    
-        }
-
-        .patient-details ul {
-            text-align: center;
-        }
-
-        #who-can-collect ul li {
-            display: block;
-            padding: auto;
-        }
-
-        #who-can-collect ul {
-            display: inline;
-        }
-
-        #prescription-medications ul {
-            display: inline;
-        }
     </style>
 </head>
 
 <body>
     <header>
-        <h2 id="title">Drug Regimen Dashboard</h2>
+        <h2 id="title">Drug Regimen</h2>
         <nav class="navbar">
+            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
             <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+            <a href='http://127.0.0.1:8000/manage' class="left-nav">Manage Patients</a>
+            <a href='http://127.0.0.1:8000/prescribe' class="left-nav">Prescribe Medication</a>
             <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
             <div class="dropdown">
                 <a href='#' class="dropbtn">{{ username }}</a>
@@ -162,26 +105,28 @@
         </nav>
     </header>
     <main>
-        {% for patient in patients %}
-        <div class="patient-summary">
-            <div class="patient-details">
-                <a href='#' class="patient-details" id="patient-name">John Smith</a>
-            </div>
-            <div class="patient-details" id="who-can-collect">
-                <ul>
-                    <li>Sarah Smith</li>
-                    <li>Tim Smith</li>
-					<li>Bill Smith</li>
-                </ul>
-            </div>
-            <div id="prescription-medications" class="patient-details">
-                <ul>
-                    <li>Pyrazinamide 20mg</li>
-                    <li>Nurofen 10mg</li>
-                </ul>
-            </div>
+        <div>
+        <h2>Add Patient</h2>
+            <form action="/add-patient" method="post">
+                {% csrf_token %}
+                <label for="patient-username">Patient Username: </label>
+                <input id="patient-username" type="text" name="patient-username">
+                <input type="submit" value="Add">
+            </form>
         </div>
-        {% endfor %}
+        <div>
+        <h2>Remove Patient</h2>
+            <form action="/remove-patient" method="post">
+                {% csrf_token %}
+                <label for="remove-patient">Choose Patient: </label>
+                <select id="remove-patient" name="remove-patient">
+                {% for patient in patients %}
+                  <option value={{ patient }}>{{ patient }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Remove">
+            </form>
+        </div>
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>

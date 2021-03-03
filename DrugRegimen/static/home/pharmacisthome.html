@@ -114,65 +114,33 @@
         }
 
         .patient-details {
-            width: 18%;
+            width: 30%;
             display: inline-block;
             box-sizing: border-box;
             text-align: center;
-            padding: 52px 0px;
         }
 
         .patient-details li {
             list-style-type: none;
             padding: 0px 20px;
             margin: 0;
-        }
-
-        .patient-details input {
-            -webkit-appearance: none;
-            background-color: #fafafa;
-            border: 1px solid #cacece;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-            padding: 9px;
-            border-radius: 3px;
-            display: inline-block;
-            position: relative;
-        }
-
-        .patient-details input:active,
-        .patient-details input:checked:active {
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .patient-details input:checked {
-            background-color: #e9ecee;
-            border: 1px solid #adb8c0;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-            color: #99a1a7;
-        }
-
-        .patient-details input:checked:after {
-            content: '\2714';
-            font-size: 14px;
-            position: absolute;
-            top: 0px;
-            left: 3px;
-            color: #006857;
+    
         }
 
         .patient-details ul {
             text-align: center;
         }
 
-        #meds ul li {
+        #who-can-collect ul li {
             display: block;
             padding: auto;
         }
 
-        #meds ul {
+        #who-can-collect ul {
             display: inline;
         }
 
-        #time-last-taken ul {
+        #prescription-medications ul {
             display: inline;
         }
     </style>
@@ -182,6 +150,7 @@
     <header>
         <h2 id="title">Drug Regimen Dashboard</h2>
         <nav class="navbar">
+            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
             <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
             <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
             <div class="dropdown">
@@ -194,31 +163,24 @@
         </nav>
     </header>
     <main>
-        {% for item in patientsAndDrugs %}
+        {% for patient in patients %}
         <div class="patient-summary">
             <div class="patient-details">
-                <a href='#' class="patient-details" id="patient-name">{{ item.0 }}</a>
+                <a href='#' class="patient-details" id="patient-name">John Smith</a>
             </div>
-            <div class="patient-details" id="meds">
+            <div class="patient-details" id="who-can-collect">
                 <ul>
-                    <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                    <li>Sarah Smith</li>
+                    <li>Tim Smith</li>
+					<li>Bill Smith</li>
                 </ul>
             </div>
-            <div id="time-last-taken" class="patient-details">
+            <div id="prescription-medications" class="patient-details">
                 <ul>
-                    <li>2 hours ago</li>
-                    <li>9:30 AM</li>
+                    <li>Pyrazinamide 20mg</li>
+                    <li>Nurofen 10mg</li>
                 </ul>
             </div>
-            <div id="require-videos" class="patient-details">
-                <input type="checkbox" id="require1" name="require1" value="Required">
-                <label for="require1"> Require videos</label>
-            </div>
-            <video class="video-player" width="22%" height="240" controls>
-                <source src="recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
-                Your browser does not support the video tag.
-            </video>
-
         </div>
         {% endfor %}
     </main>
