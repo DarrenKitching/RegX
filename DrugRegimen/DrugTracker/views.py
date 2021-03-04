@@ -229,18 +229,23 @@ def getTodaysItems(items):
 	now = datetime.datetime.now()
 	today = date.today()
 	for item in items:
-		if item.durationUnit == 'years':
-			if abs(today - item.startDate).days <= (item.durationValue * 365):
-				todaysItems.append(item)
-		if item.durationUnit == 'months':
-			if abs(today - item.startDate).days <= (item.durationValue * 30):
-				todaysItems.append(item)
-		if item.durationUnit == 'weeks':
-			if abs(today - item.startDate).days <= (item.durationValue * 7):
-				todaysItems.append(item)
-		else: # assume days
-			if abs(today - item.startDate).days <= (item.durationValue):
-				todaysItems.append(item)
+		if item.startDate is not None:
+			if item.durationUnit == 'Years':
+				if abs(today - item.startDate).days <= (item.durationValue * 365):
+					todaysItems.append(item)
+			if item.durationUnit == 'Months':
+				if abs(today - item.startDate).days <= (item.durationValue * 30):
+					todaysItems.append(item)
+			if item.durationUnit == 'Weeks':
+				if abs(today - item.startDate).days <= (item.durationValue * 7):
+					todaysItems.append(item)
+			else: # assume days
+				if abs(today - item.startDate).days <= (item.durationValue):
+					todaysItems.append(item)
+		else:
+			item.startDate = date.today()
+			item.save()
+			todaysItems.append(item)
 	return todaysItems
 
 
@@ -432,13 +437,12 @@ def writePrescription(request):
 	route = request.POST.get('route')
 	quantity = request.POST.get('quantity')
 	status = request.POST.get('status')
-	startDate = request.POST.get('start-date')
 	videoRequired = False
 	if request.POST.get('video-required') == 'on':
 		videoRequired = True
 	comment = request.POST.get('comment')
 	item = models.Item(dosageForm = dosageForm, doseValue = doseValue, doseUnit = doseUnit, drug = drug, durationValue = durationValue, 
-		durationUnit = durationUnit, frequency = frequency, route = route, quantity = quantity, status = status, startDate = startDate, 
+		durationUnit = durationUnit, frequency = frequency, route = route, quantity = quantity, status = status, 
 		videoRequired = videoRequired, videoURL =  generateTenDigtURL())
 	item.save()
 	prescription = models.Prescription(comment = comment, dateIssued = date.today(), dispensed = False, doctorId = doctor, patientId = patient,

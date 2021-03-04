@@ -1,12 +1,6 @@
 from django.db import models
 from . import consts as c
 
-'''
-class DoseURL(models.Model):
-	doseURL = models.CharField(max_length=c.MAX_MEDCODE_LEN) # 10 digit url code unique to each dose assigned to a patient
-	prescriptionID = models.CharField(max_length=c.MAX_PRESCRIPTION_ID_LEN) # identifies which prescription this URL is for
-	doseNumber = models.IntegerField() # identifies which dose of the prescription this URL represents
-'''
 class DrugConflict(models.Model):
 	drug1 = models.CharField(max_length=50)
 	drug2 = models.CharField(max_length=50)
@@ -37,7 +31,7 @@ class Item(models.Model):
 	route = models.CharField(max_length=50)
 	quantity = models.CharField(max_length=50)
 	status = models.CharField(max_length=50)
-	startDate = models.DateField() # when the prescription has been started
+	startDate = models.DateField(null=True) # when the prescription has been started
 	videoRequired = models.BooleanField()
 	videoURL = models.CharField(max_length=10) # unique ten digit url for uploading the video
 
