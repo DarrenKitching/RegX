@@ -142,8 +142,38 @@ def pharmacistHome(request):
 		render: Will render the pharmacisthome.html file.
 
 	"""
+	pharmacyPrescriptions = []
+	allPrescriptions = models.Prescription.objects.all()
+	for prescription in allPrescriptions:
+		if prescription.pharmacyId == request.user.username:
+			pharmacyPrescriptions.append(prescription)
+	notDispensed = []
+	dispensedNotReceived = []
+	dispensedAndReceived = []
+	notDispensedIds = []
+	dispensedNotReceivedIds = []
+	for prescription in pharmacyPrescriptions:
+		if prescription.dispensed == False:
+			notDispensed.append(prescription)
+			notDispensedIds.append(prescription.id)
+		elif prescription.dateReceived is None:
+			dispensedNotReceived.append(prescription)
+			dispensedNotReceivedIds.append(prescription.id)
+		else:
+			dispensedAndReceived.append(prescription)
+	notDispensedPresciptionItems = []
+	dispensedNotReceivedPrescriptionItems = []
+	dispensedAndReceivedPrescriptionItems = []
+	for prescription in notDispensed:
+		notDispensedPresciptionItems.append(getPrescriptionItems(prescription))
+	for prescription in dispensedNotReceived:
+		dispensedNotReceivedPrescriptionItems.append(getPrescriptionItems(prescription))
+	for prescription in dispensedAndReceived:
+		dispensedAndReceivedPrescriptionItems.append(getPrescriptionItems(prescription))
 	context = {
 		'username': request.user.username,
+		'notDispensed': zip(notDispensed, notDispensedPresciptionItems, notDispensedIds),
+		'dispensedNotReceived': zip(dispensedNotReceived, dispensedNotReceivedPrescriptionItems, dispensedNotReceivedIds),
 	}
 	return render(request, 'home/pharmacisthome.html', context)
 
@@ -212,6 +242,7 @@ def getPrescriptionItems(prescription):
 	PrescriptionItems = models.PrescriptionItem.objects.all()
 	for prescriptionItem in PrescriptionItems:
 		if prescriptionItem.prescription == prescription:
+			print(str(prescriptionItem.prescription) + " " + str(prescription))
 			items.append(prescriptionItem.item)
 	return items
 
@@ -451,3 +482,20 @@ def writePrescription(request):
 	prescriptionItem = models.PrescriptionItem(prescription=prescription, item = item)
 	prescriptionItem.save()
 	return home(request)
+
+def markDispensed(request, prescriptionId):
+	allPrescriptions = models.Prescription.objects.all()
+	for prescription in allPrescriptions:
+		if str(prescription.id) == str(prescriptionId):
+			prescription.dateDispensed = date.today()
+			prescription.dispensed = True
+			prescription.save()
+	return redirect('/home')
+
+def markReceived(request, prescriptionId):
+	allPrescriptions = models.Prescription.objects.all()
+	for prescription in allPrescriptions:
+		if str(prescription.id) == str(prescriptionId):
+			prescription.dateReceived = date.today()
+			prescription.save()
+	return redirect('/home')
