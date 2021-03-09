@@ -20,6 +20,7 @@ urlpatterns = [
     path('dose/<doseURL>/', views.takeDose, name='takeDose'),
     path('mark-dispensed/<prescriptionId>/', views.markDispensed, name='markDispensed'),
     path('mark-received/<prescriptionId>/', views.markReceived, name='markReceived'),
+    path('generateQRs/<prescriptionId>/', views.generatePrescriptionQRs, name='generateQRs'),
     path('upload', views.upload, name='upload'),
 	path('api', include(router.urls)),
 	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
