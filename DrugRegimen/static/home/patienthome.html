@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Home</title>
+    <link rel="stylesheet" href="../admin/css/subnav.css">
     <style>
         #title {
             padding-left: 35px;
@@ -154,7 +155,9 @@
         </nav>
     </header>
     <main>
-        <h2>Patient Home</h2>
+        <div id="subnav">
+            <h3>Patient Home</h2>
+        </div>
         {% for medication in medications %}
         <div class="prescription-summary">
             <div class="prescription-details">

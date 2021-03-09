@@ -1,0 +1,9 @@
+#subnav {
+    font-family: 'Trebuchet MS';
+    margin-left: 10%;
+    margin-right: 70%;
+    color: dimgrey;
+    border-bottom: 3px solid dimgrey;
+    margin-bottom:40px;
+    margin-top:30px;
+  }

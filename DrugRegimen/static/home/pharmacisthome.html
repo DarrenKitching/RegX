@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Home</title>
+    <link rel="stylesheet" href="../admin/css/subnav.css">
     <style>
         #title {
             padding-left: 35px;
@@ -148,7 +149,7 @@
 
 <body>
     <header>
-        <h2 id="title">Drug Regimen Dashboard</h2>
+        <h2 id="title">Drug Regimen</h2>
         <nav class="navbar">
             <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
             <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
@@ -163,13 +164,12 @@
         </nav>
     </header>
     <main>
-<<<<<<< HEAD
-        <h2>Pharmacy Home</h2>
+        <div id="subnav">
+            <h3>Pharmacy Home</h2>
+        </div>
         {% for patient in patients %}
-=======
         <h2>Not dispensed:</h2>
         {% for prescription in notDispensed %}
->>>>>>> a710521b3d51835d1ce20ef3b09c87edab6cebf7
         <div class="patient-summary">
             <div class="patient-details">
                 <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
