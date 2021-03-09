@@ -1,6 +1,6 @@
 import pyqrcode
 
-def createQR(url):
+def createQR(videoURL):
 	"""
 	This function can turn a url into a QRCode image.
 
@@ -10,10 +10,7 @@ def createQR(url):
         url (string): url is a string of what our qr code should point to e.g. http://127.0.0.1:8000/dose/1z5Lff10AN
 
     Returns:
-        print: Currently the function is only printing the qr code to the terminal and not saving them as images.
 
     """
-	qr = pyqrcode.create(url)
-	# qr.svg('uca-url.svg', scale=8)
-	# qr.eps('uca-url.eps', scale=2)
-	print(qr.terminal(quiet_zone=1))
+	qr = pyqrcode.create('http://127.0.0.1:8000/' + videoURL)
+	qr.svg('media/QR-Codes/' + videoURL + '.svg', scale=4)

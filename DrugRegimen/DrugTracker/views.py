@@ -294,7 +294,7 @@ def upload(request):
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			print("valid")
-			with open('recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm', 'wb+') as destination:
+			with open('media/recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm', 'wb+') as destination:
 				for chunk in request.FILES['video'].chunks():
 					destination.write(chunk)
 				# pass in date video was taken as well so that it can be saved, might need date as well as doseURL in file name
@@ -499,3 +499,21 @@ def markReceived(request, prescriptionId):
 			prescription.dateReceived = date.today()
 			prescription.save()
 	return redirect('/home')
+
+def generatePrescriptionQRs(request, prescriptionId):
+	items = []
+	allPrescriptions = models.Prescription.objects.all()
+	for prescription in allPrescriptions:
+		if str(prescription.id) == str(prescriptionId):
+			items = getPrescriptionItems(prescription)
+			break
+	imageUrls = []
+	for item in items:
+		qrcodes.createQR(item.videoURL)
+		imageUrls.append('http://127.0.0.1:8000/' + 'media/QR-Codes/' + item.videoURL + '.svg')
+	
+	context = {
+		'username': request.user.username,
+		'itemURLs': zip(items, imageUrls),
+	}
+	return render(request, 'print-qrcodes/print-qrcodes.html', context)

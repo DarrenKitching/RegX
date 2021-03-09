@@ -163,51 +163,11 @@
         </nav>
     </header>
     <main>
-        <h2>Not dispensed:</h2>
-        {% for prescription in notDispensed %}
+        {% for item in itemURLs %}
         <div class="patient-summary">
-            <div class="patient-details">
-                <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
-            </div>
-            <div class="patient-details" id="who-can-collect">
-                <ul>
-                    <li>Sarah Smith</li>
-                    <li>Tim Smith</li>
-					<li>Bill Smith</li>
-                </ul>
-            </div>
-            <div id="prescription-medications" class="patient-details">
-                <ul>
-                    {% for item in prescription.1 %}
-                    <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
-                    {% endfor %}
-                </ul>
-                <a href="mark-dispensed/{{ prescription.2 }}"><button>Mark Dispensed</button></a>
-                <a href="generateQRs/{{ prescription.2 }}"><button>Generate QR Codes</button></a>
-            </div>
+            <h2>{{ item.0.drug }}</h2>
+            <img src="{{ item.1 }}">
         </div>
-        {% endfor %}
-        <h2>Dispensed (Not Collected):</h2>
-        {% for prescription in dispensedNotReceived %}
-        <div class="patient-summary">
-            <div class="patient-details">
-                <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
-            </div>
-            <div class="patient-details" id="who-can-collect">
-                <ul>
-                    <li>Sarah Smith</li>
-                    <li>Tim Smith</li>
-                    <li>Bill Smith</li>
-                </ul>
-            </div>
-            <div id="prescription-medications" class="patient-details">
-                <ul>
-                    {% for item in prescription.1 %}
-                    <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
-                    {% endfor %}
-                </ul>
-                <a href="mark-received/{{ prescription.2 }}"><button>Mark Received</button></a>
-            </div>
         {% endfor %}
     </main>
     <footer class="footer">
