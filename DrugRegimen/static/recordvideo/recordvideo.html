@@ -1,133 +1,3 @@
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        
-        <title>Recording a media element - Example - code sample</title>
-    </head>
-    <body>
-        
-            <p>Click the "Start" button to begin video recording for a few seconds. You can stop
-   the video by clicking the creatively-named "Stop" button. The "Download"
-   button will download the received data (although it's in a raw, unwrapped form
-   that isn't very useful).
-</p>
-<br>
-
-<div class="left">
-  <div id="startButton" class="button">
-    Start
-  </div>
-  <h2>Preview</h2>
-  <video id="preview" width="160" height="120" autoplay muted></video>
-</div>
-
-<div class="right">
-  <div id="stopButton" class="button">
-    Stop
-  </div>
-  <h2>Recording</h2>
-  <video id="recording" width="160" height="120" controls></video>
-  <a id="downloadButton" class="button">
-    Upload
-  </a>
-</div>
-
-<div class="bottom">
-  <pre id="log"></pre>
-</div>
-
-        
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-<script>
-let preview = document.getElementById("preview");
-let recording = document.getElementById("recording");
-let startButton = document.getElementById("startButton");
-let stopButton = document.getElementById("stopButton");
-let downloadButton = document.getElementById("downloadButton");
-let logElement = document.getElementById("log");
-
-let recordingTimeMS = 5000;
-
-function log(msg) {
-  logElement.innerHTML += msg + "\n";
-}
-
-function wait(delayInMS) {
-  return new Promise(resolve => setTimeout(resolve, delayInMS));
-}
-
-function startRecording(stream, lengthInMS) {
-  let recorder = new MediaRecorder(stream);
-  let data = [];
-
-  recorder.ondataavailable = event => data.push(event.data);
-  recorder.start();
-  log(recorder.state + " for " + (lengthInMS/1000) + " seconds...");
-
-  let stopped = new Promise((resolve, reject) => {
-    recorder.onstop = resolve;
-    recorder.onerror = event => reject(event.name);
-  });
-
-  let recorded = wait(lengthInMS).then(
-    () => recorder.state == "recording" && recorder.stop()
-  );
-
-  return Promise.all([
-    stopped,
-    recorded
-  ])
-  .then(() => data);
-}
-
-function stop(stream) {
-  stream.getTracks().forEach(track => track.stop());
-}
-
-
-startButton.addEventListener("click", function() {
-  navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: true
-  }).then(stream => {
-    preview.srcObject = stream;
-    downloadButton.href = stream;
-    preview.captureStream = preview.captureStream || preview.mozCaptureStream;
-    return new Promise(resolve => preview.onplaying = resolve);
-  }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
-  .then (recordedChunks => {
-    let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
-    recording.src = URL.createObjectURL(recordedBlob);
-    downloadButton.href = recording.src;
-	var formData = new FormData();
-	formData.append('video', recordedBlob);
-	formData.append('doseURL', "{{ doseURL }}")
-	formData.append('date', "{{ date }}")
-  $.ajax({
-	    type: 'POST',
-	    url: '/upload',
-	    data: formData,
-	    processData: false,
-	    contentType: false
-	}).done(function(data) {
-	       console.log(data);
-	});
-    log("Successfully recorded " + recordedBlob.size + " bytes of " +
-        recordedBlob.type + " media.");
-  })
-  .catch(log);
-}, false);
-stopButton.addEventListener("click", function() {
-  stop(preview.srcObject);
-}, false);
-            </script>
-        
-    </body>
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,12 +83,31 @@ stopButton.addEventListener("click", function() {
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        .left {
+        margin-right: 10px;
+        float: left;
+        width: 160px;
+        padding: 0px;
+        }
+
+        .right {
+        margin-left: 10px;
+        float: left;
+        width: 160px;
+        padding: 0px;
+        }
+
+        .bottom {
+        clear: both;
+        padding-top: 10px;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <h2 id="title">Record Video</h2>
+        <h2 id="title">Drug Regimen</h2>
         <nav class="navbar">
             <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
             <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
@@ -234,6 +123,121 @@ stopButton.addEventListener("click", function() {
     </header>
     <main>
         <h2>Record Video</h2>
+        <p>Click the "Start" button to begin video recording for a few seconds. You can stop
+          the video by clicking the creatively-named "Stop" button. The "Download"
+          button will download the received data (although it's in a raw, unwrapped form
+          that isn't very useful).
+       </p>
+       <br>
+       <div class="left">
+        <div id="startButton" class="button">
+          Start
+        </div>
+        <h2>Preview</h2>
+        <video id="preview" width="160" height="120" autoplay muted></video>
+      </div>
+      
+      <div class="right">
+        <div id="stopButton" class="button">
+          Stop
+        </div>
+        <h2>Recording</h2>
+        <video id="recording" width="160" height="120" controls></video>
+        <a id="downloadButton" class="button">
+          Upload
+        </a>
+      </div>
+      
+      <div class="bottom">
+        <pre id="log"></pre>
+      </div>
+      
+              
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      
+      <script>
+      let preview = document.getElementById("preview");
+      let recording = document.getElementById("recording");
+      let startButton = document.getElementById("startButton");
+      let stopButton = document.getElementById("stopButton");
+      let downloadButton = document.getElementById("downloadButton");
+      let logElement = document.getElementById("log");
+      
+      let recordingTimeMS = 5000;
+      
+      function log(msg) {
+        logElement.innerHTML += msg + "\n";
+      }
+      
+      function wait(delayInMS) {
+        return new Promise(resolve => setTimeout(resolve, delayInMS));
+      }
+      
+      function startRecording(stream, lengthInMS) {
+        let recorder = new MediaRecorder(stream);
+        let data = [];
+      
+        recorder.ondataavailable = event => data.push(event.data);
+        recorder.start();
+        log(recorder.state + " for " + (lengthInMS/1000) + " seconds...");
+      
+        let stopped = new Promise((resolve, reject) => {
+          recorder.onstop = resolve;
+          recorder.onerror = event => reject(event.name);
+        });
+      
+        let recorded = wait(lengthInMS).then(
+          () => recorder.state == "recording" && recorder.stop()
+        );
+      
+        return Promise.all([
+          stopped,
+          recorded
+        ])
+        .then(() => data);
+      }
+      
+      function stop(stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+      
+      
+      startButton.addEventListener("click", function() {
+        navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false
+        }).then(stream => {
+          preview.srcObject = stream;
+          downloadButton.href = stream;
+          preview.captureStream = preview.captureStream || preview.mozCaptureStream;
+          return new Promise(resolve => preview.onplaying = resolve);
+        }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
+        .then (recordedChunks => {
+          let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+          recording.src = URL.createObjectURL(recordedBlob);
+          downloadButton.href = recording.src;
+          var formData = new FormData();
+          formData.append('video', recordedBlob);
+          formData.append('doseURL', "{{ doseURL }}")
+          formData.append('date', "{{ date }}")
+        $.ajax({
+              type: 'POST',
+              url: '/upload',
+              data: formData,
+              processData: false,
+              contentType: false
+          }).done(function(data) {
+                 console.log(data);
+          });
+          log("Successfully recorded " + recordedBlob.size + " bytes of " +
+              recordedBlob.type + " media.");
+        })
+        .catch(log);
+      }, false);
+      stopButton.addEventListener("click", function() {
+        stop(preview.srcObject);
+      }, false);
+                  </script>
     </main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>
