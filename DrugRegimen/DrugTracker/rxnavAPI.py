@@ -52,3 +52,18 @@ def getInteractionsBetweenDrugs(drug1, drug2):
             return None
         return zip(drugInteractions, explanations, severities)
     return None
+
+# takes a list of drug names and returns a list of conflicts found between them. Returns the empty list when no conflicts found.
+def detectConflicts(drugs):
+    conflictingDrugs = []
+    explanations = []
+    severities = []
+    for i in range(len(drugs)):
+        drugInteractions = getInteractionsSingleDrug(drugs[i])
+        for drugInteraction, explanation, severity in drugInteractions:
+            for x in range(i + 1, len(drugs)):
+                if drugInteraction == drugs[x]:
+                    conflictingDrugs.append(drugInteraction)
+                    explanations.append(explanation)
+                    severities.append(severity)
+    return zip(conflictingDrugs, explanations, severities)
