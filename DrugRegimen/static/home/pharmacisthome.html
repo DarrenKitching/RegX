@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Home</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'admin/css/subnav.css' %}">
     <style>
         #title {
@@ -153,6 +154,7 @@
         <nav class="navbar">
             <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
             <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+            <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
             <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
             <div class="dropdown">
                 <a href='#' class="dropbtn">{{ username }}</a>

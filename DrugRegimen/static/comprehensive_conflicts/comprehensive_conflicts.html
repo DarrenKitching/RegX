@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Conflicts</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'admin/css/subnav.css' %}">
     <style>
         #title {
@@ -193,22 +194,21 @@ tr:nth-child(even) {
         </div>
         <div class="topnav">
             <a>Enter medications:</a>
+            <form action="/check-interactions" method="post">
+            {% csrf_token %}
             <div class="search-container">
-              <form action="/action_page.php">
-                <input type="text" placeholder="Search.." name="search">
+                <input type="text" id="search2" name="search2">
                 <button type="submit"><i class="fa fa-search"></i></button>
-              </form>
             </div>
             <div class="search-container">
-                <form action="/action_page.php">
-                  <input type="text" placeholder="Search.." name="search">
+                  <input type="text" id="search1" name="search1">
                   <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
               </div>
+            </form>
           </div>
           
           <div style="padding-left:16px">
-            <h3>Results ..</h3>
+            <h3>Results {{ drug1 }} {{ drug2 }}</h3>
           </div>
           <table>
             <tr>
@@ -217,18 +217,14 @@ tr:nth-child(even) {
               <th>Action</th>
               <th>Warning</th>
             </tr>
+            {% for interaction in interactions %}
             <tr>
-              <td>abemaciclib</td>
-              <td>Rifampicin moderately decreases the exposure to abemaciclib.</td>
+              <td>{{ interaction.0 }}</td>
+              <td>{{ interaction.1 }}</td>
               <td>Avoid concurrent use.</td>
-              <td>Avoid</td>
-          </tr>
-          <tr>
-            <td>abemaciclib</td>
-            <td>Rifampicin is predicted to reduce alprazolam exposure.</td>
-            <td>Consider giving a different benzodiazepine (e.g. temazepam).</td>
-            <td>Avoid</td>
-          </tr>
+              <td>{{ interaction.2 }}</td>
+            </tr>
+            {% endfor %}
           </table>
     </main>
     <footer class="footer">

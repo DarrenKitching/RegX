@@ -12,6 +12,7 @@ from . import qrcodes
 import random
 import string
 from itertools import zip_longest
+from . import rxnavAPI
 
 
 def index(request):
@@ -517,3 +518,26 @@ def generatePrescriptionQRs(request, prescriptionId):
 		'itemURLs': zip(items, imageUrls),
 	}
 	return render(request, 'print-qrcodes/print-qrcodes.html', context)
+
+def drugInteractions(request):
+	context = {
+		'username': request.user.username,
+	}
+	return render(request, 'comprehensive_conflicts/comprehensive_conflicts.html', context)
+
+def checkInteractions(request):
+	pharmacist = request.user.username
+	drug1 = request.POST.get('search1')
+	drug2 = request.POST.get('search2')
+	interactions = []
+	if drug2 is '':
+		interactions = rxnavAPI.getInteractionsSingleDrug(drug1)
+	else:
+		interactions = rxnavAPI.getInteractionsBetweenDrugs(drug1, drug2)
+	context = {
+		'username': request.user.username,
+		'interactions': interactions,
+		'drug1' : drug1,
+		'drug2': drug2,
+	}
+	return render(request, 'comprehensive_conflicts/comprehensive_conflicts.html', context)
