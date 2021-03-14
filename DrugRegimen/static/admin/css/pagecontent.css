@@ -1,3 +1,4 @@
+/* Pagecontent: Styling file generally for anything underneath the navbar and above the footer */
 #subnav {
     font-family: 'Trebuchet MS';
     margin-left: 10%;
@@ -9,5 +10,5 @@
   }
 
 #pagecontent {
-    margin-left: 100px;
+    margin-left: 5%;
 }
