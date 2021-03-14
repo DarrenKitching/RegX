@@ -37,6 +37,7 @@ body {
     color: #f4f4f4;
 }
 
+
 .footer {
     position: fixed;
     left: 0;
@@ -45,9 +46,23 @@ body {
     background: #006857;
 }
 
-.footer p {
+.footer .text {
+    position: relative;
+    top: 50%;
+    transform: translateY(-130%);
     text-align: center;
     color: white;
+}
+
+.footer .imgbrand {
+    position: relative;
+    top: 50%;
+    transform: translateY(20%);
+    color: white;
+}
+
+.footer .imgbrand {
+    margin-left: 5%;
 }
 
 .dropdown-content {
