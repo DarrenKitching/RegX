@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Conflicts</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'admin/css/subnav.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <style>
         #title {
             padding-left: 35px;
@@ -191,7 +191,7 @@ tr:nth-child(even) {
             </div>
         </nav>
     </header>
-    <main>
+    <main><div id="pagecontent">
         <div id="subnav">
           <h3>Search Medication Conflicts</h2>
         </div>
@@ -229,7 +229,7 @@ tr:nth-child(even) {
             </tr>
             {% endfor %}
           </table>
-    </main>
+    </div></main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>
     </footer>

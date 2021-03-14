@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Home</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'admin/css/subnav.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <style>
         #title {
             padding-left: 35px;
@@ -165,7 +165,7 @@
             </div>
         </nav>
     </header>
-    <main>
+    <main><div id="pagecontent">
         <h2>Not dispensed:</h2>
         {% for prescription in notDispensed %}
         <div class="patient-summary">
@@ -212,7 +212,7 @@
                 <a href="mark-received/{{ prescription.2 }}"><button>Mark Received</button></a>
             </div>
         {% endfor %}
-    </main>
+    </div></main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>
     </footer>

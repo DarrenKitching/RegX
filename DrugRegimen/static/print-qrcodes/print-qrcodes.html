@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Home</title>
+    <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <style>
         #title {
             padding-left: 35px;
@@ -162,14 +163,14 @@
             </div>
         </nav>
     </header>
-    <main>
+    <main><div id="pagecontent">
         {% for item in itemURLs %}
         <div class="patient-summary">
             <h2>{{ item.0.drug }}</h2>
             <img src="{{ item.1 }}">
         </div>
         {% endfor %}
-    </main>
+    </div></main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>
     </footer>

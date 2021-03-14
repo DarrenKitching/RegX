@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Home</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'admin/css/subnav.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <style>
         #title {
             padding-left: 35px;
@@ -155,7 +155,7 @@
             </div>
         </nav>
     </header>
-    <main>
+    <main><div id="pagecontent">
         <div id="subnav">
             <h3>Patient Home</h2>
         </div>
@@ -177,7 +177,7 @@
             </div>
         </div>
         {% endfor %}
-    </main>
+    </div></main>
     <footer class="footer">
         <p>Copyright &copy; Team 5 2021</p>
     </footer>
