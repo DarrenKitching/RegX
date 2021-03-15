@@ -1,0 +1,7 @@
+List of relevant terminal commands for forgetful people like Con:
+
+### Boot up old Betty
+python3 manage.py runserver
+
+### Compile documentation
+sphinx-apidoc -f -o docs/source projectdir
