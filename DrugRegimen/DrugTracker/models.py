@@ -53,6 +53,7 @@ class PrescriptionItem(models.Model):
 class DoctorPatient(models.Model):
 	doctorUsername = models.CharField(max_length=c.MAX_NAME_LEN)
 	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
+	relationshipConfirmed = models.BooleanField()
 
 class DoseURL(models.Model):
 	doseURL = models.CharField(max_length = 10)
