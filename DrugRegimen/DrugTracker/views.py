@@ -385,8 +385,19 @@ def account(request):
 	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
 
 def patientAccount(request):
+	allDoctorPatient = models.DoctorPatient.objects.all()
+	yourDoctors = []
+	yourDoctorsPendingApproval = []
+	for doctorPatientRelationship in allDoctorPatient:
+		if doctorPatientRelationship.patientUsername == request.user.username:
+			if doctorPatientRelationship.relationshipConfirmed:
+				yourDoctors.append(doctorPatientRelationship.doctorUsername)
+			else:
+				yourDoctorsPendingApproval.append(doctorPatientRelationship.doctorUsername)
 	context = {
 		'username': request.user.username,
+		'doctors': yourDoctors,
+		'pendingDoctors': yourDoctorsPendingApproval,
 	}
 	return render(request, 'account/patientaccount.html', context)
 
@@ -407,7 +418,8 @@ def prescribe(request):
 	patients = [] # pateints assigned to this doctor
 	for doctorPatientRelationship in allDoctorPatientAssignmentsDoctorPatient:
 		if doctorPatientRelationship.doctorUsername == request.user.username:
-			patients.append(doctorPatientRelationship.patientUsername)
+			if doctorPatientRelationship.relationshipConfirmed == True:
+				patients.append(doctorPatientRelationship.patientUsername)
 	pharmacies = []
 	allPharmacies = models.PharmacistGroup.objects.all()
 	for pharmacy in allPharmacies:
@@ -454,6 +466,30 @@ def removePatient(request):
 		'username': request.user.username,
 	}
 	return managepatients(request)
+
+def approveDoctor(request):
+	allDoctorPatientAssignments = models.DoctorPatient.objects.all()
+	for doctorPatientRelationship in allDoctorPatientAssignments:
+		if (doctorPatientRelationship.doctorUsername in request.POST):
+			if doctorPatientRelationship.patientUsername == request.user.username:
+				doctorPatientRelationship.relationshipConfirmed = True
+				doctorPatientRelationship.save()
+	context = {
+		'username': request.user.username,
+	}
+	return patientAccount(request)
+
+def removeDoctor(request):
+	allDoctorPatientAssignments = models.DoctorPatient.objects.all()
+	for doctorPatientRelationship in allDoctorPatientAssignments:
+		if (doctorPatientRelationship.doctorUsername in request.POST):
+			if doctorPatientRelationship.patientUsername == request.user.username:
+				doctorPatientRelationship.relationshipConfirmed = False
+				doctorPatientRelationship.save()
+	context = {
+		'username': request.user.username,
+	}
+	return patientAccount(request)
 
 def writePrescription(request):
 	doctor = request.user.username
