@@ -2,175 +2,230 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Account</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
-    <style>
-
-        .left {
-        margin-right: 10px;
-        float: left;
-        width: 160px;
-        padding: 0px;
-        }
-
-        .right {
-        margin-left: 10px;
-        float: left;
-        width: 160px;
-        padding: 0px;
-        }
-
-        .bottom {
-        clear: both;
-        padding-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Account</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
+  <style>
+    .bottom {
+      clear: both;
+      padding-top: 10px;
+    }
+    .button-container {
+      margin-left: 250px;
+      margin-right: 250px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+    }
+    .button {
+      background-color: #006857;
+      margin: 10px;
+      padding-top: 10px;
+      padding-bottom: 7px;
+      text-align: center;
+      border: black solid 2px;
+      border-radius: 10px;
+      width: 100px;
+      flex-grow: 1;
+    }
+    .dot {
+      height: 25px;
+      width: 25px;
+      background-color: rgb(211, 0, 0);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .square {
+      height: 23px;
+      width: 23px;
+      background-color: blue;
+      display: inline-block;
+    }
+    .videos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    #preview {
+      border: #006857 solid 10px;
+      border-radius: 10px;
+    }
+    #recording {
+      border: #006857 solid 10px;
+      border-radius: 10px;
+    }
+    video {
+      margin: 20px;
+    }
+    #downloadButton {
+      color: white;
+      font-size: larger;
+    }
+    #message {
+      border: black solid 2px; 
+      background-color: #006857;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+      margin-left: 260px;
+      margin-right: 260px;
+      border-radius: 10px;    
+    }
+    #message p {
+      color: white;
+      font-size:xx-large;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h2 id="title">Drug Regimen</h2>
-        <nav class="navbar">
-            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
-            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
-            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
-            <div class="dropdown">
-                <a href='#' class="dropbtn">{{ username }}</a>
-                <div class="dropdown-content">
-                    <a href="http://127.0.0.1:8000/account">Account</a>
-                    <a href="http://127.0.0.1:8000">Sign Out</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main><div id="pagecontent">
-        <div id="subnav">
-            <h3>Record Video</h2>
+  <header>
+    <h2 id="title">Drug Regimen</h2>
+    <nav class="navbar">
+      <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+      <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+      <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+      <div class="dropdown">
+        <a href='#' class="dropbtn">{{ username }}</a>
+        <div class="dropdown-content">
+          <a href="http://127.0.0.1:8000/account">Account</a>
+          <a href="http://127.0.0.1:8000">Sign Out</a>
         </div>
-        <p>Click the "Start" button to begin video recording for a few seconds. You can stop
-          the video by clicking the creatively-named "Stop" button. The "Download"
-          button will download the received data (although it's in a raw, unwrapped form
-          that isn't very useful).
-       </p>
-       <br>
-       <div class="left">
-        <div id="startButton" class="button">
-          Start
-        </div>
-        <h2>Preview</h2>
-        <video id="preview" width="160" height="120" autoplay muted></video>
       </div>
-      
-      <div class="right">
-        <div id="stopButton" class="button">
-          Stop
-        </div>
-        <h2>Recording</h2>
-        <video id="recording" width="160" height="120" controls></video>
-        <a id="downloadButton" class="button">
-          Upload
-        </a>
+    </nav>
+  </header>
+  <main>
+    <div id="pagecontent">
+      <div id="subnav">
+        <h3>Record Video</h2>
       </div>
-      
+      <div id="message">
+        <p>Click the "<span class="dot"></span>" button to begin video recording for a few seconds</p>
+        <br>
+      </div>
+
+      <div class="button-container">
+        <div class="buttons">
+          <div id="startButton" class="button">
+            <span class="dot"></span>
+          </div>
+          <div id="stopButton" class="button">
+            <span class="square"></span>
+          </div>
+          <a id="downloadButton" class="button">
+            Upload
+          </a>
+        </div>
+      </div>
+
+      <div class="videos">
+        <video id="preview" width="640" height="480" autoplay muted></video>
+
+        <video id="recording" width="640" height="480" controls></video>
+      </div>
+
       <div class="bottom">
         <pre id="log"></pre>
       </div>
-      
-              
+
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-      
+
       <script>
-      let preview = document.getElementById("preview");
-      let recording = document.getElementById("recording");
-      let startButton = document.getElementById("startButton");
-      let stopButton = document.getElementById("stopButton");
-      let downloadButton = document.getElementById("downloadButton");
-      let logElement = document.getElementById("log");
-      
-      let recordingTimeMS = 5000;
-      
-      function log(msg) {
-        logElement.innerHTML += msg + "\n";
-      }
-      
-      function wait(delayInMS) {
-        return new Promise(resolve => setTimeout(resolve, delayInMS));
-      }
-      
-      function startRecording(stream, lengthInMS) {
-        let recorder = new MediaRecorder(stream);
-        let data = [];
-      
-        recorder.ondataavailable = event => data.push(event.data);
-        recorder.start();
-        log(recorder.state + " for " + (lengthInMS/1000) + " seconds...");
-      
-        let stopped = new Promise((resolve, reject) => {
-          recorder.onstop = resolve;
-          recorder.onerror = event => reject(event.name);
-        });
-      
-        let recorded = wait(lengthInMS).then(
-          () => recorder.state == "recording" && recorder.stop()
-        );
-      
-        return Promise.all([
-          stopped,
-          recorded
-        ])
-        .then(() => data);
-      }
-      
-      function stop(stream) {
-        stream.getTracks().forEach(track => track.stop());
-      }
-      
-      
-      startButton.addEventListener("click", function() {
-        navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: false
-        }).then(stream => {
-          preview.srcObject = stream;
-          downloadButton.href = stream;
-          preview.captureStream = preview.captureStream || preview.mozCaptureStream;
-          return new Promise(resolve => preview.onplaying = resolve);
-        }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
-        .then (recordedChunks => {
-          let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
-          recording.src = URL.createObjectURL(recordedBlob);
-          downloadButton.href = recording.src;
-          var formData = new FormData();
-          formData.append('video', recordedBlob);
-          formData.append('doseURL', "{{ doseURL }}")
-          formData.append('date', "{{ date }}")
-        $.ajax({
-              type: 'POST',
-              url: '/upload',
-              data: formData,
-              processData: false,
-              contentType: false
-          }).done(function(data) {
-                 console.log(data);
+        let preview = document.getElementById("preview");
+        let recording = document.getElementById("recording");
+        let startButton = document.getElementById("startButton");
+        let stopButton = document.getElementById("stopButton");
+        let downloadButton = document.getElementById("downloadButton");
+        let logElement = document.getElementById("log");
+
+        let recordingTimeMS = 5000;
+
+        function log(msg) {
+          logElement.innerHTML += msg + "\n";
+        }
+
+        function wait(delayInMS) {
+          return new Promise(resolve => setTimeout(resolve, delayInMS));
+        }
+
+        function startRecording(stream, lengthInMS) {
+          let recorder = new MediaRecorder(stream);
+          let data = [];
+
+          recorder.ondataavailable = event => data.push(event.data);
+          recorder.start();
+          log(recorder.state + " for " + (lengthInMS / 1000) + " seconds...");
+
+          let stopped = new Promise((resolve, reject) => {
+            recorder.onstop = resolve;
+            recorder.onerror = event => reject(event.name);
           });
-          log("Successfully recorded " + recordedBlob.size + " bytes of " +
-              recordedBlob.type + " media.");
-        })
-        .catch(log);
-      }, false);
-      stopButton.addEventListener("click", function() {
-        stop(preview.srcObject);
-      }, false);
-                  </script>
-    </div></main>
-    <footer class="footer">
-      <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-      <div class="text">Copyright &copy; Team 5 2021</div>
-</footer>
+
+          let recorded = wait(lengthInMS).then(
+            () => recorder.state == "recording" && recorder.stop()
+          );
+
+          return Promise.all([
+            stopped,
+            recorded
+          ])
+            .then(() => data);
+        }
+
+        function stop(stream) {
+          stream.getTracks().forEach(track => track.stop());
+        }
+
+
+        startButton.addEventListener("click", function () {
+          navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+          }).then(stream => {
+            preview.srcObject = stream;
+            downloadButton.href = stream;
+            preview.captureStream = preview.captureStream || preview.mozCaptureStream;
+            return new Promise(resolve => preview.onplaying = resolve);
+          }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
+            .then(recordedChunks => {
+              let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+              recording.src = URL.createObjectURL(recordedBlob);
+              downloadButton.href = recording.src;
+              var formData = new FormData();
+              formData.append('video', recordedBlob);
+              formData.append('doseURL', "{{ doseURL }}")
+              formData.append('date', "{{ date }}")
+              $.ajax({
+                type: 'POST',
+                url: '/upload',
+                data: formData,
+                processData: false,
+                contentType: false
+              }).done(function (data) {
+                console.log(data);
+              });
+              log("Successfully recorded " + recordedBlob.size + " bytes of " +
+                recordedBlob.type + " media.");
+            })
+            .catch(log);
+        }, false);
+        stopButton.addEventListener("click", function () {
+          stop(preview.srcObject);
+        }, false);
+      </script>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
+    <div class="text">Copyright &copy; Team 5 2021</div>
+  </footer>
 </body>
 
 </html>
