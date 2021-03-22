@@ -448,7 +448,7 @@ def addPatient(request):
 	doctor = request.user.username
 	patient = request.POST.get('patient-username')
 	if (doctor is not None) and (patient is not None) and (doctor != '') and (patient != ''):
-		doctorPatientRelationship = models.DoctorPatient(doctorUsername = doctor, patientUsername = patient)
+		doctorPatientRelationship = models.DoctorPatient(doctorUsername = doctor, patientUsername = patient, relationshipConfirmed = False)
 		doctorPatientRelationship.save()
 	context = {
 		'username': 'Dr.' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
