@@ -23,7 +23,12 @@ def obtainMotionVideo(videoPath):
 
 			#cv.imshow('Frame', frame)
 			#cv.imshow('FG Mask', fgMask)
-			newFrame = cv.bitwise_and(frame, frame, mask = fgMask)
-			ret, thresh1 = cv.threshold(newFrame, 120, 255, cv.THRESH_BINARY) 
-			out.write(thresh1)
+			#newFrame = cv.bitwise_and(frame, frame, mask = fgMask)
+			#ret, thresh1 = cv.threshold(newFrame, 120, 255, cv.THRESH_BINARY) 
+			cv.imshow('MOG2', fgMask)
+
+			out.write(cv.cvtColor(fgMask, cv.COLOR_GRAY2RGB))
+			k = cv.waitKey(30) & 0xff; 
+			if k == 27: 
+				break; 
 	out.release()
