@@ -11,6 +11,7 @@ from . import models
 from . import qrcodes
 import random
 import string
+import re
 from itertools import zip_longest
 from . import rxnavAPI
 
@@ -126,7 +127,7 @@ def patientHome(request):
 	todaysItems = getTodaysItems(patientItems)
 	context = {
 		'medications': todaysItems,
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		}
 	return render(request, 'home/patienthome.html', context)
 
@@ -172,7 +173,7 @@ def pharmacistHome(request):
 	for prescription in dispensedAndReceived:
 		dispensedAndReceivedPrescriptionItems.append(getPrescriptionItems(prescription))
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'notDispensed': zip(notDispensed, notDispensedPresciptionItems, notDispensedIds),
 		'dispensedNotReceived': zip(dispensedNotReceived, dispensedNotReceivedPrescriptionItems, dispensedNotReceivedIds),
 	}
@@ -211,7 +212,7 @@ def doctorHome(request):
 	today = date.today()
 	context = {
 		'patientsAndDrugs' : zipped,
-		'username' : request.user.username,
+		'username' : 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'date': str(today)
 		}
 	return render(request, 'home/doctorhome.html', context)
@@ -320,19 +321,19 @@ def about(request):
 
 def patientAbout(request):
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'about/patientabout.html', context)
 
 def doctorAbout(request):
 	context = {
-		'username': request.user.username,
+		'username': 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'about/doctorabout.html', context)
 
 def pharmacistAbout(request):
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'about/pharmacistabout.html', context)
 
@@ -353,19 +354,19 @@ def help(request):
 
 def patientHelp(request):
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'help/patienthelp.html', context)
 
 def doctorHelp(request):
 	context = {
-		'username': request.user.username,
+		'username': 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'help/doctorhelp.html', context)
 
 def pharmacistHelp(request):
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'help/pharmacisthelp.html', context)
 
@@ -395,7 +396,7 @@ def patientAccount(request):
 			else:
 				yourDoctorsPendingApproval.append(doctorPatientRelationship.doctorUsername)
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'doctors': yourDoctors,
 		'pendingDoctors': yourDoctorsPendingApproval,
 	}
@@ -403,13 +404,13 @@ def patientAccount(request):
 
 def doctorAccount(request):
 	context = {
-		'username': request.user.username,
+		'username': 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'account/doctoraccount.html', context)
 
 def pharmacistAccount(request):
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'account/pharmacistaccount.html', context)
 
@@ -425,7 +426,7 @@ def prescribe(request):
 	for pharmacy in allPharmacies:
 		pharmacies.append(pharmacy.pharmacistUsername)
 	context = {
-		'username': request.user.username,
+		'username': 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'patients': patients,
 		'pharmacies': pharmacies,
 	}
@@ -438,7 +439,7 @@ def managepatients(request):
 		if doctorPatientRelationship.doctorUsername == request.user.username:
 			patients.append(doctorPatientRelationship.patientUsername)
 	context = {
-		'username': request.user.username,
+		'username': 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'patients': patients,
 	}
 	return render(request, 'manage-patients/manage-patients.html', context)
@@ -450,7 +451,7 @@ def addPatient(request):
 		doctorPatientRelationship = models.DoctorPatient(doctorUsername = doctor, patientUsername = patient)
 		doctorPatientRelationship.save()
 	context = {
-		'username': request.user.username,
+		'username': 'Dr.' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return managepatients(request)
 
@@ -463,7 +464,7 @@ def removePatient(request):
 			if (doctorPatientRelationship.doctorUsername == doctor) and (doctorPatientRelationship.patientUsername == patient):
 				doctorPatientRelationship.delete()
 	context = {
-		'username': request.user.username,
+		'username': 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return managepatients(request)
 
@@ -475,7 +476,7 @@ def approveDoctor(request):
 				doctorPatientRelationship.relationshipConfirmed = True
 				doctorPatientRelationship.save()
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return patientAccount(request)
 
@@ -487,7 +488,7 @@ def removeDoctor(request):
 				doctorPatientRelationship.relationshipConfirmed = False
 				doctorPatientRelationship.save()
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return patientAccount(request)
 
@@ -550,14 +551,14 @@ def generatePrescriptionQRs(request, prescriptionId):
 		imageUrls.append('http://127.0.0.1:8000/' + 'media/QR-Codes/' + item.videoURL + '.svg')
 	
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'itemURLs': zip(items, imageUrls),
 	}
 	return render(request, 'print-qrcodes/print-qrcodes.html', context)
 
 def drugInteractions(request):
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return render(request, 'comprehensive_conflicts/comprehensive_conflicts.html', context)
 
@@ -571,7 +572,7 @@ def checkInteractions(request):
 	else:
 		interactions = rxnavAPI.getInteractionsBetweenDrugs(drug1, drug2)
 	context = {
-		'username': request.user.username,
+		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'interactions': interactions,
 		'drug1' : drug1,
 		'drug2': drug2,
