@@ -1,89 +1,103 @@
-
 <!DOCTYPE html>
 
-<html lang="en-us" >
+<html lang="en-us">
+
 <head>
-<title>Login</title>
-<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
-<link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
 
 
 
 
 
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
-    
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
 
-<meta name="robots" content="NONE,NOARCHIVE">
+
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    #header {
+      background-color: #006857;
+    }
+    input[type=submit] {
+      background-color: #006857;
+    }
+    input[type=submit]:hover {
+      background-color: #028d76;
+    }
+  </style>
 </head>
 
 
-<body class=" login"
-  data-admin-utc-offset="0">
+<body class=" login" data-admin-utc-offset="0">
 
-<!-- Container -->
-<div id="container">
+  <!-- Container -->
+  <div id="container">
 
-    
+
     <!-- Header -->
     <div id="header">
-        <div id="branding">
-        
-<h1 id="site-name"><a href="/admin/">Drug Regimen Tracker</a></h1>
+      <div id="branding">
 
-        </div>
-        
-        
+        <h1 id="site-name"><a href="/admin/">Drug Regimen Tracker</a></h1>
+
+      </div>
+
+
     </div>
     <!-- END Header -->
-    
-    
 
-    
-        
-    
+
+
+
+
+
 
     <!-- Content -->
     <div id="content" class="colM">
-        
-        
-        
 
 
 
 
-<div id="content-main">
 
 
 
-<form action="/admin/login/?next=/home/" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="beevuhWTKUJHWKc0oWNNLX9AOCyxKYPgTVgQI2uvyLuWDTIzN8Psw6t8iY8etaRZ">
-  {% csrf_token %}
-  <div class="form-row">
-    <label class="required" for="id_username">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
-  </div>
-  <div class="form-row">
-    
-    <label class="required" for="id_password">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
-    <input type="hidden" name="next" value="/home">
-  </div>
-  
-  
-  <div class="submit-row">
-    <label>&nbsp;</label><input type="submit" value="Log in">
-  </div>
-</form>
+      <div id="content-main">
 
-</div>
 
-        
-        <br class="clear">
+
+        <form action="/admin/login/?next=/home/" method="post" id="login-form"><input type="hidden"
+            name="csrfmiddlewaretoken" value="beevuhWTKUJHWKc0oWNNLX9AOCyxKYPgTVgQI2uvyLuWDTIzN8Psw6t8iY8etaRZ">
+          {% csrf_token %}
+          <div class="form-row">
+            <label class="required" for="id_username">Username:</label> <input type="text" name="username" autofocus
+              autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+          </div>
+          <div class="form-row">
+
+            <label class="required" for="id_password">Password:</label> <input type="password" name="password"
+              autocomplete="current-password" required id="id_password">
+            <input type="hidden" name="next" value="/home">
+          </div>
+
+
+          <div class="submit-row">
+            <label>&nbsp;</label><input type="submit" value="Log in">
+          </div>
+        </form>
+
+      </div>
+
+
+      <br class="clear">
     </div>
     <!-- END Content -->
 
     <div id="footer"></div>
-</div>
-<!-- END Container -->
+  </div>
+  <!-- END Container -->
 
 </body>
+
 </html>
