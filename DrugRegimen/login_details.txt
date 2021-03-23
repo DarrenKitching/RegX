@@ -1,0 +1,18 @@
+New Users:
+Username: HarryWalker Password: HarryWalker
+Username: ElizabethCruz Password: ElizabethCruz
+Username: JohnBlack Password: JohnBlack
+Username: AlexRedmond Password: AlexRedmond
+Username: ChloeMcManus Password: ChloeMcManus
+Username: AoifeKane Password: AoifeKane
+Username: ConorMurray Password: ConorMurray
+Username: JackBrennan Password: JackBrennan
+Username: TimBlake Password: TimBlake
+Username: IsabelleSmart Password: IsabelleSmart
+
+New Pharmacies:
+Username: LloydsGlasnevin Password: LloydsGlasnevin
+
+New Doctors:
+Username: RebeccaMulville Password: RebeccaMulville
+
