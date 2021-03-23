@@ -201,6 +201,7 @@ def doctorHome(request):
 	allPrescriptions = models.Prescription.objects.all()
 	patientDrugs = [] # a list of drugs to be taken by this doctor's patients today
 	patientAssignedToDrug = []
+	confidenceScores = []
 	for patient in patients:
 		for prescription in allPrescriptions:
 			if prescription.patientId == patient:
@@ -208,14 +209,16 @@ def doctorHome(request):
 				todaysItems = getTodaysItems(patientItems) # get a list of items this patient needs to take today
 				for item in todaysItems:
 					patientDrugs.append(item)
+					path = 'media/recorded-videos/' + item.videoURL + ('_' + (str(date.today()))) + '.webm'
+					confidenceScores.append(motionTracking.obtainConfidenceScore(path))
 				for item in todaysItems:
 					patientAssignedToDrug.append(prescription.patientId)
-	zipped = zip(patientAssignedToDrug, patientDrugs)
-	today = date.today()
+	zipped = zip(patientAssignedToDrug, patientDrugs, confidenceScores)
 	context = {
 		'patientsAndDrugs' : zipped,
 		'username' : 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
-		'date': str(today)
+		'date': str(date.today()),
+		'confidenceScores' : confidenceScores
 		}
 	return render(request, 'home/doctorhome.html', context)
 
@@ -302,10 +305,10 @@ def upload(request):
 				for chunk in request.FILES['video'].chunks():
 					destination.write(chunk)
 			# pass in date video was taken as well so that it can be saved, might need date as well as doseURL in file name
-			path = 'media/recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm'
-			t = threading.Thread(target=motionTracking.obtainMotionVideo(path), args=(), kwargs={})
-			t.setDaemon(True)
-			t.start()
+			# path = 'media/recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm'
+			# t = threading.Thread(target=motionTracking.obtainMotionVideo(path), args=(), kwargs={})
+			# t.setDaemon(True)
+			# t.start()
 		else:
 			print("invalid")
 	return patientHome(request)

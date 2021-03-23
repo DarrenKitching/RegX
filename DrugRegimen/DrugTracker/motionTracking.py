@@ -4,7 +4,7 @@ import numpy as np
 from scipy.stats import sem, t
 from scipy import mean
 
-def obtainMotionVideo(videoPath):
+def obtainConfidenceScore(videoPath):
 	backgroundModel = cv.createBackgroundSubtractorMOG2()
 	capture = cv.VideoCapture(cv.samples.findFileOrKeep(videoPath))
 	frame_width = int(capture.get(3))
@@ -16,8 +16,7 @@ def obtainMotionVideo(videoPath):
 	totalBlack = 0
 	isFirst = True
 	if not capture.isOpened():
-			print('Unable to open: ' + videoPath)
-			exit(0)
+		return 0
 	while True:
 			ret, frame = capture.read()
 			if frame is None:
@@ -38,8 +37,8 @@ def obtainMotionVideo(videoPath):
 	higherInterval = 0.225
 	mean = 0.155
 	if percentageNonBlack > higherInterval or percentageNonBlack < lowerInterval:
-		print(5)
+		return 5
 	else:
 		difference = abs(mean - percentageNonBlack) # between 0 and 0.07
 		multiples = difference / 0.01
-		print (round(95 - (10 * multiples)))
+		return (round(95 - (10 * multiples)))
