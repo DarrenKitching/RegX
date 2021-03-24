@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
     <style>
-
         .patient-summary {
             position: relative;
             overflow: hidden;
@@ -50,7 +49,7 @@
             list-style-type: none;
             padding: 0px 20px;
             margin: 0;
-    
+
         }
 
         .patient-details ul {
@@ -73,74 +72,82 @@
 </head>
 
 <body>
-    <header>
-        <h2 id="title">Drug Regimen</h2>
-        <nav class="navbar">
-            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
-            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
-            <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
-            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
-            <div class="dropdown">
-                <a href='#' class="dropbtn">{{ username }}</a>
-                <div class="dropdown-content">
-                    <a href="http://127.0.0.1:8000/account">Account</a>
-                    <a href="http://127.0.0.1:8000">Sign Out</a>
+    <div id="page-container">
+        <header>
+            <h2 id="title">Drug Regimen</h2>
+            <nav class="navbar">
+                <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+                <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+                <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
+                <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+                <div class="dropdown">
+                    <a href='#' class="dropbtn">{{ username }}</a>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/account">Account</a>
+                        <a href="http://127.0.0.1:8000">Sign Out</a>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <main><div id="pagecontent">
-        <h2>Not dispensed:</h2>
-        {% for prescription in notDispensed %}
-        <div class="patient-summary">
-            <div class="patient-details">
-                <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
-            </div>
-            <div class="patient-details" id="who-can-collect">
-                <ul>
-                    <li>Sarah Smith</li>
-                    <li>Tim Smith</li>
-					<li>Bill Smith</li>
-                </ul>
-            </div>
-            <div id="prescription-medications" class="patient-details">
-                <ul>
-                    {% for item in prescription.1 %}
-                    <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
+            </nav>
+        </header>
+        <main>
+            <div id="pagecontent">
+                <h2>Not dispensed:</h2>
+                {% for prescription in notDispensed %}
+                <div class="patient-summary">
+                    <div class="patient-details">
+                        <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
+                    </div>
+                    <div class="patient-details" id="who-can-collect">
+                        <ul>
+                            <li>Sarah Smith</li>
+                            <li>Tim Smith</li>
+                            <li>Bill Smith</li>
+                        </ul>
+                    </div>
+                    <div id="prescription-medications" class="patient-details">
+                        <ul>
+                            {% for item in prescription.1 %}
+                            <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{
+                                item.doseUnit }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="mark-dispensed/{{ prescription.2 }}"><button>Mark Dispensed</button></a>
+                        <a href="generateQRs/{{ prescription.2 }}"><button>Generate QR Codes</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+                <h2>Dispensed (Not Collected):</h2>
+                {% for prescription in dispensedNotReceived %}
+                <div class="patient-summary">
+                    <div class="patient-details">
+                        <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
+                    </div>
+                    <div class="patient-details" id="who-can-collect">
+                        <ul>
+                            <li>Sarah Smith</li>
+                            <li>Tim Smith</li>
+                            <li>Bill Smith</li>
+                        </ul>
+                    </div>
+                    <div id="prescription-medications" class="patient-details">
+                        <ul>
+                            {% for item in prescription.1 %}
+                            <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{
+                                item.doseUnit }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="mark-received/{{ prescription.2 }}"><button>Mark Received</button></a>
+                    </div>
                     {% endfor %}
-                </ul>
-                <a href="mark-dispensed/{{ prescription.2 }}"><button>Mark Dispensed</button></a>
-                <a href="generateQRs/{{ prescription.2 }}"><button>Generate QR Codes</button></a>
-            </div>
-        </div>
-        {% endfor %}
-        <h2>Dispensed (Not Collected):</h2>
-        {% for prescription in dispensedNotReceived %}
-        <div class="patient-summary">
-            <div class="patient-details">
-                <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
-            </div>
-            <div class="patient-details" id="who-can-collect">
-                <ul>
-                    <li>Sarah Smith</li>
-                    <li>Tim Smith</li>
-                    <li>Bill Smith</li>
-                </ul>
-            </div>
-            <div id="prescription-medications" class="patient-details">
-                <ul>
-                    {% for item in prescription.1 %}
-                    <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
-                    {% endfor %}
-                </ul>
-                <a href="mark-received/{{ prescription.2 }}"><button>Mark Received</button></a>
-            </div>
-        {% endfor %}
-    </div></main>
-    <footer class="footer">
-        <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-        <div class="text">Copyright &copy; Team 5 2021</div>
-</footer>
+                </div>
+        </main>
+        <footer class="footer">
+            <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
+            <div class="text">Copyright &copy; Team 5 2021</div>
+        </footer>
+    </div>
+
+
 </body>
 
 </html>

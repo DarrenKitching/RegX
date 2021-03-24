@@ -63,48 +63,53 @@
 </head>
 
 <body>
-    <header>
-        <h2 id="title">Drug Regimen Dashboard</h2>
-        <nav class="navbar">
-            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
-            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
-            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
-            <div class="dropdown">
-                <a href='#' class="dropbtn">{{ username }}</a>
-                <div class="dropdown-content">
-                    <a href="http://127.0.0.1:8000/account">Account</a>
-                    <a href="http://127.0.0.1:8000">Sign Out</a>
+    <div id="page-container">
+        <header>
+            <h2 id="title">Drug Regimen Dashboard</h2>
+            <nav class="navbar">
+                <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+                <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+                <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+                <div class="dropdown">
+                    <a href='#' class="dropbtn">{{ username }}</a>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/account">Account</a>
+                        <a href="http://127.0.0.1:8000">Sign Out</a>
+                    </div>
                 </div>
+            </nav>
+        </header>
+        <main>
+            <div id="pagecontent">
+                <div id="subnav">
+                    <h3>Patient Home</h2>
+                </div>
+                {% for medication in medications %}
+                <div class="prescription-summary">
+                    <div class="prescription-details">
+                        <a href='#' class="prescription-details" id="medication">{{ medication.drug }} {{
+                            medication.doseValue }} {{ medication.doseUnit }}</a>
+                    </div>
+                    <div class="prescription-details" id="time-last-taken">
+                        <p>09:30 AM</p>
+                    </div>
+                    <div id="time-dose-due" class="prescription-details">
+                        <p>30 minutes</p>
+                    </div>
+                    <div class="prescription-details">
+                        <ul>
+                            <a href="dose/{{ medication.videoURL }}"><button>Submit Video</button></a>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-        </nav>
-    </header>
-    <main><div id="pagecontent">
-        <div id="subnav">
-            <h3>Patient Home</h2>
-        </div>
-        {% for medication in medications %}
-        <div class="prescription-summary">
-            <div class="prescription-details">
-                <a href='#' class="prescription-details" id="medication">{{ medication.drug }} {{ medication.doseValue }} {{ medication.doseUnit }}</a>
-            </div>
-            <div class="prescription-details" id="time-last-taken">
-                <p>09:30 AM</p>
-            </div>
-            <div id="time-dose-due" class="prescription-details">
-                <p>30 minutes</p>
-            </div>
-            <div class="prescription-details">
-                <ul>
-                    <a href="dose/{{ medication.videoURL }}"><button>Submit Video</button></a>
-                </ul>
-            </div>
-        </div>
-        {% endfor %}
-    </div></main>
-    <footer class="footer">
-        <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-        <div class="text">Copyright &copy; Team 5 2021</div>
-</footer>
+        </main>
+        <footer class="footer">
+            <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
+            <div class="text">Copyright &copy; Team 5 2021</div>
+        </footer>
+        <div>
 </body>
 
 </html>

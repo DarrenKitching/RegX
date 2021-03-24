@@ -2,208 +2,217 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Help</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/faq.css' %}">
-    <script type="text/javascript" src="../admin/js/faq.js"></script> <!-- This line should work instead of adding the script manually, as is done below -->
-    <script>
-        /*
-        *   This content is licensed according to the W3C Software License at
-        *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
-        *
-        *   File:   ButtonExpand.js
-        *
-        *   Desc:   Checkbox widget that implements ARIA Authoring Practices
-        *           for a menu of links
-        */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Help</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/css/faq.css' %}">
+  <script type="text/javascript" src="../admin/js/faq.js"></script>
+  <!-- This line should work instead of adding the script manually, as is done below -->
+  <script>
+    /*
+    *   This content is licensed according to the W3C Software License at
+    *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+    *
+    *   File:   ButtonExpand.js
+    *
+    *   Desc:   Checkbox widget that implements ARIA Authoring Practices
+    *           for a menu of links
+    */
 
-        /*
-        *   @constructor ButtonExpand
-        *
-        *
-        */
-        var ButtonExpand = function (domNode) {
+    /*
+    *   @constructor ButtonExpand
+    *
+    *
+    */
+    var ButtonExpand = function (domNode) {
 
-        this.domNode = domNode;
+      this.domNode = domNode;
 
-        this.keyCode = Object.freeze({
+      this.keyCode = Object.freeze({
         'RETURN': 13
-        });
-        };
+      });
+    };
 
-        ButtonExpand.prototype.init = function () {
+    ButtonExpand.prototype.init = function () {
 
-        this.controlledNode = false;
+      this.controlledNode = false;
 
-        var id = this.domNode.getAttribute('aria-controls');
+      var id = this.domNode.getAttribute('aria-controls');
 
-        if (id) {
+      if (id) {
         this.controlledNode = document.getElementById(id);
-        }
+      }
 
-        this.domNode.setAttribute('aria-expanded', 'false');
-        this.hideContent();
+      this.domNode.setAttribute('aria-expanded', 'false');
+      this.hideContent();
 
-        this.domNode.addEventListener('keydown',    this.handleKeydown.bind(this));
-        this.domNode.addEventListener('click',      this.handleClick.bind(this));
-        this.domNode.addEventListener('focus',      this.handleFocus.bind(this));
-        this.domNode.addEventListener('blur',       this.handleBlur.bind(this));
+      this.domNode.addEventListener('keydown', this.handleKeydown.bind(this));
+      this.domNode.addEventListener('click', this.handleClick.bind(this));
+      this.domNode.addEventListener('focus', this.handleFocus.bind(this));
+      this.domNode.addEventListener('blur', this.handleBlur.bind(this));
 
-        };
+    };
 
-        ButtonExpand.prototype.showContent = function () {
+    ButtonExpand.prototype.showContent = function () {
 
-        if (this.controlledNode) {
+      if (this.controlledNode) {
         this.controlledNode.style.display = 'block';
-        }
+      }
 
-        };
+    };
 
-        ButtonExpand.prototype.hideContent = function () {
+    ButtonExpand.prototype.hideContent = function () {
 
-        if (this.controlledNode) {
+      if (this.controlledNode) {
         this.controlledNode.style.display = 'none';
-        }
+      }
 
-        };
+    };
 
-        ButtonExpand.prototype.toggleExpand = function () {
+    ButtonExpand.prototype.toggleExpand = function () {
 
-        if (this.domNode.getAttribute('aria-expanded') === 'true') {
+      if (this.domNode.getAttribute('aria-expanded') === 'true') {
         this.domNode.setAttribute('aria-expanded', 'false');
         this.hideContent();
-        }
-        else {
+      }
+      else {
         this.domNode.setAttribute('aria-expanded', 'true');
         this.showContent();
-        }
+      }
 
-        };
+    };
 
-        /* EVENT HANDLERS */
+    /* EVENT HANDLERS */
 
-        ButtonExpand.prototype.handleKeydown = function (event) {
+    ButtonExpand.prototype.handleKeydown = function (event) {
 
-        console.log('[keydown]');
+      console.log('[keydown]');
 
-        switch (event.keyCode) {
+      switch (event.keyCode) {
 
         case this.keyCode.RETURN:
 
-            this.toggleExpand();
+          this.toggleExpand();
 
-            event.stopPropagation();
-            event.preventDefault();
-            break;
+          event.stopPropagation();
+          event.preventDefault();
+          break;
 
         default:
-            break;
-        }
+          break;
+      }
 
-        };
+    };
 
-        ButtonExpand.prototype.handleClick = function (event) {
-        this.toggleExpand();
-        };
+    ButtonExpand.prototype.handleClick = function (event) {
+      this.toggleExpand();
+    };
 
-        ButtonExpand.prototype.handleFocus = function (event) {
-        this.domNode.classList.add('focus');
-        };
+    ButtonExpand.prototype.handleFocus = function (event) {
+      this.domNode.classList.add('focus');
+    };
 
-        ButtonExpand.prototype.handleBlur = function (event) {
-        this.domNode.classList.remove('focus');
-        };
+    ButtonExpand.prototype.handleBlur = function (event) {
+      this.domNode.classList.remove('focus');
+    };
 
-        /* Initialize Hide/Show Buttons */
+    /* Initialize Hide/Show Buttons */
 
-        window.addEventListener('load', function (event) {
+    window.addEventListener('load', function (event) {
 
-        var buttons =  document.querySelectorAll('button[aria-expanded][aria-controls]');
+      var buttons = document.querySelectorAll('button[aria-expanded][aria-controls]');
 
-        for (var i = 0; i < buttons.length; i++) {
+      for (var i = 0; i < buttons.length; i++) {
         var be = new ButtonExpand(buttons[i]);
         be.init();
-        }
+      }
 
-        }, false);
-    </script>
+    }, false);
+  </script>
 </head>
 
 <body>
+  <div id="page-container">
     <header>
-        <h2 id="title">Drug Regimen</h2>
-        <nav class="navbar">
-            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
-            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
-            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
-            <div class="dropdown">
-                <a href='#' class="dropbtn">{{ username }}</a>
-                <div class="dropdown-content">
-                    <a href="http://127.0.0.1:8000/account">Account</a>
-                    <a href="http://127.0.0.1:8000">Sign Out</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main><div id="pagecontent">
-        <div id="subnav">
-            <h3>Patient Help</h2>
+      <h2 id="title">Drug Regimen</h2>
+      <nav class="navbar">
+        <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+        <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+        <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+        <div class="dropdown">
+          <a href='#' class="dropbtn">{{ username }}</a>
+          <div class="dropdown-content">
+            <a href="http://127.0.0.1:8000/account">Account</a>
+            <a href="http://127.0.0.1:8000">Sign Out</a>
+          </div>
         </div>
-    <dl class="faq">
-        <dt>
-          <button aria-expanded="false" aria-controls="faq1_desc">
-            Under my scripts, what does dispensed mean?
-          </button>
-        </dt>
-        <dd>
-          <p id="faq1_desc" class="desc">
-            The dispensed feature allows the patient to check how much of their prescription has been dispensed and how much of their prescription is remaining.
-          </p>
-        </dd>
-        <dt>
-          <button aria-expanded="false" aria-controls="faq2_desc">
-            Under my scripts, what does status mean?
-          </button>
-        </dt>
-        <dd>
-          <p id="faq2_desc" class="desc">
-            The status of the script will inform the patient if their prescription is still in date (Prescriptions are valid for 6 months, however currently due to covid-19 they are valid for 9 months)<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Status.1 - In Date <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Status.2 – Expired
-          </p>
-        </dd>
-        <dt>
-          <button aria-expanded="false" aria-controls="faq3_desc">
-            What does the interaction’s checker search for?
-          </button>
-        </dt>
-        <dd>
-          <p id="faq3_desc" class="desc">
-            The interactions checker allows the patient to search for drug, food and drink interactions with their medication.
-          </p>
-        </dd>
-        <dt>
-          <button aria-expanded="false" aria-controls="faq4_desc">
-            How do I use the interaction’s checker?
-          </button>
-        </dt>
-        <dd>
-          <p id="faq4_desc" class="desc">
-            1. In the first search bar, type in the first drug you want to check for. <br>
-            2. If you want to search for all drug,food and drink interactions with this drug press search . <br>
-            3. If you want to search for a specific drug, food or drink interaction type this into the second search bar and press search .
-          </p>
-        </dd>
-    </dl>
-    </div></main>
+      </nav>
+    </header>
+    <main>
+      <div id="pagecontent">
+        <div id="subnav">
+          <h3>Patient Help</h2>
+        </div>
+        <dl class="faq">
+          <dt>
+            <button aria-expanded="false" aria-controls="faq1_desc">
+              Under my scripts, what does dispensed mean?
+            </button>
+          </dt>
+          <dd>
+            <p id="faq1_desc" class="desc">
+              The dispensed feature allows the patient to check how much of their prescription has been dispensed and
+              how much of their prescription is remaining.
+            </p>
+          </dd>
+          <dt>
+            <button aria-expanded="false" aria-controls="faq2_desc">
+              Under my scripts, what does status mean?
+            </button>
+          </dt>
+          <dd>
+            <p id="faq2_desc" class="desc">
+              The status of the script will inform the patient if their prescription is still in date (Prescriptions are
+              valid for 6 months, however currently due to covid-19 they are valid for 9 months)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;Status.1 - In Date <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;Status.2 – Expired
+            </p>
+          </dd>
+          <dt>
+            <button aria-expanded="false" aria-controls="faq3_desc">
+              What does the interaction’s checker search for?
+            </button>
+          </dt>
+          <dd>
+            <p id="faq3_desc" class="desc">
+              The interactions checker allows the patient to search for drug, food and drink interactions with their
+              medication.
+            </p>
+          </dd>
+          <dt>
+            <button aria-expanded="false" aria-controls="faq4_desc">
+              How do I use the interaction’s checker?
+            </button>
+          </dt>
+          <dd>
+            <p id="faq4_desc" class="desc">
+              1. In the first search bar, type in the first drug you want to check for. <br>
+              2. If you want to search for all drug,food and drink interactions with this drug press search . <br>
+              3. If you want to search for a specific drug, food or drink interaction type this into the second search
+              bar and press search .
+            </p>
+          </dd>
+        </dl>
+      </div>
+    </main>
     <footer class="footer">
-        <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-        <div class="text">Copyright &copy; Team 5 2021</div>
-</footer>
+      <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
+      <div class="text">Copyright &copy; Team 5 2021</div>
+    </footer>
+  </div>
 </body>
 
 </html>

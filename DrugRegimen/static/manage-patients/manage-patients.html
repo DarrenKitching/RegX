@@ -11,54 +11,58 @@
 </head>
 
 <body>
-    <header>
-        <h2 id="title">Drug Regimen</h2>
-        <nav class="navbar">
-            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
-            <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
-            <a href='http://127.0.0.1:8000/manage' class="left-nav">Manage Patients</a>
-            <a href='http://127.0.0.1:8000/prescribe' class="left-nav">Prescribe Medication</a>
-            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
-            <div class="dropdown">
-                <a href='#' class="dropbtn">{{ username }}</a>
-                <div class="dropdown-content">
-                    <a href="http://127.0.0.1:8000/account">Account</a>
-                    <a href="http://127.0.0.1:8000">Sign Out</a>
+    <div id="page-container">
+        <header>
+            <h2 id="title">Drug Regimen</h2>
+            <nav class="navbar">
+                <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+                <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+                <a href='http://127.0.0.1:8000/manage' class="left-nav">Manage Patients</a>
+                <a href='http://127.0.0.1:8000/prescribe' class="left-nav">Prescribe Medication</a>
+                <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+                <div class="dropdown">
+                    <a href='#' class="dropbtn">{{ username }}</a>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/account">Account</a>
+                        <a href="http://127.0.0.1:8000">Sign Out</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div id="pagecontent">
+                <div id="subnav">
+                    <h3>Manage Patients</h2>
+                </div>
+                <div>
+                    <h2>Add Patient</h2>
+                    <form action="/add-patient" method="post">
+                        {% csrf_token %}
+                        <label for="patient-username">Patient Username: </label>
+                        <input id="patient-username" type="text" name="patient-username">
+                        <input type="submit" value="Add">
+                    </form>
+                </div>
+                <div>
+                    <h2>Remove Patient</h2>
+                    <form action="/remove-patient" method="post">
+                        {% csrf_token %}
+                        <label for="remove-patient">Choose Patient: </label>
+                        <select id="remove-patient" name="remove-patient">
+                            {% for patient in patients %}
+                            <option value={{ patient }}>{{ patient }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Remove">
+                    </form>
                 </div>
             </div>
-        </nav>
-    </header>
-    <main><div id="pagecontent">
-        <div id="subnav">
-            <h3>Manage Patients</h2>
-        </div>
-        <div>
-        <h2>Add Patient</h2>
-            <form action="/add-patient" method="post">
-                {% csrf_token %}
-                <label for="patient-username">Patient Username: </label>
-                <input id="patient-username" type="text" name="patient-username">
-                <input type="submit" value="Add">
-            </form>
-        </div>
-        <div>
-        <h2>Remove Patient</h2>
-            <form action="/remove-patient" method="post">
-                {% csrf_token %}
-                <label for="remove-patient">Choose Patient: </label>
-                <select id="remove-patient" name="remove-patient">
-                {% for patient in patients %}
-                  <option value={{ patient }}>{{ patient }}</option>
-                {% endfor %}
-                </select>
-                <input type="submit" value="Remove">
-            </form>
-        </div>
-    </div></main>
-    <footer class="footer">
-        <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-        <div class="text">Copyright &copy; Team 5 2021</div>
-</footer>
+        </main>
+        <footer class="footer">
+            <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
+            <div class="text">Copyright &copy; Team 5 2021</div>
+        </footer>
+    </div>
 </body>
 
 </html>
