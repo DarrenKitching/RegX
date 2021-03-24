@@ -37,9 +37,13 @@ body {
     color: #f4f4f4;
 }
 
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
 
 .footer {
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;

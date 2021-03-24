@@ -11,4 +11,6 @@
 
 #pagecontent {
     margin-left: 5%;
+    padding-bottom: 80px;
+    /* Footer height + 8px */
 }
