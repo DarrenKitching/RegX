@@ -3,3 +3,5 @@ PyQRCode
 djangorestframework
 requests
 opencv-python
+numpy
+scripty
