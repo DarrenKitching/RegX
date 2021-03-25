@@ -51,7 +51,107 @@
       background-color: #f2f2f2;
       padding: 20px;
     }
+
+    .drugbtn {
+      border-radius: 4px;
+      color: black;
+      text-decoration: none;
+      flex-grow:1;
+      text-align: center;
+      padding: 10px;
+    }
+    #drugbtn-links {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    #add-drug {
+      background-color: #4CAF50;
+    }
+    #rm-drug {
+      background-color: #2f68b3;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    #rm-all-drugs {
+      background-color: #b83333;
+    }
   </style>
+  <script type='text/javascript'>
+    var drugcount = 0;
+    var inputs = ["Drug", "Dosage Form", "Dose Value", "Dose Unit", "Duration Value", "Duration Unit", "Frequency", "Route", "Quantity", "Status", "Comment", "Video Required"]
+    var ids = ["drug", "dosage-form", "dose-value", "dose-unit", "duration-value", "duration-unit", "frequency", "route", "quantity", "status", "comment", "video-required"]
+    function addFields() {
+      // Container <div> where dynamic content will be placed
+      var container = document.getElementById("drug-container");
+      var drugdiv = document.createElement("div");
+      drugdiv.id = "drugdiv" + drugcount;
+      container.appendChild(drugdiv);
+      // Clear previous contents of the container
+      // while (container.hasChildNodes()) {
+      //   container.removeChild(container.lastChild);
+      // }
+      for (i = 0; i < 12; i++) {
+        if (i == 5) {
+          var select = document.createElement("select");
+          select.id = ids[i];
+          select.name = ids[i];
+          var opt1 = document.createElement("option");
+          var opt2 = document.createElement("option");
+          var opt3 = document.createElement("option");
+          opt1.value = "days";
+          opt2.value = "weeks";
+          opt3.value = "months";
+
+          opt1.innerHTML = "Days";
+          opt2.innerHTML = "Weeks";
+          opt3.innerHTML = "Months";
+
+          select.appendChild(opt1);
+          select.appendChild(opt2);
+          select.appendChild(opt3);
+
+          drugdiv.appendChild(document.createTextNode("Duration Unit"));
+          drugdiv.appendChild(select);
+        }
+        // Append a node with a random text
+        if (i != 5) {
+          if (i == 0) {
+            drugdiv.appendChild(document.createTextNode(inputs[i] + " " + (drugcount + 1)));
+          } else {
+            drugdiv.appendChild(document.createTextNode(inputs[i]));
+          }
+          // Create an <input> element, set its type and name attributes
+          var input = document.createElement("input");
+          if (i != 11) {
+            input.type = "text";
+          } else {
+            input.type = "checkbox";
+          }
+          input.name = ids[i] + drugcount;
+          input.id = ids[i] + drugcount;
+          drugdiv.appendChild(input);
+          // Append a line break 
+          drugdiv.appendChild(document.createElement("br"));
+
+          container.appendChild(drugdiv);
+        }
+      }
+      drugcount++;
+    }
+    function removeDrug() {
+      drugcount--;
+      var container = document.getElementById("drug-container");
+      var div = document.getElementById("drugdiv" + drugcount);
+      container.removeChild(div);
+    }
+    function clearAll() {
+      var container = document.getElementById("drug-container");
+      while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+      }
+      drugcount = 0;
+    }
+  </script>
 </head>
 
 <body>
@@ -94,65 +194,14 @@
             </select>
             <br><br>
 
-            <label for="drug">Drug: </label>
-            <input id="drug" type="text" name="drug">
-            <br><br>
+            <div id="drugbtn-links">
+              <a href="#" id="add-drug" class="drugbtn" onclick="addFields()">Add Drug</a>
+              <a href="#" id="rm-drug" class="drugbtn" onclick="removeDrug()">Remove Drug</a>
+              <a href="#" id="rm-all-drugs" class="drugbtn" onclick="clearAll()">Clear All</a>
+            </div>
 
-            <label for="DosageForm">Dosage Form: </label>
-            <input id="dosage-form" type="text" name="dosage-form">
-            <br><br>
-
-            <label for="DosageValue">Dose Value: </label>
-            <input id="dose-value" type="number" name="dose-value">
-            <br><br>
-
-            <label for="DoseUnit">Dose Unit: </label>
-            <input id="dose-unit" type="text" name="dose-unit">
-            <br><br>
-
-            <label for="DurationValue">Duration Value: </label>
-            <input id="duration-value" type="number" name="duration-value">
-            <br><br>
-
-            <label for="DurationUnit">Duration Unit: </label>
-            <select id="duration-unit" name="duration-unit">
-              <option value="days">Days</option>
-              <option value="weeks">Weeks</option>
-              <option value="months">Months</option>
-            </select>
-            <br><br>
-
-
-            <label for="frequency">Frequency: </label>
-            <input id="frequency" type="text" name="frequency">
-            <br><br>
-
-
-            <label for="route">Route: </label>
-            <input id="route" type="text" name="route">
-            <br><br>
-
-            <label for="quantity">Quantity: </label>
-            <input id="quantity" type="text" name="quantity">
-            <br><br>
-
-            <label for="status">Status: </label>
-            <input id="status" type="text" name="status">
-            <br><br>
-            <!--
-                <label for="start-date">Start Date: </label>
-                <input id="start-date" type="date" name="start-date">
-                <br><br>
-                Start date set to Null and changed on first video upload by user.
-                -->
-
-            <label for="video-required">Video Required: </label>
-            <input id="video-required" type="checkbox" name="video-required">
-            <br><br>
-
-            <label for="comment">Comment: </label>
-            <input id="comment" type="text" name="comment">
-            <br><br>
+            <div id="drug-container">
+            </div>
 
             <input type="submit" value="Prescribe">
           </form>
