@@ -33,12 +33,12 @@ def obtainConfidenceScore(videoPath):
 			if k == 27: 
 				break; 
 	percentageNonBlack = 1 - (totalBlack / totalFrames) / (frame_width * frame_height) # average number of non black pixels per frame divided by resolution
-	lowerInterval = 0.085
-	higherInterval = 0.225
-	mean = 0.155
+	lowerInterval = 0.06
+	higherInterval = 0.26
+	mean = 0.16
 	if percentageNonBlack > higherInterval or percentageNonBlack < lowerInterval:
-		return 5
+		return 5 # outside of confidence range
 	else:
-		difference = abs(mean - percentageNonBlack) # between 0 and 0.07
+		difference = abs(mean - percentageNonBlack) # between 0 and 0.1
 		multiples = difference / 0.01
-		return (round(95 - (10 * multiples)))
+		return (round(100 - (5 * multiples)))

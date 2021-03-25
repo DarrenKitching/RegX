@@ -107,8 +107,7 @@
                     <div id="prescription-medications" class="patient-details">
                         <ul>
                             {% for item in prescription.1 %}
-                            <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{
-                                item.doseUnit }}</li>
+                            <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
                             {% endfor %}
                         </ul>
                         <a href="mark-dispensed/{{ prescription.2 }}"><button>Mark Dispensed</button></a>
@@ -132,8 +131,7 @@
                     <div id="prescription-medications" class="patient-details">
                         <ul>
                             {% for item in prescription.1 %}
-                            <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{
-                                item.doseUnit }}</li>
+                            <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
                             {% endfor %}
                         </ul>
                         <a href="mark-received/{{ prescription.2 }}"><button>Mark Received</button></a>
