@@ -15,6 +15,7 @@ import string
 import re
 from itertools import zip_longest
 from . import rxnavAPI
+from . import createUser
 import threading
 
 
@@ -59,6 +60,21 @@ def home(request):
 		if doctor.doctorUsername == request.user.username: # check to see if logged in user is a doctor
 			return doctorHome(request) # if they are then call doctorHome
 	return HttpResponse("Error: Your account isn't associated with any user group") # this line is only run if the logged in user isn't assigned to any group
+
+def register(request):
+	return render(request, 'login/register.html') 
+
+def newAccount(request):
+	firstName = request.POST.get('first-name')
+	secondName = request.POST.get('second-name')
+	username = request.POST.get('username')
+	email = request.POST.get('email')
+	password = request.POST.get('password')
+	passwordRepeat = request.POST.get('password-repeat')
+	if password == passwordRepeat:
+		createUser.createNewUser(username, password)
+	return render(request, 'login/login.html')
+
 
 def getMedicationName(medicationCode):
 	"""
@@ -249,7 +265,7 @@ def getPrescriptionItems(prescription):
 	PrescriptionItems = models.PrescriptionItem.objects.all()
 	for prescriptionItem in PrescriptionItems:
 		if prescriptionItem.prescription == prescription:
-			print(str(prescriptionItem.prescription) + " " + str(prescription))
+			# print(str(prescriptionItem.prescription) + " " + str(prescription))
 			items.append(prescriptionItem.item)
 	return items
 

@@ -69,7 +69,8 @@ a {
 </head>
 <body>
 
-<form action="/action_page.php">
+<form action="/newaccount" method="post">
+  {% csrf_token %}
   <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create an account.</p>
@@ -80,6 +81,9 @@ a {
 
     <label for="second-name"><b>Second Name</b></label>
     <input type="text" placeholder="Second Name" name="second-name" id="second-name" required>
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Username" name="username" id="username" required>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
@@ -96,7 +100,7 @@ a {
   </div>
   
   <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
+    <p>Already have an account? <a href="http://127.0.0.1:8000/">Sign in</a>.</p>
   </div>
 </form>
 

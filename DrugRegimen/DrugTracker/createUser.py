@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 import django
 from . import models
 
-def createUser(username, password):
+def createNewUser(username, password):
 	newUser = User(username=username)
 	newUser.set_password(password)
 	newUser.is_superuser = True

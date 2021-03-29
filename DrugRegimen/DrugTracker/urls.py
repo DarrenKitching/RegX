@@ -8,6 +8,8 @@ router.register(r'drugnotes', views.DrugNotesViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('register', views.register, name='register'),
+    path('newaccount', views.newAccount, name='newaccount'),
     path('home', views.home, name='home'),
     path('about', views.about, name='about'),
     path('account', views.account, name='account'),
