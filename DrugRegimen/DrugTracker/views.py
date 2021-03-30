@@ -17,7 +17,7 @@ from itertools import zip_longest
 from . import rxnavAPI
 from . import createUser
 import threading
-
+import os.path
 
 def index(request):
 	"""
@@ -313,18 +313,16 @@ class DrugNotesViewSet (viewsets.ModelViewSet):
 
 @csrf_exempt
 def upload(request):
+	BASE = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+
 	if request.is_ajax():
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
+			path = os.path.join(BASE, 'media/recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm')
 			print("valid")
-			with open('media/recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm', 'wb+') as destination:
+			with open(path, 'wb+') as destination:
 				for chunk in request.FILES['video'].chunks():
 					destination.write(chunk)
-			# pass in date video was taken as well so that it can be saved, might need date as well as doseURL in file name
-			# path = 'media/recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm'
-			# t = threading.Thread(target=motionTracking.obtainMotionVideo(path), args=(), kwargs={})
-			# t.setDaemon(True)
-			# t.start()
 		else:
 			print("invalid")
 	return patientHome(request)
@@ -592,7 +590,7 @@ def checkInteractions(request):
 	drug1 = request.POST.get('search1')
 	drug2 = request.POST.get('search2')
 	interactions = []
-	if drug2 is '':
+	if drug2 == '':
 		interactions = rxnavAPI.getInteractionsSingleDrug(drug1)
 	else:
 		interactions = rxnavAPI.getInteractionsBetweenDrugs(drug1, drug2)
