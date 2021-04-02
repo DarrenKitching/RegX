@@ -519,29 +519,37 @@ def writePrescription(request):
 	doctor = request.user.username
 	patient = request.POST.get('patient')
 	pharmacy = request.POST.get('pharmacy')
-	drug = request.POST.get('drug')
-	dosageForm = request.POST.get('dosage-form')
-	doseValue = request.POST.get('dose-value')
-	doseUnit = request.POST.get('dose-unit')
-	durationValue = request.POST.get('duration-value')
-	durationUnit = request.POST.get('duration-unit')
-	frequency = request.POST.get('frequency')
-	route = request.POST.get('route')
-	quantity = request.POST.get('quantity')
-	status = request.POST.get('status')
-	videoRequired = False
-	if request.POST.get('video-required') == 'on':
-		videoRequired = True
-	comment = request.POST.get('comment')
-	item = models.Item(dosageForm = dosageForm, doseValue = doseValue, doseUnit = doseUnit, drug = drug, durationValue = durationValue, 
-		durationUnit = durationUnit, frequency = frequency, route = route, quantity = quantity, status = status, 
-		videoRequired = videoRequired, videoURL =  generateTenDigtURL())
-	item.save()
-	prescription = models.Prescription(comment = comment, dateIssued = date.today(), dispensed = False, doctorId = doctor, patientId = patient,
+	prescription = models.Prescription(comment = request.POST.get('comment0'), dateIssued = date.today(), dispensed = False, doctorId = doctor, patientId = patient,
 		pharmacyId = pharmacy)
 	prescription.save()
-	prescriptionItem = models.PrescriptionItem(prescription=prescription, item = item)
-	prescriptionItem.save()
+	i = 0
+	while True:
+		drug = request.POST.get('drug' + str(i))
+		if drug is None: # if we've reached the end of the drugs list
+			break # then break
+		for key, value in request.POST.items():
+			print('Key: %s' % (key) ) 
+			print('Value %s' % (value) )
+		dosageForm = request.POST.get('dosage-form' + str(i))
+		doseValue = request.POST.get('dose-value' + str(i))
+		doseUnit = request.POST.get('dose-unit' + str(i))
+		durationValue = request.POST.get('duration-value' + str(i))
+		durationUnit = request.POST.get('duration-unit' + str(i))
+		frequency = request.POST.get('frequency' + str(i))
+		route = request.POST.get('route' + str(i))
+		quantity = request.POST.get('quantity' + str(i))
+		status = request.POST.get('status' + str(i))
+		videoRequired = False
+		if request.POST.get('video-required' + str(i)) == 'on':
+			videoRequired = True
+		comment = request.POST.get('comment' + str(i))
+		item = models.Item(dosageForm = dosageForm, doseValue = doseValue, doseUnit = doseUnit, drug = drug, durationValue = durationValue, 
+			durationUnit = durationUnit, frequency = frequency, route = route, quantity = quantity, status = status, 
+			videoRequired = videoRequired, videoURL =  generateTenDigtURL())
+		item.save()
+		prescriptionItem = models.PrescriptionItem(prescription=prescription, item = item)
+		prescriptionItem.save()
+		i += 1
 	return home(request)
 
 def markDispensed(request, prescriptionId):

@@ -93,8 +93,8 @@
       for (i = 0; i < 12; i++) {
         if (i == 5) {
           var select = document.createElement("select");
-          select.id = ids[i];
-          select.name = ids[i];
+          select.id = ids[i] + drugcount;
+          select.name = ids[i] + drugcount;
           var opt1 = document.createElement("option");
           var opt2 = document.createElement("option");
           var opt3 = document.createElement("option");
@@ -122,9 +122,13 @@
           }
           // Create an <input> element, set its type and name attributes
           var input = document.createElement("input");
-          if (i != 11) {
+          if (i != 11 && i != 4 && i != 2) {
             input.type = "text";
-          } else {
+          } 
+          else if(i == 4 || i == 2) {
+            input.type = "number";
+          }
+          else {
             input.type = "checkbox";
           }
           input.name = ids[i] + drugcount;
@@ -177,33 +181,33 @@
       <div id="pagecontent">
         <div class=prescribe>
           <form action="/write-prescription" method="post">
-            {% csrf_token %}
-            <label for="patient">Choose Patient: </label>
-            <select id="patient" name="patient">
-              {% for patient in patients %}
-              <option value={{ patient }}>{{ patient }}</option>
-              {% endfor %}
-            </select>
-            <br><br>
+              {% csrf_token %}
+              <label for="patient">Choose Patient: </label>
+              <select id="patient" name="patient">
+                {% for patient in patients %}
+                <option value={{ patient }}>{{ patient }}</option>
+                {% endfor %}
+              </select>
+              <br><br>
 
-            <label for="pharmacy">Choose Pharmacy: </label>
-            <select id="pharmacy" name="pharmacy">
-              {% for pharmacy in pharmacies %}
-              <option value={{ pharmacy }}>{{ pharmacy }}</option>
-              {% endfor %}
-            </select>
-            <br><br>
+              <label for="pharmacy">Choose Pharmacy: </label>
+              <select id="pharmacy" name="pharmacy">
+                {% for pharmacy in pharmacies %}
+                <option value={{ pharmacy }}>{{ pharmacy }}</option>
+                {% endfor %}
+              </select>
+              <br><br>
 
-            <div id="drugbtn-links">
-              <a href="#" id="add-drug" class="drugbtn" onclick="addFields()">Add Drug</a>
-              <a href="#" id="rm-drug" class="drugbtn" onclick="removeDrug()">Remove Drug</a>
-              <a href="#" id="rm-all-drugs" class="drugbtn" onclick="clearAll()">Clear All</a>
-            </div>
+              <div id="drugbtn-links">
+                <a href="#" id="add-drug" class="drugbtn" onclick="addFields()">Add Drug</a>
+                <a href="#" id="rm-drug" class="drugbtn" onclick="removeDrug()">Remove Drug</a>
+                <a href="#" id="rm-all-drugs" class="drugbtn" onclick="clearAll()">Clear All</a>
+              </div>
 
-            <div id="drug-container">
-            </div>
+              <div id="drug-container">
+              </div>
 
-            <input type="submit" value="Prescribe">
+              <input type="submit" value="Prescribe">
           </form>
         </div>
       </div>

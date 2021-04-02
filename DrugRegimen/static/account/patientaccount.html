@@ -26,30 +26,32 @@
             </div>
         </nav>
     </header>
-    <main><div id="pagecontent">
-        <div id="subnav">
-            <h3>Patient Account</h2>
-            <h3>Your Doctors:</h3>
-                <ul>
-                {% for doctor in doctors %}
-                <form action="/remove-doctor" method="post">
-                    {% csrf_token %}
-                        <li>{{ doctor }} <input type="submit" name = {{ doctor }} value="Remove"></li>
-                </form>
-                {% endfor %}
-                </ul>
-            <h3>Doctors Pending Approval:</h3>
-                <ul>
-                {% for doctor in pendingDoctors %}
-                <form action="/approve-doctor" method="post">
-                    {% csrf_token %}
-                        <li>{{ doctor }}</li>
-                    <input type="submit" name = {{ doctor }} value="Approve">
-                </form>
-                {% endfor %}
-                </ul>
+    <main>
+        <div id="pagecontent">
+            <div id="subnav">
+                <h3>Patient Account</h2>
+                <h3>Your Doctors:</h3>
+                    <ul>
+                    {% for doctor in doctors %}
+                    <form action="/remove-doctor" method="post">
+                        {% csrf_token %}
+                            <li>{{ doctor }} <input type="submit" name = {{ doctor }} value="Remove"></li>
+                    </form>
+                    {% endfor %}
+                    </ul>
+                <h3>Doctors Pending Approval:</h3>
+                    <ul>
+                    {% for doctor in pendingDoctors %}
+                    <form action="/approve-doctor" method="post">
+                        {% csrf_token %}
+                            <li>{{ doctor }}</li>
+                        <input type="submit" name = {{ doctor }} value="Approve">
+                    </form>
+                    {% endfor %}
+                    </ul>
+            </div>
         </div>
-    </div></main>
+    </main>
     <footer class="footer">
         <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
         <div class="text">Copyright &copy; Team 5 2021</div>
