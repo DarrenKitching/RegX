@@ -1,4 +1,13 @@
 /* Pagecontent: Styling file generally for anything underneath the navbar and above the footer */
+
+input[type=submit] {
+  background-color: #006857;
+
+}
+input[type=submit]:hover {
+  background-color: #028d76;
+}
+
 #subnav {
     font-family: 'Trebuchet MS';
     margin-left: 10%;
@@ -12,4 +21,35 @@
 #pagecontent {
     padding-bottom: 80px;
     /* Footer height + 8px */
+}
+
+/* FORM BUTTONS */
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+a.button {
+  padding: 4px 5px;
+}
+
+
+.button[disabled], input[type=submit][disabled], input[type=button][disabled] {
+  opacity: 0.4;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+  float: right;
+  border: none;
+  font-weight: 400;
+}
+
+.button[disabled].default,
+input[type=submit][disabled].default,
+input[type=button][disabled].default {
+  opacity: 0.4;
 }
