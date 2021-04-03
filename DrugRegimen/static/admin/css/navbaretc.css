@@ -23,6 +23,13 @@ body {
     text-align: center;
 }
 
+#current-page-link a{
+    background-color: #8831aa;
+}
+#current-page-link a:hover{
+    background-color: #680091;
+}
+
 .left-nav {
     float: left;
 }
