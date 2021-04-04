@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Account</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'admin/css/subnav.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
 </head>
 
@@ -16,6 +16,7 @@
         <nav class="navbar">
             <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
             <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
+            <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
             <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
             <div class="dropdown">
                 <a href='#' class="dropbtn">{{ username }}</a>
@@ -30,26 +31,28 @@
         <div id="pagecontent">
             <div id="subnav">
                 <h3>Patient Account</h2>
-                <h3>Your Doctors:</h3>
-                    <ul>
-                    {% for doctor in doctors %}
-                    <form action="/remove-doctor" method="post">
-                        {% csrf_token %}
-                            <li>{{ doctor }} <input type="submit" name = {{ doctor }} value="Remove"></li>
-                    </form>
-                    {% endfor %}
-                    </ul>
-                <h3>Doctors Pending Approval:</h3>
-                    <ul>
-                    {% for doctor in pendingDoctors %}
-                    <form action="/approve-doctor" method="post">
-                        {% csrf_token %}
-                            <li>{{ doctor }}</li>
-                        <input type="submit" name = {{ doctor }} value="Approve">
-                    </form>
-                    {% endfor %}
-                    </ul>
             </div>
+            <h3>Your Doctors:</h3>
+                <ul>
+                {% for doctor in doctors %}
+                <form action="/remove-doctor" method="post">
+                    {% csrf_token %}
+                    <div id="submit">
+                        <li>{{ doctor }} <input type="submit" name = {{ doctor }} value="Remove"></li>
+                    </div>
+                </form>
+                {% endfor %}
+                </ul>
+            <h3>Doctors Pending Approval:</h3>
+                <ul>
+                {% for doctor in pendingDoctors %}
+                <form action="/approve-doctor" method="post">
+                    {% csrf_token %}
+                        <li>{{ doctor }}</li>
+                    <input type="submit" name = {{ doctor }} value="Approve">
+                </form>
+                {% endfor %}
+                </ul>
         </div>
     </main>
     <footer class="footer">
