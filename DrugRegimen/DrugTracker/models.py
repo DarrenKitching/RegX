@@ -57,3 +57,7 @@ class DoctorPatient(models.Model):
 
 class DoseURL(models.Model):
 	doseURL = models.CharField(max_length = 10)
+
+class PrescriptionCollector(models.Model):
+	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
+	collectorName = models.CharField(max_length=c.MAX_NAME_LEN) # name of person allowed to collect on patient's behalf

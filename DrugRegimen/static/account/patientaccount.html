@@ -53,6 +53,24 @@
                 </form>
                 {% endfor %}
                 </ul>
+                <h3>People who can collect prescriptions for you:</h3>
+                <ul>
+                {% for collector in collectors %}
+                <form action="/remove-collector" method="post">
+                    {% csrf_token %}
+                    <div id="submit">
+                        <li>{{ collector }} <input type="submit" name = "{{ collector }}" value="Remove"></li>
+                    </div>
+                </form>
+                {% endfor %}
+                </ul>
+            <h3>Add Collector:</h3>
+            <form action="/add-collector" method="post">
+                {% csrf_token %}
+                <label for="collector-name">Collector's Name: </label>
+                <input id="collector-name" type="text" name="collector-name">
+                <input type="submit" value="Add">
+            </form>
         </div>
     </main>
     <footer class="footer">

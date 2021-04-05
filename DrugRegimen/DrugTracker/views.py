@@ -172,13 +172,17 @@ def pharmacistHome(request):
 	dispensedAndReceived = []
 	notDispensedIds = []
 	dispensedNotReceivedIds = []
+	notDispensedCollectors = []
+	dispensedNotReceivedCollectors = []
 	for prescription in pharmacyPrescriptions:
 		if prescription.dispensed == False:
 			notDispensed.append(prescription)
 			notDispensedIds.append(prescription.id)
+			notDispensedCollectors.append(getCollectors(prescription.patientId))
 		elif prescription.dateReceived is None:
 			dispensedNotReceived.append(prescription)
 			dispensedNotReceivedIds.append(prescription.id)
+			dispensedNotReceivedCollectors.append(getCollectors(prescription.patientId))
 		else:
 			dispensedAndReceived.append(prescription)
 	notDispensedPresciptionItems = []
@@ -192,8 +196,8 @@ def pharmacistHome(request):
 		dispensedAndReceivedPrescriptionItems.append(getPrescriptionItems(prescription))
 	context = {
 		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
-		'notDispensed': zip(notDispensed, notDispensedPresciptionItems, notDispensedIds),
-		'dispensedNotReceived': zip(dispensedNotReceived, dispensedNotReceivedPrescriptionItems, dispensedNotReceivedIds),
+		'notDispensed': zip(notDispensed, notDispensedPresciptionItems, notDispensedIds, notDispensedCollectors),
+		'dispensedNotReceived': zip(dispensedNotReceived, dispensedNotReceivedPrescriptionItems, dispensedNotReceivedIds, dispensedNotReceivedCollectors),
 	}
 	return render(request, 'home/pharmacisthome.html', context)
 
@@ -418,9 +422,15 @@ def patientAccount(request):
 				yourDoctors.append(doctorPatientRelationship.doctorUsername)
 			else:
 				yourDoctorsPendingApproval.append(doctorPatientRelationship.doctorUsername)
+	allCollectors = models.PrescriptionCollector.objects.all()
+	yourCollectors = []
+	for collector in allCollectors:
+		if collector.patientUsername == request.user.username:
+			yourCollectors.append(collector.collectorName)
 	context = {
 		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'doctors': yourDoctors,
+		'collectors': yourCollectors,
 		'pendingDoctors': yourDoctorsPendingApproval,
 	}
 	return render(request, 'account/patientaccount.html', context)
@@ -490,6 +500,22 @@ def removePatient(request):
 		'username': 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 	}
 	return managepatients(request)
+
+def addCollector(request):
+	patient = request.user.username
+	newCollector = request.POST.get('collector-name')
+	newCollectorModel = models.PrescriptionCollector(patientUsername = patient, collectorName = newCollector)
+	newCollectorModel.save()
+	return patientAccount(request)
+
+def removeCollector(request):
+	patient = request.user.username
+	allPatientCollectors = models.PrescriptionCollector.objects.all()
+	for patientCollector in allPatientCollectors:
+		if patientCollector.patientUsername == patient and (patientCollector.collectorName in request.POST):
+			print ("test")
+			patientCollector.delete()
+	return patientAccount(request)
 
 def approveDoctor(request):
 	allDoctorPatientAssignments = models.DoctorPatient.objects.all()
@@ -609,3 +635,11 @@ def checkInteractions(request):
 		'drug2': drug2,
 	}
 	return render(request, 'comprehensive_conflicts/comprehensive_conflicts.html', context)
+
+def getCollectors(patient):
+	allCollectors = models.PrescriptionCollector.objects.all()
+	collectorsForPatient = []
+	for collector in allCollectors:
+		if collector.patientUsername == patient:
+			collectorsForPatient.append(collector.collectorName)
+	return collectorsForPatient

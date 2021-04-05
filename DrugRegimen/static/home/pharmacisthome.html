@@ -99,9 +99,9 @@
                     </div>
                     <div class="patient-details" id="who-can-collect">
                         <ul>
-                            <li>Sarah Smith</li>
-                            <li>Tim Smith</li>
-                            <li>Bill Smith</li>
+                            {% for collector in prescription.3 %}
+                            <li>{{ collector }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div id="prescription-medications" class="patient-details">
@@ -125,9 +125,9 @@
                     </div>
                     <div class="patient-details" id="who-can-collect">
                         <ul>
-                            <li>Sarah Smith</li>
-                            <li>Tim Smith</li>
-                            <li>Bill Smith</li>
+                            {% for collector in prescription.3 %}
+                            <li>{{ collector }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div id="prescription-medications" class="patient-details">
@@ -136,7 +136,7 @@
                             <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
                             {% endfor %}
                         </ul>
-                        <a href="mark-received/{{ prescription.2 }}"><button>Mark Received</button></a>
+                        <a href="mark-received/{{ prescription.2 }}"><input type="submit" value="Mark Received"></input></a>
                     </div>
                 </div>
                 {% endfor %}
