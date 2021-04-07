@@ -1,4 +1,4 @@
-New Users:
+Users:
 Username: HarryWalker Password: HarryWalker
 Username: ElizabethCruz Password: ElizabethCruz
 Username: JohnBlack Password: JohnBlack
@@ -10,9 +10,10 @@ Username: JackBrennan Password: JackBrennan
 Username: TimBlake Password: TimBlake
 Username: IsabelleSmart Password: IsabelleSmart
 
-New Pharmacies:
+Pharmacies:
 Username: LloydsGlasnevin Password: LloydsGlasnevin
+Username: BootsDrumcondra Password: BootsDrumcondra
 
-New Doctors:
+Doctors:
 Username: RebeccaMulville Password: RebeccaMulville
 
