@@ -23,6 +23,7 @@ urlpatterns = [
     path('remove-collector', views.removeCollector, name='removeCollector'),
     path('approve-doctor', views.approveDoctor, name='approveDoctor'),
     path('remove-doctor', views.removeDoctor, name='removeDoctor'),
+    path('change-pharmacy', views.changePharmacy, name='changePharmacy'),
     path('dose/<doseURL>/', views.takeDose, name='takeDose'),
     path('mark-dispensed/<prescriptionId>/', views.markDispensed, name='markDispensed'),
     path('mark-received/<prescriptionId>/', views.markReceived, name='markReceived'),

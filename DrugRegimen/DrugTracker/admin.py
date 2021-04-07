@@ -11,4 +11,6 @@ admin.site.register(Item)
 admin.site.register(PrescriptionItem)
 admin.site.register(DoctorPatient)
 admin.site.register(DoseURL)
+admin.site.register(PrescriptionCollector)
+admin.site.register(PatientPharmacy)
 # Register your models here.

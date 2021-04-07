@@ -71,6 +71,19 @@
                 <input id="collector-name" type="text" name="collector-name">
                 <input type="submit" value="Add">
             </form>
+            <h3>Your Pharmacy:</h3>
+            <label>Your current pharmacy is: {{ currentPharmacy }}</label>
+            <br><br>
+            <form action="/change-pharmacy" method="post">
+                {% csrf_token %}
+                <label for="pharmacy">Change Pharmacy: </label>
+                <select id="pharmacy" name="pharmacy">
+                {% for pharmacy in pharmacies %}
+                <option value={{ pharmacy }}>{{ pharmacy }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Change">
+            </form>
         </div>
     </main>
     <footer class="footer">

@@ -416,6 +416,7 @@ def patientAccount(request):
 	allDoctorPatient = models.DoctorPatient.objects.all()
 	yourDoctors = []
 	yourDoctorsPendingApproval = []
+	pharmacies = []
 	for doctorPatientRelationship in allDoctorPatient:
 		if doctorPatientRelationship.patientUsername == request.user.username:
 			if doctorPatientRelationship.relationshipConfirmed:
@@ -427,11 +428,21 @@ def patientAccount(request):
 	for collector in allCollectors:
 		if collector.patientUsername == request.user.username:
 			yourCollectors.append(collector.collectorName)
+	allPharmacies = models.PharmacistGroup.objects.all()
+	for pharmacy in allPharmacies:
+		pharmacies.append(pharmacy.pharmacistUsername)
+	currentPharmacy = 'LloydsGlasnevin'
+	allPatientPharmacy = models.PatientPharmacy.objects.all()
+	for patientPharmacy in allPatientPharmacy:
+		if patientPharmacy.patientUsername == request.user.username:
+			currentPharmacy = patientPharmacy.pharmacyId
 	context = {
 		'username': re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'doctors': yourDoctors,
 		'collectors': yourCollectors,
 		'pendingDoctors': yourDoctorsPendingApproval,
+		'pharmacies' : pharmacies,
+		'currentPharmacy' : currentPharmacy
 	}
 	return render(request, 'account/patientaccount.html', context)
 
@@ -643,3 +654,18 @@ def getCollectors(patient):
 		if collector.patientUsername == patient:
 			collectorsForPatient.append(collector.collectorName)
 	return collectorsForPatient
+
+def changePharmacy(request):
+	newPharmacy = request.POST.get('pharmacy')
+	print(newPharmacy)
+	allPatientPharmacy = models.PatientPharmacy.objects.all()
+	for patientPharmacy in allPatientPharmacy:
+		if patientPharmacy.patientUsername == request.user.username:
+			print("match")
+			patientPharmacy.pharmacyId = newPharmacy
+			patientPharmacy.save()
+			return patientAccount(request)
+	print("no match")
+	newPatientPharmacy = models.PatientPharmacy(patientUsername = request.user.username, pharmacyId = newPharmacy)
+	newPatientPharmacy.save()
+	return patientAccount(request)
