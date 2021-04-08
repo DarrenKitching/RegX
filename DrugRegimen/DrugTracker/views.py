@@ -68,10 +68,13 @@ def newAccount(request):
 	firstName = request.POST.get('first-name')
 	secondName = request.POST.get('second-name')
 	username = request.POST.get('username')
+	gms = request.POST.get('gms')
 	email = request.POST.get('email')
 	password = request.POST.get('password')
 	passwordRepeat = request.POST.get('password-repeat')
 	if password == passwordRepeat:
+		newPatientGMS = models.PatientGMS(patientUsername=username, gms=gms)
+		newPatientGMS.save()
 		createUser.createNewUser(username, password)
 	return render(request, 'login/login.html')
 

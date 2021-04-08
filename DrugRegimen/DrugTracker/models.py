@@ -65,3 +65,7 @@ class PrescriptionCollector(models.Model):
 class PatientPharmacy(models.Model):
 	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
 	pharmacyId = models.CharField(max_length=50)
+
+class PatientGMS(models.Model):
+	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
+	gms = models.CharField(max_length=50) # gms number
