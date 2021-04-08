@@ -225,6 +225,7 @@ def doctorHome(request):
 	patientDrugs = [] # a list of drugs to be taken by this doctor's patients today
 	patientAssignedToDrug = []
 	confidenceScores = []
+	videoExists = []
 	for patient in patients:
 		for prescription in allPrescriptions:
 			if prescription.patientId == patient:
@@ -233,10 +234,15 @@ def doctorHome(request):
 				for item in todaysItems:
 					patientDrugs.append(item)
 					path = 'media/recorded-videos/' + item.videoURL + ('_' + (str(date.today()))) + '.webm'
-					confidenceScores.append(motionTracking.obtainConfidenceScore(path))
+					score = motionTracking.obtainConfidenceScore(path)
+					confidenceScores.append(score)
+					if score == 0:
+						videoExists.append(False)
+					else:
+						videoExists.append(True)
 				for item in todaysItems:
 					patientAssignedToDrug.append(prescription.patientId)
-	zipped = zip(patientAssignedToDrug, patientDrugs, confidenceScores)
+	zipped = zip(patientAssignedToDrug, patientDrugs, confidenceScores, videoExists)
 	context = {
 		'patientsAndDrugs' : zipped,
 		'username' : 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),

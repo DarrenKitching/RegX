@@ -16,12 +16,45 @@
             background-color: rgb(187, 187, 187);
             border-radius: 20px;
         }
+        .patient-summary-red {
+            position: relative;
+            overflow: hidden;
+            margin: 15px 15px;
+            background-color: #cc0000;
+            border-radius: 20px;
+        }
+
+        .patient-summary-green {
+            position: relative;
+            overflow: hidden;
+            margin: 15px 15px;
+            background-color: #009933;
+            border-radius: 20px;
+        }
 
         .patient-details a {
             font-size: larger;
             text-decoration: none;
             color: rgb(0, 0, 0);
             background-color: rgb(187, 187, 187);
+            text-align: center;
+            width: auto;
+        }
+
+        .patient-details-green a {
+            font-size: larger;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            background-color: #009933;
+            text-align: center;
+            width: auto;
+        }
+
+        .patient-details-red a {
+            font-size: larger;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            background-color: #cc0000;
             text-align: center;
             width: auto;
         }
@@ -37,6 +70,31 @@
             padding: 0;
             overflow: hidden;
         }
+
+        .patient-summary-green a:hover {
+            background-color: #01493d;
+            color: white;
+        }
+
+        .patient-summary-green video {
+            float: right;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .patient-summary-red a:hover {
+            background-color: #01493d;
+            color: white;
+        }
+
+        .patient-summary-red video {
+            float: right;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
 
         .patient-details {
             width: 18%;
@@ -88,6 +146,106 @@
             text-align: center;
         }
 
+                .patient-details-green {
+            width: 18%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 52px 0px;
+        }
+
+        .patient-details-green li {
+            list-style-type: none;
+            padding: 0px 20px;
+            margin: 0;
+        }
+
+        .patient-details-green input {
+            -webkit-appearance: none;
+            background-color: #fafafa;
+            border: 1px solid #cacece;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 9px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .patient-details-green input:active,
+        .patient-details-green input:checked:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .patient-details-green input:checked {
+            background-color: #e9ecee;
+            border: 1px solid #adb8c0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+            color: #99a1a7;
+        }
+
+        .patient-details-green input:checked:after {
+            content: '\2714';
+            font-size: 14px;
+            position: absolute;
+            top: 0px;
+            left: 3px;
+            color: #006857;
+        }
+
+        .patient-details-green ul {
+            text-align: center;
+        }
+
+                .patient-details-red {
+            width: 18%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 52px 0px;
+        }
+
+        .patient-details-red li {
+            list-style-type: none;
+            padding: 0px 20px;
+            margin: 0;
+        }
+
+        .patient-details-red input {
+            -webkit-appearance: none;
+            background-color: #fafafa;
+            border: 1px solid #cacece;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 9px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .patient-details-red input:active,
+        .patient-details-red input:checked:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .patient-details-red input:checked {
+            background-color: #e9ecee;
+            border: 1px solid #adb8c0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+            color: #99a1a7;
+        }
+
+        .patient-details-red input:checked:after {
+            content: '\2714';
+            font-size: 14px;
+            position: absolute;
+            top: 0px;
+            left: 3px;
+            color: #006857;
+        }
+
+        .patient-details-red ul {
+            text-align: center;
+        }
+
         #meds ul li {
             display: block;
             padding: auto;
@@ -128,9 +286,10 @@
                     <h3>Doctor Help</h2>
                 </div>
                 {% for item in patientsAndDrugs %}
-                <div class="patient-summary">
-                    <div class="patient-details">
-                        <a href='#' class="patient-details" id="patient-name">{{ item.0 }}</a>
+                {% if item.3 %}
+                <div class="patient-summary-green">
+                    <div class="patient-details-green">
+                        <a href='#' class="patient-details-green" id="patient-name">{{ item.0 }}</a>
                     </div>
                     <div class="patient-details" id="meds">
                         <ul>
@@ -150,8 +309,32 @@
                         <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
-
                 </div>
+                {% else %}
+                <div class="patient-summary-red">
+                    <div class="patient-details-red">
+                        <a href='#' class="patient-details-red" id="patient-name">{{ item.0 }}</a>
+                    </div>
+                    <div class="patient-details" id="meds">
+                        <ul>
+                            <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                        </ul>
+                    </div>
+                    <div id="time-last-taken" class="patient-details">
+                        <ul>
+                            <li>{{ item.2 }}</li>
+                        </ul>
+                    </div>
+                    <div id="require-videos" class="patient-details">
+                        <input type="checkbox" id="require1" name="require1" value="Required">
+                        <label for="require1"> Require videos</label>
+                    </div>
+                    <video class="video-player" width="22%" height="240" controls>
+                        <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </main>
