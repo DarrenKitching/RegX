@@ -19,7 +19,7 @@ input[type=submit]:hover {
   }
 
 #pagecontent { /* In HTML files this should include everything between the subnav and the footer */
-    padding-left: 4%;
+    padding-left: 3%;
     padding-bottom: 80px;
     /* Footer height + 8px */
 }

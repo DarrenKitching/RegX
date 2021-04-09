@@ -46,6 +46,7 @@
         }
 
         .patient-details li {
+            font-size: large;
             list-style-type: none;
             padding: 0px 20px;
             margin: 0;
@@ -59,6 +60,7 @@
         #who-can-collect ul li {
             display: block;
             padding: auto;
+            font-size: larger;
         }
 
         #who-can-collect ul {
@@ -90,6 +92,9 @@
             </nav>
         </header>
         <main>
+            <div id="subnav">
+                <h3>Pharmacy Home</h2>
+            </div>
             <div id="pagecontent">
                 <h2>Not dispensed:</h2>
                 {% for prescription in notDispensed %}
@@ -107,7 +112,7 @@
                     <div id="prescription-medications" class="patient-details">
                         <ul>
                             {% for item in prescription.1 %}
-                            <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
+                            <li>{{ item.drug }}: {{ item.doseValue }} {{ item.doseUnit }} {{ item.dosageForm }}s x {{ item.quantity }}</li>
                             {% endfor %}
                         </ul>
                         <div id="submit">
