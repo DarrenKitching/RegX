@@ -15,12 +15,11 @@ input[type=submit]:hover {
     color: dimgrey;
     border-bottom: 3px solid dimgrey;
     margin-bottom:40px;
-    margin-top:30px;
   }
 
 #pagecontent { /* In HTML files this should include everything between the subnav and the footer */
-    padding-left: 3%;
-    padding-bottom: 80px;
+    padding-left: 2.5%;
+    padding-bottom: 25%;
     /* Footer height + 8px */
 }
 
