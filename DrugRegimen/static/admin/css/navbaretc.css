@@ -27,10 +27,10 @@ body {
 }
 
 #current-page-link a{
-    background-color: #8831aa;
+    background-color: #7283da;
 }
 #current-page-link a:hover{
-    background-color: #680091;
+    background-color: #454f80;
 }
 
 .left-nav {
