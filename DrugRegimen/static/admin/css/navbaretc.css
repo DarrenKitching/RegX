@@ -1,7 +1,7 @@
 /* Navbaretc: Styling file for navbar, pre-navbar, footer, and such */
 
 #title {
-    padding-left: 35px;
+    padding-left: 55px;
 }
 
 body {
@@ -19,7 +19,10 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    padding: 15px 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
     text-align: center;
 }
 

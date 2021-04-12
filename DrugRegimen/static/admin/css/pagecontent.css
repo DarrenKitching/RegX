@@ -15,6 +15,7 @@ input[type=submit]:hover {
     color: dimgrey;
     border-bottom: 3px solid rgb(105, 105, 105);
     margin-bottom: 35px;
+    margin-top: 0px;
   }
 
 #pagecontent { /* In HTML files this should include everything between the subnav and the footer */
