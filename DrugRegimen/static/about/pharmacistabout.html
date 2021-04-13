@@ -9,45 +9,121 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
+
+    <style>
+        .flex-container {
+            display: flex;
+            margin: 0 auto;
+        }
+
+        #about-text {
+            flex: 1;
+            justify-content: center;
+            background-color: #f2f2f2;
+        }
+
+        #about-img {
+            flex: 1;
+            display: flex;
+            background-color: #f2f2f2;
+            text-align: center;
+
+        }
+
+        p {
+            padding: 15vh 5vh;
+            text-align: center;
+            font-size: larger;
+        }
+
+        #pharmacy {
+            max-width: 60%;
+            height: auto;
+            border: 6px solid #006857;
+            margin: auto;
+            vertical-align: middle;
+        }
+
+        .image-wrapper {
+            overflow: hidden;
+            position: relative;
+            justify-content: center;
+        }
+
+        .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #pagecontent {
+            padding-top: 5%;
+            padding-bottom: 6%;
+            margin-left: 0%;
+            margin-right: 0%;
+            padding-left: 0%;
+        }
+
+        .pill-img {
+            width: 36px;
+            height: 14.4px;
+        }
+
+        span {
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <div class="imgbrand"><img style="margin-left: 50px;" width="8%" height="8%" src="{% static 'admin/img/regx.png' %}"></div>
-        <nav class="navbar">
-            <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
-            <div id="current-page-link"><a href='http://127.0.0.1:8000/about' class="left-nav">About</a></div>
-            <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
-            <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
-            <div class="dropdown">
-                <a href='#' class="dropbtn">{{ username }}</a>
-                <div class="dropdown-content">
-                    <a href="http://127.0.0.1:8000/account">Account</a>
-                    <a href="http://127.0.0.1:8000">Sign Out</a>
+    <div id="page-container">
+        <header>
+            <div class="imgbrand"><img style="margin-left: 50px;" width="8%" height="8%"
+                    src="{% static 'admin/img/regx.png' %}"></div>
+            <nav class="navbar">
+                <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
+                <div id="current-page-link"><a href='http://127.0.0.1:8000/about' class="left-nav">About</a></div>
+                <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
+                <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
+                <div class="dropdown">
+                    <a href='#' class="dropbtn">{{ username }}</a>
+                    <div class="dropdown-content">
+                        <a href="http://127.0.0.1:8000/account">Account</a>
+                        <a href="http://127.0.0.1:8000">Sign Out</a>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <main style="background-image: url({% static 'admin/img/bgpharmacy.png' %}); height: 800px;"><!-- height: 100% works lovely for pages with more content than can fit on screen at one time. for pages with less content than that though, we need to find a better solution then assigning a static height, eg 800px-->
-            <div id="subnav">
-                <h3>Pharmacy About</h2>
-            </div>
+            </nav>
+        </header>
+        <main>
             <div id="pagecontent">
-                <p>
-                    &lt;App Name&gt; is a service which allows doctors to manage perscriptions for their patients.</br>
-                    It facilitates pharmacies coupling prescriptions with QR codes which the patient scans to inform their doctor and to check for medical conflicts.</br>
-                    </br>
-                    Our service offers a range of services for pharmacies, including the following:</br>
-                    > The ability to verify digital prescriptions at the counter</br>
-                    > A handy means to keep track of prescriptions granted</br>
-                </p>
-            </div>
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-        <div class="text">Copyright &copy; Team 5 2021</div>
-</footer>
+                <div class="flex-container">
+                    <div id="about-text">
+                        <p id="about-intro">
+                            RegX is a service which allows doctors to manage perscriptions for their
+                            patients.
+                            It facilitates pharmacies coupling prescriptions with QR codes which the patient scans to
+                            inform
+                            their doctor and to check for medical conflicts.</br>
+                            </br>
+                            Our service offers a range of services for doctors, including the following:</br> </br>
+                            <img class="pill-img" src="{% static 'admin/img/pill.png' %}"> Write a digital prescription for a patient - including the listing of others who can retrieve the prescription on their behalf 
+                            </br> </br>
+                            <img class="pill-img" src="{% static 'admin/img/pill.png' %}"> Set the prescription so that video uploads from the patient of their consumption of the prescription are necessary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            </br> </br>
+                            <img class="pill-img" src="{% static 'admin/img/pill.png' %}"> Review the QR scans and videos of patients to ensure they are adhering to their regimen &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        </p>
+                    </div>
+                    <div id="about-img">
+                        <span class="helper"></span>
+                        <img id="pharmacy" src="{% static 'admin/img/pharmacy.jpeg' %}" </div>
+                    </div>
+                </div>
+        </main>
+        <footer class="footer">
+            <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
+            <div class="text">Copyright &copy; Team 5 2021</div>
+        </footer>
+    </div>
 </body>
 
 </html>
