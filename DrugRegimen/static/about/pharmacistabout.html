@@ -94,8 +94,11 @@
                 </div>
             </nav>
         </header>
-        <main>
-            <div id="pagecontent">
+        <main style="background-image: url({% static 'admin/img/bgpharmacy.png' %}); height: 100%;"><!-- height: 100% works lovely for pages with more content than can fit on screen at one time. for pages with less content than that though, we need to find a better solution then assigning a static height, eg 800px-->
+            <div id="subnav">
+                <h3>Pharmacy About</h2>
+              </div>
+            <div id="pagecontent" style="margin-left: 1.5%; margin-right: .75%;">
                 <div class="flex-container">
                     <div id="about-text">
                         <p id="about-intro">
