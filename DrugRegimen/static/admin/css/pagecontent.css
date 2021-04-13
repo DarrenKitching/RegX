@@ -12,10 +12,11 @@ input[type=submit]:hover {
     font-family: 'Trebuchet MS';
     margin-left: 10%;
     margin-right: 70%;
-    color: dimgrey;
-    border-bottom: 3px solid rgb(105, 105, 105);
     margin-bottom: 35px;
     margin-top: 0px;
+    color: dimgrey;
+    border-bottom: 3px solid rgb(105, 105, 105);
+    border-top: 200px;
   }
 
 #pagecontent { /* In HTML files this should include everything between the subnav and the footer */
@@ -27,6 +28,11 @@ input[type=submit]:hover {
     background-color: #D5E6E3;
     outline: 1px solid #006857;
     /* Footer height + 8px */
+}
+
+#subnav h3{ /* MVP addition by Luka */
+  margin: 0 0;
+  padding: 0 0;
 }
 
 /* FORM BUTTONS */

@@ -8,6 +8,14 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    
+    $('#content').load("pharmacy-map");
+
+    });
+    </script>
 </head>
 
 <body>
@@ -84,6 +92,7 @@
                 </select>
                 <input type="submit" value="Change">
             </form>
+            <a href="http://127.0.0.1:8000/pharmacy-map"><input type="submit" value="Choose from map"></a>
         </div>
     </main>
     <footer class="footer">
