@@ -681,3 +681,6 @@ def changePharmacy(request):
 
 def pharmacyNearYou(request):
 	return render(request, 'account/pharmnearyou/pharmnearyou.html')
+
+def pharmacyMap(request):
+	return render(request, 'account/pharmnearyou/pharmacymap.html') 

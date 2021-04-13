@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pharmacy Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'admin/css/pharmnearyou.css' %}">
+    <script src="{% static 'admin/js/pharmnearyou.js' %}"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnOLKz6HrsRiJtPPDLmtGyixjLEbm6FJ4&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+  </body>
+</html>

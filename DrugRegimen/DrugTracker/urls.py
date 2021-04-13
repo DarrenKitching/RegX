@@ -32,6 +32,7 @@ urlpatterns = [
     path('check-interactions', views.checkInteractions, name='checkInteractions'),
     path('drug-interactions', views.drugInteractions, name='upload'),
     path('pharmacy-near-you', views.pharmacyNearYou, name='pharmacyNearYou'),
+    path('pharmacy-map', views.pharmacyMap, name='pharmacyMap'),
 	path('api', include(router.urls)),
 	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

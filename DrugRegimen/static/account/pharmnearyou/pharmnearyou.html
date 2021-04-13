@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Custom Popups</title>
-    {% load static %}
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+   
+   $('#content').load("new.html");
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <link rel="stylesheet" href="{% static 'admin/css/pharmnearyou.css' %}">
-    <script href="{% static 'admin/js/pharmnearyou.js' %}"></script>
-  </head>
-  <body>
-    <div id="map"></div>
-    <div id="content">Hello world!</div>
+});
+</script>
+</head>
+<body>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
-  </body>
+<div id="content"></div>
+
+</body>
 </html>

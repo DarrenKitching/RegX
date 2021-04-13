@@ -1,65 +1,50 @@
-let map, popup, Popup;
+// Note: This example requires that you consent to location sharing when
+// prompted by your browser. If you see the error "The Geolocation service
+// failed.", it means you probably did not give permission for the browser to
+// locate you.
+let map, infoWindow;
 
-/** Initializes the map and the custom popup. */
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -33.9, lng: 151.1 },
-    zoom: 10,
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 6,
   });
-
-  /**
-   * A customized popup on the map.
-   */
-  class Popup extends google.maps.OverlayView {
-    constructor(position, content) {
-      super();
-      this.position = position;
-      content.classList.add("popup-bubble");
-      // This zero-height div is positioned at the bottom of the bubble.
-      const bubbleAnchor = document.createElement("div");
-      bubbleAnchor.classList.add("popup-bubble-anchor");
-      bubbleAnchor.appendChild(content);
-      // This zero-height div is positioned at the bottom of the tip.
-      this.containerDiv = document.createElement("div");
-      this.containerDiv.classList.add("popup-container");
-      this.containerDiv.appendChild(bubbleAnchor);
-      // Optionally stop clicks, etc., from bubbling up to the map.
-      Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
-    }
-    /** Called when the popup is added to the map. */
-    onAdd() {
-      this.getPanes().floatPane.appendChild(this.containerDiv);
-    }
-    /** Called when the popup is removed from the map. */
-    onRemove() {
-      if (this.containerDiv.parentElement) {
-        this.containerDiv.parentElement.removeChild(this.containerDiv);
-      }
-    }
-    /** Called each frame when the popup needs to draw itself. */
-    draw() {
-      const divPosition = this.getProjection().fromLatLngToDivPixel(
-        this.position
+  infoWindow = new google.maps.InfoWindow();
+  const locationButton = document.createElement("button");
+  locationButton.textContent = "Pan to Current Location";
+  locationButton.classList.add("custom-map-control-button");
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener("click", () => {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          infoWindow.setPosition(pos);
+          infoWindow.setContent("Location found.");
+          infoWindow.open(map);
+          map.setCenter(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
       );
-      // Hide the popup when it is far out of view.
-      const display =
-        Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
-          ? "block"
-          : "none";
-
-      if (display === "block") {
-        this.containerDiv.style.left = divPosition.x + "px";
-        this.containerDiv.style.top = divPosition.y + "px";
-      }
-
-      if (this.containerDiv.style.display !== display) {
-        this.containerDiv.style.display = display;
-      }
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
     }
-  }
-  popup = new Popup(
-    new google.maps.LatLng(-33.866, 151.196),
-    document.getElementById("content")
+  });
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
   );
-  popup.setMap(map);
+  infoWindow.open(map);
 }
