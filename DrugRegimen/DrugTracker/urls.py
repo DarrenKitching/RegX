@@ -31,6 +31,7 @@ urlpatterns = [
     path('upload', views.upload, name='upload'),
     path('check-interactions', views.checkInteractions, name='checkInteractions'),
     path('drug-interactions', views.drugInteractions, name='upload'),
+    path('pharmacy-near-you', views.pharmacyNearYou, name='pharmacyNearYou'),
 	path('api', include(router.urls)),
 	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

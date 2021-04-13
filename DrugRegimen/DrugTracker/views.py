@@ -678,3 +678,6 @@ def changePharmacy(request):
 	newPatientPharmacy = models.PatientPharmacy(patientUsername = request.user.username, pharmacyId = newPharmacy)
 	newPatientPharmacy.save()
 	return patientAccount(request)
+
+def pharmacyNearYou(request):
+	return render(request, 'account/pharmnearyou/pharmnearyou.html')
