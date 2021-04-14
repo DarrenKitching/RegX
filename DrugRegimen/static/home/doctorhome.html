@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Home</title>
-    <link rel="shortcut icon" type="image/png" href="/static/admin/img/favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="/static/admin/img/favicon.png" />
     {% load static %}
     <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
@@ -17,6 +17,7 @@
             background-color: rgb(187, 187, 187);
             border-radius: 20px;
         }
+
         .patient-summary-red {
             box-shadow: 3px 6px #888888;
             position: relative;
@@ -148,7 +149,7 @@
             text-align: center;
         }
 
-                .patient-details-green {
+        .patient-details-green {
             width: 18%;
             display: inline-block;
             box-sizing: border-box;
@@ -198,7 +199,7 @@
             text-align: center;
         }
 
-                .patient-details-red {
+        .patient-details-red {
             width: 18%;
             display: inline-block;
             box-sizing: border-box;
@@ -260,13 +261,18 @@
         #time-last-taken ul {
             display: inline;
         }
+        #bg-img {
+            background-image: url({% static 'admin/img/bgdoctor.png' %});
+            height: 100%;
+        }
     </style>
 </head>
 
 <body>
     <div id="page-container">
         <header>
-            <div class="imgbrand"><img style="margin-left: 50px;" width="8%" height="8%" src="{% static 'admin/img/regx.png' %}"></div>
+            <div class="imgbrand"><img style="margin-left: 50px;" width="8%" height="8%"
+                    src="{% static 'admin/img/regx.png' %}"></div>
             <nav class="navbar">
                 <div id="current-page-link"><a href='http://127.0.0.1:8000/home' class="left-nav">Home</a></div>
                 <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
@@ -282,41 +288,41 @@
                 </div>
             </nav>
         </header>
-        <main style="background-image: url({% static 'admin/img/bgdoctor.png' %}); height: 100%;"><!-- height: 100% works lovely for pages with more content than can fit on screen at one time. for pages with less content than that though, we need to find a better solution then assigning a static height, eg 800px-->
-                <div id="subnav">
-                    <h3>Doctor Home</h2>
-                </div>
-                <div style="margin-left: 1.5%;
+        <div id="bg-img">
+            <div id="subnav">
+                <h3>Doctor Home</h2>
+            </div>
+            <div style="margin-left: 1.5%;
                 margin-right: 3%;
                 padding-left: 1.5%;
                 padding-top: 0.75%;
                 padding-bottom: 10%;">
-                    {% for item in patientsAndDrugs %}
-                    {% if item.3 %}
-                    <div class="patient-summary-green">
-                        <div class="patient-details-green">
-                            <a href='#' class="patient-details-green" id="patient-name">{{ item.0 }}</a>
-                        </div>
-                        <div class="patient-details" id="meds">
-                            <ul>
-                                <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
-                            </ul>
-                        </div>
-                        <div id="time-last-taken" class="patient-details">
-                            <ul>
-                                <li>{{ item.2 }}</li>
-                            </ul>
-                        </div>
-                        <div id="require-videos" class="patient-details">
-                            <input type="checkbox" id="require1" name="require1" value="Required">
-                            <label for="require1"> Require videos</label>
-                        </div>
-                        <video class="video-player" width="22%" height="240" controls>
-                            <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
+                {% for item in patientsAndDrugs %}
+                {% if item.3 %}
+                <div class="patient-summary-green">
+                    <div class="patient-details-green">
+                        <a href='#' class="patient-details-green" id="patient-name">{{ item.0 }}</a>
                     </div>
-                    {% else %}
+                    <div class="patient-details" id="meds">
+                        <ul>
+                            <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                        </ul>
+                    </div>
+                    <div id="time-last-taken" class="patient-details">
+                        <ul>
+                            <li>{{ item.2 }}</li>
+                        </ul>
+                    </div>
+                    <div id="require-videos" class="patient-details">
+                        <input type="checkbox" id="require1" name="require1" value="Required">
+                        <label for="require1"> Require videos</label>
+                    </div>
+                    <video class="video-player" width="22%" height="240" controls>
+                        <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                {% else %}
                 <div class="patient-summary-red">
                     <div class="patient-details-red">
                         <a href='#' class="patient-details-red" id="patient-name">{{ item.0 }}</a>
@@ -343,7 +349,7 @@
                 {% endif %}
                 {% endfor %}
             </div>
-        </main>
+        </div >
         <footer class="footer">
             <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
             <div class="text">Copyright &copy; Team 5 2021</div>

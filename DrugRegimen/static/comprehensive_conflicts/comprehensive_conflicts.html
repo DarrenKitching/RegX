@@ -103,6 +103,11 @@
     tr:nth-child(even) {
       background-color: #dddddd;
     }
+
+    #bg-img {
+            background-image: url({% static 'admin/img/bgdoctor.png' %});
+            height: 100%;
+        }
   </style>
 </head>
 
@@ -125,7 +130,7 @@
         </div>
       </nav>
     </header>
-    <main style="background-image: url({% static 'admin/img/bgpatient.png' %}); height: 800px;"><!-- height: 100% works lovely for pages with more content than can fit on screen at one time. for pages with less content than that though, we need to find a better solution then assigning a static height, eg 800px-->
+      <div id="bg-img">
         <div id="subnav">
           <h3>Search Medication Conflicts</h2>
         </div>
@@ -165,7 +170,7 @@
           {% endfor %}
         </table>
       </div>
-    </main>
+    </div>
     <footer class="footer">
       <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
       <div class="text">Copyright &copy; Team 5 2021</div>
