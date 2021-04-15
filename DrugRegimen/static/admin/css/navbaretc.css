@@ -52,6 +52,19 @@ body {
     min-height: 100vh;
 }
 
+.spacer {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.spacer > div {
+    display: inline-block;
+    display: -moz-inline-box;
+    *display: inline; /* For IE7 */
+    zoom: 1; /* Trigger hasLayout */
+    width: 33%;
+    text-align: center;
+}
+
 .footer {
     position: absolute;
     left: 0;
@@ -66,17 +79,6 @@ body {
     transform: translateY(-130%);
     text-align: center;
     color: white;
-}
-
-.footer .imgbrand {
-    position: relative;
-    top: 50%;
-    transform: translateY(20%);
-    color: white;
-}
-
-.footer .imgbrand {
-    margin-left: 5%;
 }
 
 .dropdown-content {

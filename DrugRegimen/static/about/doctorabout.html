@@ -15,8 +15,9 @@
             background-image: url({% static 'admin/img/bgdoctor.png' %});
             height: 100%;
             min-height: 800px;
+            background-size: 100%;
         }
-        
+
         .flex-container {
             display: flex;
             margin: 0 auto;
@@ -84,12 +85,12 @@
 <body>
     <div id="page-container">
         <header>
-            <div class="imgbrand"><img style="margin-left: 50px;" width="8%" height="8%"
-                    src="{% static 'admin/img/regx.png' %}"></div>
+            <div class="imgbrand"><img style="margin-left: 50px;" width="8%" height="8%" src="{% static 'admin/img/regx.png' %}"></div>
             <nav class="navbar">
                 <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
                 <div id="current-page-link"><a href='http://127.0.0.1:8000/about' class="left-nav">About</a></div>
-                <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
+                <a href='http://127.0.0.1:8000/manage' class="left-nav">Manage Patients</a>
+                <a href='http://127.0.0.1:8000/prescribe' class="left-nav">Prescribe Medication</a>
                 <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
                 <div class="dropdown">
                     <a href='#' class="dropbtn">{{ username }}</a>
@@ -101,6 +102,7 @@
             </nav>
         </header>
         <main id="bg-img">
+            </br>
             <div id="subnav">
                 <h3>Doctor About</h2>
               </div>
@@ -129,8 +131,11 @@
                 </div>
         </main>
         <footer class="footer">
-            <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-            <div class="text">Copyright &copy; Team 5 2021</div>
+            <div class="spacer">
+                <div class="imgbrandleft"><img src="{% static 'admin/img/synergy.png' %}" style="height: 55px; margin-bottom: 15px;"></div>
+                <div class="text">Copyright &copy; Team 5 2021</div>
+                <div class="imgbrandright"><img src="{% static 'admin/img/tcdlogo.jpeg' %}" style="height: 85px;"></div>
+            </div>
         </footer>
     </div>
 </body>

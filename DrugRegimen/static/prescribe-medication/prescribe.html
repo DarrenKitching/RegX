@@ -14,6 +14,7 @@
           background-image: url({% static 'admin/img/bgdoctor.png' %});
           height: 100%;
           min-height: 800px;
+          background-size: 100%;
       }
     input[type=text],
     select {
@@ -188,6 +189,7 @@
       </nav>
     </header>
     <main id="bg-img">
+      </br>
       <div id="subnav">
         <h3>Prescribe Medication</h2>
       </div>
@@ -226,9 +228,12 @@
       </div>
     </main>
     <footer class="footer">
-      <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-      <div class="text">Copyright &copy; Team 5 2021</div>
-    </footer>
+      <div class="spacer">
+          <div class="imgbrandleft"><img src="{% static 'admin/img/synergy.png' %}" style="height: 55px; margin-bottom: 15px;"></div>
+          <div class="text">Copyright &copy; Team 5 2021</div>
+          <div class="imgbrandright"><img src="{% static 'admin/img/tcdlogo.jpeg' %}" style="height: 85px;"></div>
+      </div>
+  </footer>
   </div>
 </body>
 
