@@ -9,6 +9,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
+    <style>
+        #bg-img { /* this needs to be on each page as the line below this doesn't seem to work when linked in a remote css file */
+            background-image: url({% static 'admin/img/bgdoctor.png' %});
+            height: 100%;
+            min-height: 800px;
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
@@ -36,7 +43,7 @@
             </div>
         </nav>
     </header>
-    <main style="background-image: url({% static 'admin/img/bgpatient.png' %}); height: 800px;"><!-- height: 100% works lovely for pages with more content than can fit on screen at one time. for pages with less content than that though, we need to find a better solution then assigning a static height, eg 800px-->
+    <main id="bg-img">
             <div id="subnav">
                 <h3>Patient Account</h2>
             </div>

@@ -8,6 +8,12 @@ input[type=submit]:hover {
   background-color: #028d76;
 }
 
+#bg-img {
+  background-image: url({% static 'admin/img/bgdoctor.png' %});
+  height: 100%;
+  min-height: 800px;
+}
+
 #subnav {
     font-family: 'Trebuchet MS';
     margin-left: 10%;
