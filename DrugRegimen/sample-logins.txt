@@ -13,7 +13,8 @@ Username: IsabelleSmart Password: IsabelleSmart
 Pharmacies:
 Username: LloydsGlasnevin Password: LloydsGlasnevin
 Username: BootsDrumcondra Password: BootsDrumcondra
+Username: MurraysBallsbridge Password: MurraysBallsbridge
 
 Doctors:
 Username: RebeccaMulville Password: RebeccaMulville
-
+Username: MarkHanks Password: MarkHanks
