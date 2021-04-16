@@ -69,3 +69,8 @@ class PatientPharmacy(models.Model):
 class PatientGMS(models.Model):
 	patientUsername = models.CharField(max_length=c.MAX_NAME_LEN) # username of patient
 	gms = models.CharField(max_length=50) # gms number
+
+class VideoConfidence(models.Model):
+	doseURL = models.CharField(max_length = 10)
+	uploadDate = models.DateTimeField()
+	confidenceScore = models.IntegerField()

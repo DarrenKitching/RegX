@@ -222,32 +222,50 @@ def doctorHome(request):
 		if doctorPatientRelationship.doctorUsername == request.user.username:
 			patients.append(doctorPatientRelationship.patientUsername)
 	allPrescriptions = models.Prescription.objects.all()
-	patientDrugs = [] # a list of drugs to be taken by this doctor's patients today
-	patientAssignedToDrug = []
-	confidenceScores = []
-	videoExists = []
+	
+	goodPatientDrugs = [] # a list of drugs to be taken by this doctor's patients today
+	goodPatientAssignedToDrug = []
+	goodConfidenceScores = []
+
+	flaggedPatientDrugs = [] # a list of drugs to be taken by this doctor's patients today
+	flaggedPatientAssignedToDrug = []
+	flaggedConfidenceScores = []
+	
+	missingPatientDrugs = [] # a list of drugs to be taken by this doctor's patients today
+	missingPatientAssignedToDrug = []
+	missingConfidenceScores = []
+
 	for patient in patients:
 		for prescription in allPrescriptions:
 			if prescription.patientId == patient:
 				patientItems = getAllPrescriptionItems([prescription]) # get this patient's prescriptions
 				todaysItems = getTodaysItems(patientItems) # get a list of items this patient needs to take today
 				for item in todaysItems:
-					patientDrugs.append(item)
+					
 					path = 'media/recorded-videos/' + item.videoURL + ('_' + (str(date.today()))) + '.webm'
-					score = motionTracking.obtainConfidenceScore(path)
-					confidenceScores.append(score)
-					if score == 0:
-						videoExists.append(False)
+					score = getConfidenceScore(item.videoURL)
+					if score == -1:
+						missingConfidenceScores.append('Video Missing')
+						missingPatientDrugs.append(item)
+						missingPatientAssignedToDrug.append(prescription.patientId)
+					elif score < 60: # flagged
+						flaggedConfidenceScores.append('Low Confidence')
+						flaggedPatientDrugs.append(item)
+						flaggedPatientAssignedToDrug.append(prescription.patientId)
 					else:
-						videoExists.append(True)
-				for item in todaysItems:
-					patientAssignedToDrug.append(prescription.patientId)
-	zipped = zip(patientAssignedToDrug, patientDrugs, confidenceScores, videoExists)
+						goodConfidenceScores.append('High Confidence')
+						goodPatientDrugs.append(item)
+						goodPatientAssignedToDrug.append(prescription.patientId)
+
+	zippedGood = zip(goodPatientAssignedToDrug, goodPatientDrugs, goodConfidenceScores)
+	zippedFlagged = zip(flaggedPatientAssignedToDrug, flaggedPatientDrugs, flaggedConfidenceScores)
+	zippedMissing = zip(missingPatientAssignedToDrug, missingPatientDrugs, missingConfidenceScores)
 	context = {
-		'patientsAndDrugs' : zipped,
+		'goodPatientsAndDrugs' : zippedGood,
+		'flaggedPatientsAndDrugs' : zippedFlagged,
+		'missingPatientsAndDrugs' : zippedMissing,
 		'username' : 'Dr. ' + re.sub(r"(\w)([A-Z])", r"\1 \2", request.user.username),
 		'date': str(date.today()),
-		'confidenceScores' : confidenceScores
 		}
 	return render(request, 'home/doctorhome.html', context)
 
@@ -336,6 +354,9 @@ def upload(request):
 			with open(path, 'wb+') as destination:
 				for chunk in request.FILES['video'].chunks():
 					destination.write(chunk)
+			score = motionTracking.obtainConfidenceScore(path)
+			newConfidenceObject = models.VideoConfidence(doseURL=request.POST.get('doseURL'), uploadDate=datetime.datetime.now(), confidenceScore=score)
+			newConfidenceObject.save()
 		else:
 			print("invalid")
 	return patientHome(request)
@@ -683,4 +704,22 @@ def pharmacyNearYou(request):
 	return render(request, 'account/pharmnearyou/pharmnearyou.html')
 
 def pharmacyMap(request):
-	return render(request, 'account/pharmnearyou/pharmacymap.html') 
+	return render(request, 'account/pharmnearyou/pharmacymap.html')
+
+def getConfidenceScore(doseURL):
+	confidenceScore = -1
+	print(doseURL)
+	allScores = models.VideoConfidence.objects.all()
+	for score in allScores:
+		if score.doseURL == doseURL and score.uploadDate.date() == datetime.date.today():
+			confidenceScore = score.confidenceScore
+	return confidenceScore
+
+def getTimeSinceLastUpload(doseURL):
+	now = datetime.now()
+	hoursSinceLastUpload = 999999
+	allScores = models.VideoConfidence.objects.all()
+	for score in allScores:
+		if (((now - score.uploadDate).total_seconds() / 60) / 60) < hoursSinceLastUpload:
+			hoursSinceLastUpload = (((now - score.uploadDate).total_seconds() / 60) / 60)
+	return hoursSinceLastUpload

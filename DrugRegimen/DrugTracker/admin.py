@@ -14,4 +14,5 @@ admin.site.register(DoseURL)
 admin.site.register(PrescriptionCollector)
 admin.site.register(PatientPharmacy)
 admin.site.register(PatientGMS)
+admin.site.register(VideoConfidence)
 # Register your models here.

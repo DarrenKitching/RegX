@@ -304,8 +304,7 @@
                 padding-left: 1.5%;
                 padding-top: 0.75%;
                 padding-bottom: 10%;">
-                {% for item in patientsAndDrugs %}
-                {% if item.3 %}
+                {% for item in goodPatientsAndDrugs %}
                 <div class="patient-summary-green">
                     <div class="patient-details-green">
                         <a href='#' class="patient-details-green" id="patient-name">{{ item.0 }}</a>
@@ -329,7 +328,8 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                {% else %}
+                {% endfor %}
+                {% for item in flaggedPatientsAndDrugs %}
                 <div class="patient-summary-red">
                     <div class="patient-details-red">
                         <a href='#' class="patient-details-red" id="patient-name">{{ item.0 }}</a>
@@ -353,7 +353,31 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                {% endif %}
+                {% endfor %}
+                {% for item in missingPatientsAndDrugs %}
+                <div class="patient-summary">
+                    <div class="patient-details">
+                        <a href='#' class="patient-details" id="patient-name">{{ item.0 }}</a>
+                    </div>
+                    <div class="patient-details" id="meds">
+                        <ul>
+                            <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                        </ul>
+                    </div>
+                    <div id="time-last-taken" class="patient-details">
+                        <ul>
+                            <li>{{ item.2 }}</li>
+                        </ul>
+                    </div>
+                    <div id="require-videos" class="patient-details">
+                        <input type="checkbox" id="require1" name="require1" value="Required">
+                        <label for="require1"> Require videos</label>
+                    </div>
+                    <video class="video-player" width="22%" height="240" controls>
+                        <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
                 {% endfor %}
             </div>
         </main >
