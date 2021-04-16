@@ -25,20 +25,34 @@
         }
 
         .patient-summary-red {
-            box-shadow: 3px 6px #888888;
+            box-shadow: 3px 6px #666666;
             position: relative;
             overflow: hidden;
             margin: 15px 15px;
             background-color: #e07276;
             border-radius: 20px;
+            max-height: 200px;
         }
 
         .patient-summary-green {
+            box-shadow: 3px 6px #666666;
             position: relative;
             overflow: hidden;
             margin: 15px 15px;
-            background-color: #009933;
+            margin-top: 0px;
+            background-color: #3b985a;
             border-radius: 20px;
+            max-height: 200px;
+        }
+
+        .patient-summary-grey {
+            box-shadow: 3px 6px #666666;
+            position: relative;
+            overflow: hidden;
+            margin: 15px 15px;
+            background-color: #888888;
+            border-radius: 20px;
+            max-height: 200px;
         }
 
         .patient-details a {
@@ -54,7 +68,7 @@
             font-size: larger;
             text-decoration: none;
             color: rgb(0, 0, 0);
-            background-color: #009933;
+            background-color: #3b985a;
             text-align: center;
             width: auto;
         }
@@ -64,6 +78,15 @@
             text-decoration: none;
             color: rgb(0, 0, 0);
             background-color: #e07276;
+            text-align: center;
+            width: auto;
+        }
+
+        .patient-details-grey a {
+            font-size: larger;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            background-color: #888888;
             text-align: center;
             width: auto;
         }
@@ -86,6 +109,18 @@
         }
 
         .patient-summary-green video {
+            float: right;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .patient-summary-red a:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .patient-summary-red video {
             float: right;
             margin: 0;
             padding: 0;
@@ -255,6 +290,56 @@
             text-align: center;
         }
 
+        .patient-details-grey {
+            width: 18%;
+            display: inline-block;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 52px 0px;
+        }
+
+        .patient-details-grey li {
+            list-style-type: none;
+            padding: 0px 20px;
+            margin: 0;
+        }
+
+        .patient-details-grey input {
+            -webkit-appearance: none;
+            background-color: #fafafa;
+            border: 1px solid #cacece;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 9px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .patient-details-grey input:active,
+        .patient-details-grey input:checked:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .patient-details-grey input:checked {
+            background-color: #e9ecee;
+            border: 1px solid #adb8c0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+            color: #99a1a7;
+        }
+
+        .patient-details-grey input:checked:after {
+            content: '\2714';
+            font-size: 14px;
+            position: absolute;
+            top: 0px;
+            left: 3px;
+            color: #006857;
+        }
+
+        .patient-details-grey ul {
+            text-align: center;
+        }
+
         #meds ul li {
             display: block;
             padding: auto;
@@ -271,6 +356,7 @@
             background-image: url({% static 'admin/img/bgdoctor.png' %});
             height: 100%;
         }
+
     </style>
 </head>
 
@@ -302,81 +388,95 @@
             <div style="margin-left: 1.5%;
                 margin-right: 3%;
                 padding-left: 1.5%;
-                padding-top: 0.75%;
                 padding-bottom: 10%;">
+                <div class="spacer5" style="margin-left: 40px; margin-bottom: 0px; padding-bottom: 0px; color: dimgrey;">
+                    <div><h2 style="background-color: #f2f2f2; border: 1px solid #4e4d4c;">Patient name</h2></div>
+                    <div><h2 style="background-color: #f2f2f2; border: 1px solid #4e4d4c;">Medication</h2></div>
+                    <div><h2 style="background-color: #f2f2f2; border: 1px solid #4e4d4c;">Video Classification</h2></div>
+                    <div><h2 style="background-color: #f2f2f2; border: 1px solid #4e4d4c;">Settings</h2></div>
+                    <div><h2 style="background-color: #f2f2f2; border: 1px solid #4e4d4c;">Video</h2></div>
+                </div>
                 {% for item in goodPatientsAndDrugs %}
                 <div class="patient-summary-green">
-                    <div class="patient-details-green">
-                        <a href='#' class="patient-details-green" id="patient-name">{{ item.0 }}</a>
+                    <div class="spacer5">
+                        <div class="patient-details-green">
+                            <a href='#' class="patient-details-green" id="patient-name">{{ item.0 }}</a>
+                        </div>
+                        <div class="patient-details" id="meds">
+                            <ul>
+                                <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                            </ul>
+                        </div>
+                        <div id="time-last-taken" class="patient-details">
+                            <ul>
+                                <li>{{ item.2 }}</li>
+                            </ul>
+                        </div>
+                        <div id="require-videos" class="patient-details">
+                            <label for="require1"> Require videos from this patient</label>
+                            <input type="checkbox" id="require1" name="require1" value="Required" checked>
+                        </div>
+                        <video class="video-player" width="22%" height="240" controls>
+                            <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
-                    <div class="patient-details" id="meds">
-                        <ul>
-                            <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
-                        </ul>
-                    </div>
-                    <div id="time-last-taken" class="patient-details">
-                        <ul>
-                            <li>{{ item.2 }}</li>
-                        </ul>
-                    </div>
-                    <div id="require-videos" class="patient-details">
-                        <input type="checkbox" id="require1" name="require1" value="Required">
-                        <label for="require1"> Require videos</label>
-                    </div>
-                    <video class="video-player" width="22%" height="240" controls>
-                        <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
                 </div>
                 {% endfor %}
                 {% for item in flaggedPatientsAndDrugs %}
                 <div class="patient-summary-red">
-                    <div class="patient-details-red">
-                        <a href='#' class="patient-details-red" id="patient-name">{{ item.0 }}</a>
+                    <div class="spacer5">
+                        <div class="patient-details-red">
+                            <a href='#' class="patient-details-red" id="patient-name">{{ item.0 }}</a>
+                        </div>
+                        <div class="patient-details" id="meds">
+                            <ul>
+                                <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                            </ul>
+                        </div>
+                        <div id="time-last-taken" class="patient-details">
+                            <ul>
+                                <li>{{ item.2 }}</li>
+                            </ul>
+                        </div>
+                        <div id="require-videos" class="patient-details">
+                            <label for="require1"> Require videos from this patient</label>
+                            <input type="checkbox" id="require1" name="require1" value="Required" checked>
+                        </div>
+                        <video class="video-player" width="22%" height="240" controls>
+                            <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
-                    <div class="patient-details" id="meds">
-                        <ul>
-                            <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
-                        </ul>
-                    </div>
-                    <div id="time-last-taken" class="patient-details">
-                        <ul>
-                            <li>{{ item.2 }}</li>
-                        </ul>
-                    </div>
-                    <div id="require-videos" class="patient-details">
-                        <input type="checkbox" id="require1" name="require1" value="Required">
-                        <label for="require1"> Require videos</label>
-                    </div>
-                    <video class="video-player" width="22%" height="240" controls>
-                        <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
                 </div>
                 {% endfor %}
                 {% for item in missingPatientsAndDrugs %}
-                <div class="patient-summary">
-                    <div class="patient-details">
-                        <a href='#' class="patient-details" id="patient-name">{{ item.0 }}</a>
+                <div class="patient-summary-grey">
+                    <div class="spacer5" style="transform: translateY(-30%);">
+                        <div class="patient-details-grey">
+                            <a href='#' class="patient-details-grey" id="patient-name">{{ item.0 }}</a>
+                        </div>
+                        <div class="patient-details" id="meds">
+                            <ul>
+                                <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
+                            </ul>
+                        </div>
+                        <div id="time-last-taken" class="patient-details">
+                            <ul>
+                                <li>{{ item.2 }}</li>
+                            </ul>
+                        </div>
+                        <div id="require-videos" class="patient-details">
+                            <label for="require1"> Require videos from this patient</label>
+                            <input type="checkbox" id="require1" name="require1" value="Required" checked>
+                        </div>
+                        <div style="transform: translateY(40%);">
+                            <video class="video-player" width="120%" height="240" controls>
+                                <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
                     </div>
-                    <div class="patient-details" id="meds">
-                        <ul>
-                            <li>{{ item.1.drug }} {{ item.1.doseValue }} {{ item.1.doseUnit }}</li>
-                        </ul>
-                    </div>
-                    <div id="time-last-taken" class="patient-details">
-                        <ul>
-                            <li>{{ item.2 }}</li>
-                        </ul>
-                    </div>
-                    <div id="require-videos" class="patient-details">
-                        <input type="checkbox" id="require1" name="require1" value="Required">
-                        <label for="require1"> Require videos</label>
-                    </div>
-                    <video class="video-player" width="22%" height="240" controls>
-                        <source src="media/recorded-videos/{{ item.1.videoURL }}_{{ date }}.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
                 </div>
                 {% endfor %}
             </div>
