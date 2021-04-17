@@ -245,14 +245,17 @@ def doctorHome(request):
 					path = 'media/recorded-videos/' + item.videoURL + ('_' + (str(date.today()))) + '.webm'
 					score = getConfidenceScore(item.videoURL)
 					if score == -1:
+						# print("missing")
 						missingConfidenceScores.append('Video Missing')
 						missingPatientDrugs.append(item)
 						missingPatientAssignedToDrug.append(prescription.patientId)
 					elif score < 60: # flagged
+						# print("flagged")
 						flaggedConfidenceScores.append('Low Confidence')
 						flaggedPatientDrugs.append(item)
 						flaggedPatientAssignedToDrug.append(prescription.patientId)
 					else:
+						# print("good")
 						goodConfidenceScores.append('High Confidence')
 						goodPatientDrugs.append(item)
 						goodPatientAssignedToDrug.append(prescription.patientId)
@@ -350,15 +353,13 @@ def upload(request):
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			path = os.path.join(BASE, 'media/recorded-videos/' + request.POST.get('doseURL') + ('_' + request.POST.get('date')) + '.webm')
-			print("valid")
+			# print("valid")
 			with open(path, 'wb+') as destination:
 				for chunk in request.FILES['video'].chunks():
 					destination.write(chunk)
 			score = motionTracking.obtainConfidenceScore(path)
 			newConfidenceObject = models.VideoConfidence(doseURL=request.POST.get('doseURL'), uploadDate=datetime.datetime.now(), confidenceScore=score)
 			newConfidenceObject.save()
-		else:
-			print("invalid")
 	return patientHome(request)
 
 def about(request):
@@ -554,7 +555,6 @@ def removeCollector(request):
 	allPatientCollectors = models.PrescriptionCollector.objects.all()
 	for patientCollector in allPatientCollectors:
 		if patientCollector.patientUsername == patient and (patientCollector.collectorName in request.POST):
-			print ("test")
 			patientCollector.delete()
 	return patientAccount(request)
 
@@ -594,9 +594,6 @@ def writePrescription(request):
 		drug = request.POST.get('drug' + str(i))
 		if drug is None: # if we've reached the end of the drugs list
 			break # then break
-		for key, value in request.POST.items():
-			print('Key: %s' % (key) ) 
-			print('Value %s' % (value) )
 		dosageForm = request.POST.get('dosage-form' + str(i))
 		doseValue = request.POST.get('dose-value' + str(i))
 		doseUnit = request.POST.get('dose-unit' + str(i))
@@ -687,15 +684,15 @@ def getCollectors(patient):
 
 def changePharmacy(request):
 	newPharmacy = request.POST.get('pharmacy')
-	print(newPharmacy)
+	# print(newPharmacy)
 	allPatientPharmacy = models.PatientPharmacy.objects.all()
 	for patientPharmacy in allPatientPharmacy:
 		if patientPharmacy.patientUsername == request.user.username:
-			print("match")
+			# print("match")
 			patientPharmacy.pharmacyId = newPharmacy
 			patientPharmacy.save()
 			return patientAccount(request)
-	print("no match")
+	# print("no match")
 	newPatientPharmacy = models.PatientPharmacy(patientUsername = request.user.username, pharmacyId = newPharmacy)
 	newPatientPharmacy.save()
 	return patientAccount(request)
@@ -708,11 +705,12 @@ def pharmacyMap(request):
 
 def getConfidenceScore(doseURL):
 	confidenceScore = -1
-	print(doseURL)
+	# print(doseURL)
 	allScores = models.VideoConfidence.objects.all()
 	for score in allScores:
 		if score.doseURL == doseURL and score.uploadDate.date() == datetime.date.today():
 			confidenceScore = score.confidenceScore
+	# print(confidenceScore)
 	return confidenceScore
 
 def getTimeSinceLastUpload(doseURL):
