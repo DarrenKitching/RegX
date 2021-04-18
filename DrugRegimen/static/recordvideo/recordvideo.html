@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
   <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
   <style>
+    #bg-img { /* this needs to be on each page as the line below this doesn't seem to work when linked in a remote css file */
+      background-image: url({% static 'admin/img/bgpatient.png' %});
+      height: 100%;
+      min-height: 800px;
+      background-size: 100%;
+    }
     .bottom {
       clear: both;
       padding-top: 10px;
@@ -115,11 +121,11 @@
         </div>
       </nav>
     </header>
-    <main>
-      <div id="pagecontent">
+    <main id="bg-img">
         <div id="subnav">
           <h3>Record Video</h2>
         </div>
+        <div id="pagecontent">
         <div id="message">
           <p>Click the "<span class="dot"></span>" button to begin video recording for a few seconds</p>
           <br>
@@ -238,9 +244,12 @@
       </div>
     </main>
     <footer class="footer">
-      <div class="imgbrand"><img src="{% static 'admin/img/synergy.png' %}"></div>
-      <div class="text">Copyright &copy; Team 5 2021</div>
-    </footer>
+      <div class="spacer">
+          <div class="imgbrandleft"><img src="{% static 'admin/img/synergy.png' %}" style="height: 55px; margin-bottom: 15px;"></div>
+          <div class="text">Copyright &copy; Team 5 2021</div>
+          <div class="imgbrandright"><img src="{% static 'admin/img/tcdlogo.jpeg' %}" style="height: 85px;"></div>
+      </div>
+  </footer>
   </div>
 </body>
 

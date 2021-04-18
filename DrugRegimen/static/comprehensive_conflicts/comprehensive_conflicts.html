@@ -24,6 +24,8 @@
     .topnav {
       overflow: hidden;
       background-color: #e9e9e9;
+      border: 1px solid #cccccc;
+      margin-right: 10px;
     }
 
     .topnav a {
@@ -101,7 +103,7 @@
 
     td,
     th {
-      border: 1px solid #dddddd;
+      border: 1px solid #cccccc;
       text-align: left;
       padding: 8px;
     }
@@ -138,7 +140,7 @@
           <h3>Search Medication Conflicts</h2>
         </div>
         <div id="pagecontent">
-          <div class="topnav" style="margin-right: 10px;">
+          <div class="topnav">
             <a>Enter medications:</a>
             <form action="/check-interactions" method="post">
               {% csrf_token %}
@@ -156,7 +158,7 @@
             <h3>Results {{ drug1 }} {{ drug2 }}</h3>
           </div>
           <table>
-            <tr>
+            <tr style="background-color: #e9e9e9;">
               <th>Drug Interaction</th>
               <th>Explanation</th>
               <th>Action</th>
