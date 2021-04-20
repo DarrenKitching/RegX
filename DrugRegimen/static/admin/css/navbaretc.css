@@ -117,3 +117,19 @@ body {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+@media(max-width: 500px) {
+    #inter {
+        display:none;
+    }
+    .navbar {
+        display:flex;
+    }
+    .navbar a {
+        flex-grow:1;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    .footer {
+        display:none;
+    }
+}

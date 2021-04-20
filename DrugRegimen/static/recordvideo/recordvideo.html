@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Account</title>
-  <link rel="shortcut icon" type="image/png" href="/static/admin/img/favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="/static/admin/img/favicon.png" />
   {% load static %}
   <link rel="stylesheet" href="{% static 'admin/css/navbaretc.css' %}">
   <link rel="stylesheet" href="{% static 'admin/css/pagecontent.css' %}">
@@ -25,7 +25,7 @@
       justify-content: center;
     }
 
-    .button {
+    .buttonrec {
       background-color: #006857;
       margin: 10px;
       padding-top: 10px;
@@ -94,17 +94,141 @@
       color: white;
       font-size: xx-large;
     }
+
+    .imgbrand img {
+      margin-left: 50px
+    }
+
+    @media(max-width: 500px) {
+      .bottom {
+        clear: both;
+        padding-top: 10px;
+      }
+
+      .button-container {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+      }
+
+      .buttonrec {
+        background-color: #006857;
+        margin: 0px;
+        margin-top: 5px;
+        padding-top: 10px;
+        padding-bottom: 7px;
+        text-align: center;
+        border: black solid 2px;
+        border-radius: 10px;
+        width: 100px;
+        flex-grow: 1;
+      }
+
+      #stopButton {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      .dot {
+        height: 22px;
+        width: 22px;
+        background-color: rgb(211, 0, 0);
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .square {
+        height: 21px;
+        width: 21px;
+        background-color: blue;
+        display: inline-block;
+      }
+
+      .videos {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      #preview {
+        border: #000000 solid 5px;
+        border-radius: 10px;
+        width: 100vh;
+        height: auto;
+        margin-top: 5px;
+      }
+
+      #recording {
+        border: #000000 solid 5px;
+        border-radius: 10px;
+        width: 100vh;
+        height: auto;
+        margin-top: 5px;
+      }
+
+      video {
+        margin: 0px;
+      }
+
+      #message {
+        border: black solid 2px;
+        background-color: #006857;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        margin-left: 0px;
+        margin-right: 0px;
+        border-radius: 10px;
+        margin-top: 5px;
+      }
+
+      #message p {
+        color: white;
+        font-size: large;
+        padding: 0px;
+        margin-block-start: 0.3em;
+        margin-block-end: 0.3em;
+      }
+
+      #subnav {
+        display: none;
+      }
+
+      .imgbrand img {
+        display: block;
+        margin: auto;
+        width: 33%;
+        height: 33%;
+      }
+
+      #pagecontent {
+        margin-left: 0.75%;
+      }
+      #button-vid-container{
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      #page-container{
+        min-height: 0vh;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div id="page-container">
     <header>
-      <div class="imgbrand"><img style="margin-left: 50px;" width="8%" height="8%" src="{% static 'admin/img/regx.png' %}"></div>
+      <div class="imgbrand"><img width="8%" height="8%" src="{% static 'admin/img/regx.png' %}"></div>
       <nav class="navbar">
         <a href='http://127.0.0.1:8000/home' class="left-nav">Home</a>
         <a href='http://127.0.0.1:8000/about' class="left-nav">About</a>
-        <a href='http://127.0.0.1:8000/drug-interactions' class="left-nav">Drug Interactions</a>
+        <a href='http://127.0.0.1:8000/drug-interactions' id="inter" class="left-nav">Drug Interactions</a>
         <a href='http://127.0.0.1:8000/help' class="left-nav">Help</a>
         <div class="dropdown">
           <a href='#' class="dropbtn">{{ username }}</a>
@@ -125,26 +249,27 @@
           <br>
         </div>
 
-        <div class="button-container">
-          <div class="buttons">
-            <div id="startButton" class="button">
-              <span class="dot"></span>
+        <div id="button-vid-container">
+          <div class="button-container">
+            <div class="buttons">
+              <div id="startButton" class="buttonrec">
+                <span class="dot"></span>
+              </div>
+              <div id="stopButton" class="buttonrec">
+                <span class="square"></span>
+              </div>
+              <a id="downloadButton" class="buttonrec">
+                Upload
+              </a>
             </div>
-            <div id="stopButton" class="button">
-              <span class="square"></span>
-            </div>
-            <a id="downloadButton" class="button">
-              Upload
-            </a>
+          </div>
+
+          <div class="videos">
+            <video id="preview" width="640" height="480" autoplay muted></video>
+
+            <video id="recording" width="640" height="480" controls></video>
           </div>
         </div>
-
-        <div class="videos">
-          <video id="preview" width="640" height="480" autoplay muted></video>
-
-          <video id="recording" width="640" height="480" controls></video>
-        </div>
-
         <div class="bottom">
           <pre id="log"></pre>
         </div>
