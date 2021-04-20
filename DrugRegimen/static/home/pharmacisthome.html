@@ -22,6 +22,7 @@
             position: relative;
             overflow: hidden;
             margin: 15px 15px;
+            margin-top: 0px;
             background-color: #f4f4f4;
             border-radius: 20px;
             border: 1px solid #4e4d4c;
@@ -109,8 +110,15 @@
             </div>
             <div id="pagecontent">
                 <h2>Not dispensed:</h2>
+                <div class="spacer4" style="margin-bottom: 0px; padding-bottom: 0px; color: dimgrey;">
+                    <div><h2>Patient name</h2></div>
+                    <div><h2>Annointed retrievers</h2></div>
+                    <div><h2>Medicine</h2></div>
+                    <div><h2>Actions</h2></div>
+                </div>
                 {% for prescription in notDispensed %}
                 <div class="patient-summary">
+                    <div class="spacer4">
                     <div class="patient-details">
                         <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
                     </div>
@@ -121,22 +129,26 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <div id="prescription-medications" class="patient-details">
+                    <div class="patient-details">
                         <ul>
                             {% for item in prescription.1 %}
                             <li>{{ item.drug }}: {{ item.doseValue }} {{ item.doseUnit }} {{ item.dosageForm }}s x {{ item.quantity }}</li>
                             {% endfor %}
                         </ul>
+                    </div>
+                    <div id="prescription-medications" class="patient-details">
                         <div id="submit">
                             <a href="mark-dispensed/{{ prescription.2 }}"><input type="submit" value="Mark Dispensed"></a>
                             <a href="generateQRs/{{ prescription.2 }}"><input type="submit" value="Generate QR Codes"></a>
                         </div>
+                    </div>
                     </div>
                 </div>
                 {% endfor %}
                 <h2>Dispensed (Not Collected):</h2>
                 {% for prescription in dispensedNotReceived %}
                 <div class="patient-summary">
+                    <div class="spacer4">
                     <div class="patient-details">
                         <a href='#' class="patient-details" id="patient-name">{{ prescription.0.patientId }}</a>
                     </div>
@@ -147,13 +159,16 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <div id="prescription-medications" class="patient-details">
+                    <div class="patient-details" id="who-can-collect">
                         <ul>
                             {% for item in prescription.1 %}
                             <li>{{ item.quantity }} {{ item.dosageForm }} {{ item.drug }} {{ item.doseValue }} {{ item.doseUnit }}</li>
                             {% endfor %}
                         </ul>
+                    </div>
+                    <div id="prescription-medications" class="patient-details">
                         <a href="mark-received/{{ prescription.2 }}"><input type="submit" value="Mark Received"></input></a>
+                    </div>
                     </div>
                 </div>
                 {% endfor %}
